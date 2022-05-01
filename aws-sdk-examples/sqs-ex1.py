@@ -4,15 +4,13 @@ import boto3
 sqs = boto3.resource('sqs')
 
 # Inputs
-print("Enter a name for the SQS queue")
-sqs_name=input()
+sqs_name=input("Enter a name for the SQS queue: ")
 
-print("Enter delay in seconds")
-sqs_delay_seconds=input()
+sqs_delay_seconds=input("Enter delay in seconds: ")
 
 
 # Create the queue. This returns an SQS.Queue instance
-queue = sqs.create_queue(QueueName=sqs_name, Attributes={'DelaySeconds': sqs_delay_seconds})
+queue = sqs.create_queue(QueueName=sqs_name, Attributes={'DelaySeconds': sqs_delay_seconds}, tags={'environment': 'dev'})
 
 # Outputs
 print("SQS URL: " +queue.url)
