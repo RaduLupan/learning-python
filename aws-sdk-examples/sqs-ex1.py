@@ -5,11 +5,10 @@ sqs = boto3.resource('sqs')
 
 # Local variables
 common_tags_dictionary = dict()
+sqs_attributes_dictionary = dict()
 
 # Inputs
 sqs_name=input("Enter a name for the SQS queue: ")
-
-sqs_delay_seconds=input("Enter delay in seconds: ")
 
 user_input=""
 while user_input != "exit":
@@ -27,7 +26,7 @@ while user_input != "exit":
 
 
 # Create the queue. This returns an SQS.Queue instance
-queue = sqs.create_queue(QueueName=sqs_name, Attributes={'DelaySeconds': sqs_delay_seconds}, tags=common_tags_dictionary)
+queue = sqs.create_queue(QueueName=sqs_name, Attributes=sqs_attributes_dictionary, tags=common_tags_dictionary)
 
 # Outputs
 print("SQS URL: " +queue.url)
