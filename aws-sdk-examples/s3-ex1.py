@@ -22,30 +22,31 @@ from botocore.exceptions import ClientError
 #buckets = list(s3.buckets.all())
 # print(buckets)
 
-bucket_name='letsencrypt-certbot-lambda-dev-uwiwzpe7prtu'
+bucket_name='227d9713c8ed4db0bb977f8d1189b90f-logs'
 s3 = boto3.client('s3')
 
 
 bucket_properties=dict()
 
-#try:
- #   access = s3.get_public_access_block(Bucket=bucket_name)
- #   print (access)
-#except botocore.exceptions.ClientError as e:
-#    if e.response['Error']['Code'] == 'NoSuchPublicAccessBlockConfiguration':
-#        print('\t no Public Access')
-#    else:
-#        print("unexpected error: %s" % (e.response))
+try:
+    access = s3.get_public_access_block(Bucket=bucket_name)
+    
+    # Loop through the PublicAccessBlockConfiguration dictionary and load all keys in bucket_properties.
+    for key in access['PublicAccessBlockConfiguration']:
+        bucket_properties[key]=access['PublicAccessBlockConfiguration'][key]
 
-access = s3.get_public_access_block(Bucket=bucket_name)
+except botocore.exceptions.ClientError as e:
+    if e.response['Error']['Code'] == 'NoSuchPublicAccessBlockConfiguration':
+        print(f"Bucket {bucket_name} has never been configured for Public Access Block and all 4 swithces are False by default.")
+        bucket_properties['BlockPublicAcls']=False
+        bucket_properties['IgnorePublicAcls']=False
+        bucket_properties['BlockPublicPolicy']=False
+        bucket_properties['RestrictPublicBuckets']=False
+    else:
+        print("Unexpected error: %s" % (e.response))
 
-# Loop through the PublicAccessBlockConfiguration dictionary and load all keys in bucket_properties.
-for key in access['PublicAccessBlockConfiguration']:
-    bucket_properties[key]=access['PublicAccessBlockConfiguration'][key]
 
 print(f"Bucket {bucket_name} has the following properties: {bucket_properties}")
-# print (access)
-#print(access['PublicAccessBlockConfiguration'])
 
 #policy_status = s3.get_bucket_policy_status(Bucket=bucket_name)
 #print(policy_status)
