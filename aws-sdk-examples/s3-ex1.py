@@ -39,10 +39,9 @@ bucket_properties=dict()
 
 access = s3.get_public_access_block(Bucket=bucket_name)
 
-bucket_properties['BlockPublicAcls']=access['PublicAccessBlockConfiguration']['BlockPublicAcls']
-bucket_properties['IgnorePublicAcls'] = access['PublicAccessBlockConfiguration']['IgnorePublicAcls']
-bucket_properties['BlockPublicPolicy'] = access['PublicAccessBlockConfiguration']['BlockPublicPolicy']
-bucket_properties['RestrictPublicBuckets'] = access['PublicAccessBlockConfiguration']['RestrictPublicBuckets']
+# Loop through the PublicAccessBlockConfiguration dictionary and load all keys in bucket_properties.
+for key in access['PublicAccessBlockConfiguration']:
+    bucket_properties[key]=access['PublicAccessBlockConfiguration'][key]
 
 print(f"Bucket {bucket_name} has the following properties: {bucket_properties}")
 # print (access)
