@@ -22,21 +22,19 @@ from botocore.exceptions import ClientError
 #buckets = list(s3.buckets.all())
 # print(buckets)
 
-bucket_name='letsencrypt-certbot-lambda-dev-uwiwzpe7prtu'
+bucket_name='test-bucket'
 s3 = boto3.client('s3')
 
 
 bucket_properties=dict()
 
+# Get public access block.
 try:
-    access = s3.get_public_access_block(Bucket=bucket_name)
+    public_access_block = s3.get_public_access_block(Bucket=bucket_name)
     
-    # Loop through the PublicAccessBlockConfiguration dictionary and load all keys in bucket_properties.
-    #for key in access['PublicAccessBlockConfiguration']:
-    #    bucket_properties[key]=access['PublicAccessBlockConfiguration'][key]
+    # Simply assign the PublicAccessBlockConfiguration to bucket_properties dict.
+    bucket_properties = public_access_block['PublicAccessBlockConfiguration']
 
-    bucket_properties = access['PublicAccessBlockConfiguration']
-    
 except botocore.exceptions.ClientError as e:
     if e.response['Error']['Code'] == 'NoSuchPublicAccessBlockConfiguration':
         print(f"Bucket {bucket_name} has never been configured for Public Access Block and all 4 swithces are False by default.")
@@ -48,10 +46,28 @@ except botocore.exceptions.ClientError as e:
         print("Unexpected error: %s" % (e.response))
 
 
+# Get bucket ACL.
+bucket_acl = s3.get_bucket_acl(Bucket=bucket_name)
+
+bucket_properties['Owner']=bucket_acl['Owner']
+bucket_properties['Grants']=bucket_acl['Grants']
+
+# Get bucket policy status.
+try:
+    bucket_policy_status = s3.get_bucket_policy_status(Bucket=bucket_name)
+    print(f"Bucket policy status is: {bucket_policy_status}")
+    bucket_properties['PolicyStatus']=bucket_policy_status['PolicyStatus']
+except botocore.exceptions.ClientError as e:
+    if e.response['Error']['Code'] == 'NoSuchBucketPolicy':
+        print(f"Bucket {bucket_name} does not have a bucket policy.")
+        bucket_properties['PolicyStatus']="NOT_APPLICABLE"
+    else:
+        print("Unexpected error: %s" % (e.response))
+
+
+
+
 print(f"Bucket {bucket_name} has the following properties: {bucket_properties}")
 
-#policy_status = s3.get_bucket_policy_status(Bucket=bucket_name)
-#print(policy_status)
 
-# bucket_acl = s3.get_bucket_acl(Bucket=bucket_name)
-# print(bucket_acl)
+
