@@ -47,10 +47,13 @@ except botocore.exceptions.ClientError as e:
 
 
 # Get bucket ACL.
-bucket_acl = s3.get_bucket_acl(Bucket=bucket_name)
+try:
+    bucket_acl = s3.get_bucket_acl(Bucket=bucket_name)
+    bucket_properties['Owner']=bucket_acl['Owner']
+    bucket_properties['Grants']=bucket_acl['Grants']
 
-bucket_properties['Owner']=bucket_acl['Owner']
-bucket_properties['Grants']=bucket_acl['Grants']
+except botocore.exceptions.ClientError as e:
+    print("Unexpected error: %s" % (e.response))
 
 # Get bucket policy status.
 try:
