@@ -27,6 +27,8 @@ s3 = boto3.client('s3')
 
 
 bucket_properties=dict()
+public_acl=False
+
 
 # Get public access block.
 try:
@@ -52,6 +54,15 @@ try:
     bucket_properties['Owner']=bucket_acl['Owner']
     bucket_properties['Grants']=bucket_acl['Grants']
 
+    print(f"Bucket Grants: {bucket_acl['Grants']}")
+
+    # Amazon S3 considers a bucket or object ACL public if it grants any permissions to members of the predefined AllUsers or AuthenticatedUsers groups.
+    # See The meaning of "Public" section here: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html 
+    for grant in bucket_acl['Grants']:
+        if grant['Grantee']['Type'] == 'Group':
+            if (grant['Grantee']['URI'] == 'http://acs.amazonaws.com/groups/global/AllUsers') or (grant['Grantee']['URI'] == 'http://acs.amazonaws.com/groups/global/AuthenticatedUsers') :
+                public_acl = True
+
 except botocore.exceptions.ClientError as e:
     print("Unexpected error: %s" % (e.response))
 
@@ -69,6 +80,7 @@ except botocore.exceptions.ClientError as e:
 
 
 
+bucket_properties['PublicACL']=public_acl
 
 print(f"Bucket {bucket_name} has the following properties: {bucket_properties}")
 
