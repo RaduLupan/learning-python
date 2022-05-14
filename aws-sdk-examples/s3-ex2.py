@@ -1,12 +1,13 @@
-import boto3
 #---------------------------------------------------------------------------------------------------------
 # This exemple expands on s3-ex1.py and uses a Python function to evaluate if a given S3 bucket is public.
 # --------------------------------------------------------------------------------------------------------
 
+import boto3
 import botocore.session
 from botocore.exceptions import ClientError
 
 bucket_properties = dict()
+public_buckets = []
 
 def evaluate_s3_public_access (bucket_name):
     
@@ -54,5 +55,16 @@ def evaluate_s3_public_access (bucket_name):
 
     return bucket_properties
 
-bucket_properties=evaluate_s3_public_access (bucket_name='test')
-print(bucket_properties)
+# Get the service client.
+s3 = boto3.client('s3')
+response = s3.list_buckets()
+
+for bucket in response['Buckets']:
+    bucket_properties=evaluate_s3_public_access (bucket_name=bucket['Name'])
+    if bucket_properties['PublicACL'] or bucket_properties['PublicPolicy']:
+        public_buckets.append(bucket_properties)
+
+if len(public_buckets) == 0:
+    print("No public buckets detected. That's actually great!")
+else:
+    print(f'The list of public buckets is below:\n {public_buckets}')
