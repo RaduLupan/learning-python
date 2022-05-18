@@ -14,16 +14,8 @@ from __future__ import print_function
 import google.auth
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+
 from oauth2client.service_account import ServiceAccountCredentials
-
-scopes = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
-
-service_account_file = 'credentials.json'
-
-# The ID and range of a sample spreadsheet.
-sample_spreadsheet_id = '1z36C1xvQwrvrxyLlYIHx5wTZFt_BpOYi-q6DF_2B39g'
-sample_range_name = 'A1:A4'
-
 
 def get_values(creds, spreadsheet_id, range_name):
     try:
@@ -40,10 +32,17 @@ def get_values(creds, spreadsheet_id, range_name):
 
 
 def main():
+    scopes = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
+
+    service_account_file = 'credentials.json'
+
+    # The ID and range of a sample spreadsheet.
+    sample_spreadsheet_id = '1z36C1xvQwrvrxyLlYIHx5wTZFt_BpOYi-q6DF_2B39g'
+    sample_range_name = 'A1:A4'
 
     creds = ServiceAccountCredentials.from_json_keyfile_name(
         service_account_file,
-        SCOPES,
+        scopes,
     )
 
     result = get_values(creds, sample_spreadsheet_id, sample_range_name)
@@ -51,4 +50,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
