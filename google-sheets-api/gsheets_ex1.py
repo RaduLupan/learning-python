@@ -1,13 +1,13 @@
-#------------------------------------------------------------------------
-# This exemple shows how to use Google Sheets API with a Service Account.
-#------------------------------------------------------------------------
+'''
+------------------------------------------------------------------------
+This exemple shows how to use Google Sheets API with a Service Account.
+------------------------------------------------------------------------
 
-# References:
-#------------
-
-# 1: https://developers.google.com/sheets/api/quickstart/python
-# 2: https://github.com/googleapis/google-api-python-client/tree/main/samples
-# 3: https://github.com/googleworkspace/python-samples
+References:
+1: https://developers.google.com/sheets/api/quickstart/python
+2: https://github.com/googleapis/google-api-python-client/tree/main/samples
+3: https://github.com/googleworkspace/python-samples
+'''
 
 from __future__ import print_function
 
