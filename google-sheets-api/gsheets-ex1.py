@@ -1,3 +1,14 @@
+#------------------------------------------------------------------------
+# This exemple shows how to use Google Sheets API with a Service Account.
+# -----------------------------------------------------------------------
+
+# References:
+#------------
+
+# 1: https://developers.google.com/sheets/api/quickstart/python
+# 2: https://github.com/googleapis/google-api-python-client/tree/main/samples
+# 3: https://github.com/googleworkspace/python-samples
+
 from __future__ import print_function
 
 import google.auth
@@ -5,13 +16,13 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.service_account import ServiceAccountCredentials
 
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
+scopes = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
 
-SERVICE_ACCOUNT_FILE = 'credentials.json'
+service_account_file = 'credentials.json'
 
 # The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = '1z36C1xvQwrvrxyLlYIHx5wTZFt_BpOYi-q6DF_2B39g'
-SAMPLE_RANGE_NAME = 'A1:A4'
+sample_spreadsheet_id = '1z36C1xvQwrvrxyLlYIHx5wTZFt_BpOYi-q6DF_2B39g'
+sample_range_name = 'A1:A4'
 
 
 def get_values(creds, spreadsheet_id, range_name):
@@ -31,11 +42,11 @@ def get_values(creds, spreadsheet_id, range_name):
 def main():
 
     creds = ServiceAccountCredentials.from_json_keyfile_name(
-        SERVICE_ACCOUNT_FILE,
+        service_account_file,
         SCOPES,
     )
 
-    result = get_values(creds, SAMPLE_SPREADSHEET_ID, SAMPLE_RANGE_NAME)
+    result = get_values(creds, sample_spreadsheet_id, sample_range_name)
     print(result)
 
 if __name__ == '__main__':
