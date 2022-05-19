@@ -4,9 +4,9 @@ This module contains functions to use with Google Sheets API.
 -------------------------------------------------------------
 '''
 
-import google.auth
-
 from __future__ import print_function
+
+import google.auth
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
