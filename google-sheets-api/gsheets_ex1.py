@@ -4,9 +4,10 @@ This exemple shows how to use Google Sheets API with a Service Account.
 ------------------------------------------------------------------------
 
 References:
-1: https://developers.google.com/sheets/api/quickstart/python
-2: https://github.com/googleapis/google-api-python-client/tree/main/samples
-3: https://github.com/googleworkspace/python-samples
+1: Learn Google Spreadsheets - Google Sheets - Python API, Read & Write Data: https://www.youtube.com/watch?v=4ssigWmExak&t=1671s
+2: https://developers.google.com/sheets/api/quickstart/python
+3: https://github.com/googleapis/google-api-python-client/tree/main/samples
+4: https://github.com/googleworkspace/python-samples
 '''
 
 from __future__ import print_function
