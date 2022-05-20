@@ -38,5 +38,8 @@ def main():
             ])
     print(result)
 
+    # Create new sheet in the existing spreadsheet.
+    gsheets_api.create_sheet(creds=creds, title='My New Sheet', spreadsheet_id=sample_spreadsheet_id)
+
 if __name__ == '__main__':
     main()
