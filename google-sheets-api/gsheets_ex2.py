@@ -41,5 +41,9 @@ def main():
     # Create new sheet in the existing spreadsheet.
     gsheets_api.create_sheet(creds=creds, title='My New Sheet', spreadsheet_id=sample_spreadsheet_id)
 
+    # Update newly created sheet with data from a list.
+    sample_data=['Name','Company','Address']
+    gsheets_api.update_sheet(creds, title = 'My New Sheet', spreadsheet_id=sample_spreadsheet_id, data=sample_data)
+
 if __name__ == '__main__':
     main()
