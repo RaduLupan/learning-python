@@ -67,3 +67,16 @@ def create_sheet(creds,title,spreadsheet_id):
     except HttpError as error:
         print(f"An error occurred: {error}")
         return error
+
+def update_sheet(creds, title, spreadsheet_id, data):
+    try:
+        service = build('sheets', 'v4', credentials=creds)
+        
+        batch_update_values_request_body = {"data":[{"majorDimension": "ROWS", "range": (title+"!A1"), "values": [data]}], "valueInputOption": "USER_ENTERED"}
+        
+        request = service.spreadsheets().values().batchUpdate(spreadsheetId=spreadsheet_id, body=batch_update_values_request_body)
+
+        response = request.execute()
+    except HttpError as error:
+        print(f"An error occurred: {error}")
+        return error
