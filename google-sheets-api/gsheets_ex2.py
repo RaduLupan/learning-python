@@ -31,16 +31,8 @@ def main():
     print(f"Data retrieved using majorDimension=ROWS\n{result}")
 
     # Get values from sample spreadsheet by COLUMNS.
-    result = gsheets_api.get_values(creds=creds, spreadsheet_id=sample_spreadsheet_id, range=sample_range_name, major_dimension='COLUMNS')
-    print(f"Data retrieved using majorDimension=COLUMNS\n{result}")
-
-    # Append values to sample spreadsheet.
-    result = gsheets_api.append_values(creds, sample_spreadsheet_id, "A1:C2", "USER_ENTERED",
-             [
-                 ['F', 'B'],
-                 ['C', 'D']
-            ])
-    print(result)
+    result = gsheets_api.get_values(creds=creds, spreadsheet_id=sample_spreadsheet_id, range=sample_range_name, major_dimension='ROWS')
+    print(f"Data retrieved using majorDimension=ROWS\n{result}")
 
     # Create new sheet in the existing spreadsheet.
     gsheets_api.create_sheet(creds=creds, title='My New Sheet', spreadsheet_id=sample_spreadsheet_id)
@@ -48,6 +40,14 @@ def main():
     # Update newly created sheet with data from a list.
     sample_data=['Name','Company','Address']
     gsheets_api.update_sheet(creds, title = 'My New Sheet', spreadsheet_id=sample_spreadsheet_id, data=sample_data)
+
+    # Append values to newly created sheet.
+    result = gsheets_api.append_values(creds, sample_spreadsheet_id, "My New Sheet!A2:C3", "USER_ENTERED",
+             [
+                 ['John Green', 'Microsoft', '123 John Street'],
+                 ['Pamela Brown', 'Amazon', '456 Pamela Street']
+            ])
+    print(result)
 
 if __name__ == '__main__':
     main()
