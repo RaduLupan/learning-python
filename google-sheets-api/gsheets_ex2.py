@@ -19,16 +19,20 @@ def main():
 
     # The ID and range of a sample spreadsheet.
     sample_spreadsheet_id = '1z36C1xvQwrvrxyLlYIHx5wTZFt_BpOYi-q6DF_2B39g'
-    sample_range_name = 'A1:A4'
+    sample_range_name = 'Sheet1!A1:C2'
 
     creds = gsheets_api.ServiceAccountCredentials.from_json_keyfile_name(
         service_account_file,
         scopes,
     )
 
-    # Get values from sample spreadsheet.
-    result = gsheets_api.get_values(creds, sample_spreadsheet_id, sample_range_name)
-    print(result)
+    # Get values from sample spreadsheet by ROWS.
+    result = gsheets_api.get_values(creds=creds, spreadsheet_id=sample_spreadsheet_id, range=sample_range_name, major_dimension='ROWS')
+    print(f"Data retrieved using majorDimension=ROWS\n{result}")
+
+    # Get values from sample spreadsheet by COLUMNS.
+    result = gsheets_api.get_values(creds=creds, spreadsheet_id=sample_spreadsheet_id, range=sample_range_name, major_dimension='COLUMNS')
+    print(f"Data retrieved using majorDimension=COLUMNS\n{result}")
 
     # Append values to sample spreadsheet.
     result = gsheets_api.append_values(creds, sample_spreadsheet_id, "A1:C2", "USER_ENTERED",
