@@ -60,6 +60,8 @@ def evaluate_s3_public_access (bucket_name):
 s3 = boto3.client('s3')
 response = s3.list_buckets()
 
+print(f"S3 buckets\n {response}")
+
 for bucket in response['Buckets']:
     bucket_properties=evaluate_s3_public_access (bucket_name=bucket['Name'])
     if bucket_properties['PublicACL'] or bucket_properties['PublicPolicy']:
