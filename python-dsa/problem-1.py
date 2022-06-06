@@ -4,7 +4,27 @@ She challenges Bob to pick out the card containing a given number by turning ove
 '''
 
 def locate_card(cards, query):
-    pass
+    position = 0
+
+    while True:
+        if cards[position] == query:
+            return position
+        
+        position += 1
+
+        if position == len(cards):
+            return -1
+
+
+def evaluate_test_case(locate_card, test):
+    print(f'Test {test}')
+    
+    result = locate_card(**test['input'])
+    
+    if result == test['output']:
+        print('PASS')
+    else:
+        print ('FAIL')
 
 test = {
     'input': {
@@ -86,4 +106,8 @@ tests.append({
     'output': 2
 })
 
-print(tests)
+
+#evaluate_test_case(locate_card=locate_card, test=test)
+
+for t in tests:
+    evaluate_test_case(locate_card=locate_card, test=t)
