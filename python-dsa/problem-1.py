@@ -3,7 +3,7 @@ QUESTION 1: Alice has some cards with numbers written on them. She arranges the 
 She challenges Bob to pick out the card containing a given number by turning over as few cards as possible. Write a function to help Bob locate the card.
 '''
 
-def locate_card(cards, query):
+def locate_card_linear_search(cards, query):
     position = 0
 
     while position < len(cards):
@@ -12,6 +12,23 @@ def locate_card(cards, query):
         
         position += 1
 
+    return -1
+
+def locate_card_binary_search(cards, query):
+    lo, hi = 0, len(cards) - 1
+
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        mid_number = cards[mid]
+        
+        print("lo:", lo, ", hi:", hi, ", mid:", mid, ", mid_number:", mid_number)
+        
+        if mid_number == query:
+            return mid
+        elif mid_number > query:
+            lo = mid+1
+        elif mid_number < query:
+            hi = mid-1
     return -1
 
 def evaluate_test_case(locate_card, test):
@@ -102,6 +119,6 @@ tests.append({
     'output': 2
 })
 
-
-for t in tests:
-    evaluate_test_case(locate_card=locate_card, test=t)
+print(len(tests))
+print(tests[7])
+locate_card_binary_search(**tests[7]['input'])
