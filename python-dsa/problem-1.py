@@ -31,6 +31,21 @@ def locate_card_binary_search(cards, query):
             hi = mid-1
     return -1
 
+def test_location (cards, query, mid):
+    mid_number = cards[mid]
+    
+    print("mid:", mid, ", mid_number:", mid_number)
+
+    if mid_number == query:
+        if mid-1 >= 0 and cards[mid-1] == query:
+            return 'left'
+        else: 
+            return 'found'
+    elif mid_number < query:
+        return 'left'
+    else:
+        return 'right'
+         
 def evaluate_test_case(locate_card, test):
     print(f'Test {test}')
     
