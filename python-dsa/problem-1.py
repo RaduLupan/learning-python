@@ -23,12 +23,14 @@ def locate_card_binary_search(cards, query):
         
         print("lo:", lo, ", hi:", hi, ", mid:", mid, ", mid_number:", mid_number)
         
-        if mid_number == query:
+        result = test_location(cards=cards, query=query, mid=mid)
+
+        if result == 'found':
             return mid
-        elif mid_number > query:
-            lo = mid+1
-        elif mid_number < query:
+        elif result == 'left':
             hi = mid-1
+        elif result == 'right':
+            lo = mid+1
     return -1
 
 def test_location (cards, query, mid):
@@ -45,7 +47,7 @@ def test_location (cards, query, mid):
         return 'left'
     else:
         return 'right'
-         
+
 def evaluate_test_case(locate_card, test):
     print(f'Test {test}')
     
@@ -136,4 +138,6 @@ tests.append({
 
 print(len(tests))
 print(tests[7])
-locate_card_binary_search(**tests[7]['input'])
+print(locate_card_binary_search(**tests[7]['input']))
+
+evaluate_test_case(locate_card=locate_card_binary_search, test=tests[7])
