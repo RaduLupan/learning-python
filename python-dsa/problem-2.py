@@ -9,7 +9,18 @@ Source:
 https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 '''
 def locate_start_position(array, target):
-    pass
+    def condition(mid):
+        if array[mid] == target:
+            if mid > 0 and array[mid-1] == target:
+                return 'left'
+            else:
+                return 'found'
+        elif array[mid] < target:
+            return 'right'
+        elif array[mid] > target:
+            return 'left'
+    return binary_search(0, len(array)-1, condition)
+
 
 def locate_end_position(array, target):
     pass 
@@ -50,6 +61,10 @@ test = {
     'output': [0, 0]
 }
 
-tests.append({
-    'input'
-})
+print(f"Input: {test['input']}")
+print(f"Expected Output: {test['output']}" )
+
+start=locate_start_position(**test['input'])
+output=[start, -1]
+
+print(f"Actual Output: {output}")
