@@ -3,6 +3,9 @@ QUESTION 1: Alice has some cards with numbers written on them. She arranges the 
 She challenges Bob to pick out the card containing a given number by turning over as few cards as possible. Write a function to help Bob locate the card.
 '''
 
+from pydoc import locate
+
+
 def locate_card_linear_search(cards, query):
     position = 0
 
@@ -100,6 +103,11 @@ def evaluate_test_case(locate_card, test):
     else:
         print ("Test Result: FAIL\n")
 
+def evaluate_test_cases(locate_card, tests):
+    for test in tests:
+        print(f"TEST#: {tests.index(test)}")
+        evaluate_test_case(locate_card=locate_card, test=test)        
+
 test = {
     'input': {
         'cards': [13, 11, 10, 7, 4, 3, 1, 0],
@@ -178,7 +186,11 @@ tests.append({
     'output': 2
 })
 
+# Evaluate one particular test cases.
+# evaluate_test_case(locate_card=locate_card_linear_search, test=tests[7])
 
-for t in tests:
-    print(f"TEST#: {tests.index(t)}")
-    evaluate_test_case(locate_card=locate_card, test=t)
+# Evaluate all test cases using locate_card implementation.
+evaluate_test_cases(locate_card=locate_card, tests=tests)
+
+# Evaluate all test cases using locate_card_linear_search implementation.
+# evaluate_test_cases(locate_card=locate_card_linear_search, tests=tests)
