@@ -92,6 +92,60 @@ test = {
 
 tests.append(test)
 
+# target is the last element in array.
+tests.append({
+    'input': {
+        'array': [1, 5, 8, 10, 10, 13],
+        'target': 13
+    },
+    'output': [5, 5]
+})
+
+# target is repeated at the end of the array.
+tests.append({
+    'input': {
+        'array': [-100, 0, 5, 8, 10, 10, 13, 13, 13],
+        'target': 13
+    },
+    'output': [6, 8]
+})
+
+# target is the first unique element in the array.
+tests.append({
+    'input': {
+        'array': [2, 5, 8, 10, 10, 13, 13, 13],
+        'target': 2
+    },
+    'output': [0, 0]
+})
+
+# target is a repeating element at the beginning of the array.
+tests.append({
+    'input': {
+        'array': [2, 2, 2, 2, 2, 2, 5, 8, 10, 10, 13, 13, 13],
+        'target': 2
+    },
+    'output': [0, 5]
+})
+
+# array is an empty list.
+tests.append({
+    'input': {
+        'array': [],
+        'target': 100
+    },
+    'output': [-1, -1]
+})
+
+# target is not found in the array.
+tests.append({
+    'input': {
+        'array': [1, 7, 11, 15, 15, 25, 30, 30, 30],
+        'target': 100
+    },
+    'output': [-1, -1]
+})
+
 #evaluate_test_case(function=locate_start_end_position, test=test)
 
 evaluate_test_cases(function=locate_start_end_position, tests=tests)
