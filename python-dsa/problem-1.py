@@ -48,6 +48,20 @@ def test_location (cards, query, mid):
     else:
         return 'right'
 
+def binary_search(lo,hi,condition):
+    '''
+    Description: Generic algorithm for binary search. The condition argument is a function that determines whether the answer lies before, after or at a given position.
+    Use in conjunction with locate_card function.
+    '''
+    pass
+
+def locate_card(cards, query):
+    '''
+    Description: Uses generic binary search algorithm to locate the index of a card (query) in a list (cards).
+    Use in conjunction with binary_search function.
+    '''
+    pass
+
 def evaluate_test_case(locate_card, test):
     print(f'Test {test}')
     
