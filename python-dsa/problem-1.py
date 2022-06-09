@@ -72,29 +72,33 @@ def locate_card(cards, query):
     Use in conjunction with binary_search function.
     '''
     def condition (mid):
-        mid_number = cards[mid]
 
-        if mid_number == query:
+        if cards[mid] == query:
             if mid > 0 and cards[mid-1] == query:
                 return 'left'
             else:
                 return 'found'
-        elif mid_number < query:
+        elif cards[mid] < query:
             return 'left'
-        elif mid_number > query:
+        elif cards[mid] > query:
             return 'right'
 
-        return binary_search(lo=0, hi=len(cards)-1, condition=condition)
+    return binary_search(0, len(cards)-1, condition)
 
 def evaluate_test_case(locate_card, test):
-    print(f'Test {test}')
+    
+    print(f"Input: {test['input']}")
+
+    print (f"Expected Output: {test['output']}")
     
     result = locate_card(**test['input'])
+
+    print(f"Actual Output: {result}")
     
     if result == test['output']:
-        print('PASS')
+        print("Test Result: PASS\n")
     else:
-        print ('FAIL')
+        print ("Test Result: FAIL\n")
 
 test = {
     'input': {
@@ -174,8 +178,7 @@ tests.append({
     'output': 2
 })
 
-print(len(tests))
-print(tests[7])
-print(locate_card_binary_search(**tests[7]['input']))
 
-evaluate_test_case(locate_card=locate_card_binary_search, test=tests[7])
+for t in tests:
+    print(f"TEST#: {tests.index(t)}")
+    evaluate_test_case(locate_card=locate_card, test=t)
