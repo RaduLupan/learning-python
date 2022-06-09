@@ -60,6 +60,25 @@ def binary_search(lo,hi,condition):
             lo = mid+1
     return -1
 
+def evaluate_test_case(function, test):
+    
+    print(f"Input: {test['input']}")
+
+    print (f"Expected Output: {test['output']}")
+    
+    result = function(**test['input'])
+
+    print(f"Actual Output: {result}")
+    
+    if result == test['output']:
+        print("Test Result: PASS\n")
+    else:
+        print ("Test Result: FAIL\n")
+
+def evaluate_test_cases(function, tests):
+    for test in tests:
+        print(f"TEST#: {tests.index(test)}")
+        evaluate_test_case(function=function, test=test)        
 
 tests = []
 
@@ -71,11 +90,8 @@ test = {
     'output': [0, 0]
 }
 
-print(f"Input: {test['input']}")
-print(f"Expected Output: {test['output']}" )
+tests.append(test)
 
-start=locate_start_position(**test['input'])
-end=locate_end_position(**test['input'])
-output=[start, end]
+#evaluate_test_case(function=locate_start_end_position, test=test)
 
-print(f"Actual Output: {output}")
+evaluate_test_cases(function=locate_start_end_position, tests=tests)
