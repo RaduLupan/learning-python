@@ -45,7 +45,6 @@ def locate_start_end_position(array, target):
 def binary_search(lo,hi,condition):
     '''
     Description: Generic algorithm for binary search. The condition argument is a function that determines whether the answer lies before, after or at a given position.
-    Use in conjunction with locate_card function.
     '''
     while lo <= hi:
         mid = (lo + hi) // 2
