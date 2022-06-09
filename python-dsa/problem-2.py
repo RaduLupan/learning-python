@@ -23,7 +23,17 @@ def locate_start_position(array, target):
 
 
 def locate_end_position(array, target):
-    pass 
+    def condition(mid):
+        if array[mid] == target:
+            if mid < len(array)-1 and array[mid+1] == target:
+                return 'right'
+            else:
+                return 'found'
+        elif array[mid] < target:
+            return 'right'
+        elif array[mid] > target:
+            return 'left'
+    return binary_search(0, len(array)-1, condition)
 
 def locate_start_end_position(array, target):
 
@@ -65,6 +75,7 @@ print(f"Input: {test['input']}")
 print(f"Expected Output: {test['output']}" )
 
 start=locate_start_position(**test['input'])
-output=[start, -1]
+end=locate_end_position(**test['input'])
+output=[start, end]
 
 print(f"Actual Output: {output}")
