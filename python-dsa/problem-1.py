@@ -3,7 +3,7 @@ QUESTION 1: Alice has some cards with numbers written on them. She arranges the 
 She challenges Bob to pick out the card containing a given number by turning over as few cards as possible. Write a function to help Bob locate the card.
 '''
 
-from pydoc import locate
+# from pydoc import locate
 
 
 def locate_card_linear_search(cards, query):
