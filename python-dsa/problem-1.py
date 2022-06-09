@@ -54,7 +54,7 @@ def binary_search(lo,hi,condition):
     Use in conjunction with locate_card function.
     '''
     while lo <= hi:
-        mid = (lo+hi) // 2
+        mid = (lo + hi) // 2
         
         result = condition(mid)
 
@@ -71,7 +71,20 @@ def locate_card(cards, query):
     Description: Uses generic binary search algorithm to locate the index of a card (query) in a list (cards).
     Use in conjunction with binary_search function.
     '''
-    pass
+    def condition (mid):
+        mid_number = cards[mid]
+
+        if mid_number == query:
+            if mid > 0 and cards[mid-1] == query:
+                return 'left'
+            else:
+                return 'found'
+        elif mid_number < query:
+            return 'left'
+        elif mid_number > query:
+            return 'right'
+
+        return binary_search(lo=0, hi=len(cards)-1, condition=condition)
 
 def evaluate_test_case(locate_card, test):
     print(f'Test {test}')
