@@ -1,4 +1,5 @@
-## Python examples for working with the Google Sheets API.
+# Google-Sheets-API folder
+Python examples for working with the Google Sheets API.
 
 # References
 [Python Quickstart](https://developers.google.com/sheets/api/quickstart/python)
