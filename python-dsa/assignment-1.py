@@ -12,15 +12,15 @@ E.g. rotating the list [3, 2, 4, 1] produces [1, 3, 2, 4].
 '''
 def count_rotations_linear(nums):
     '''
-    Description: Uses linear search to determine the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    Description: Uses linear search algorithm to determine the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
     The number of rotations is given by the index of the smallest number in the nums list. For example if the smallest number in the list
     is at position k (counting from zero) then the list was rotated k times.
     Parameters:
     - nums: the rotated list of numbers.
     Linear Search (aka Brute Force) Algorithm: 
-    - Create variable position = 0 to loop through all indexes of nums list.
-    - Compare nums[position] with its predecessor nums[position-1] and if it is smaller return position as the answer.
-    - If no number in nums list is smaller than its predecessor return 0 as nums is sorted in ascending order which means rotated zero times.
+    1. Create variable position = 0 to loop through all indexes of nums list.
+    2. Compare nums[position] with its predecessor nums[position-1] and if it is smaller return position as the answer.
+    3. If no number in nums list is smaller than its predecessor return 0 as nums is sorted in ascending order and therefore rotated zero times.
     '''
     position = 0
 
@@ -30,6 +30,45 @@ def count_rotations_linear(nums):
         position += 1
     
     return 0 
+
+def count_rotations_binary(nums):
+    '''
+    Description: Uses binary search algorithm to determine the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    Parameters:
+    - nums: the rotated list of numbers.
+    Binar Search Algorithm:
+    1. Set the left and right indexes to 0 and len(nums)-1 respectively.
+    2. Calculate the mid position of the search interval.
+    3. Compare the number at the mid position with the number at the right end of the interval. 
+    4. If the number at the mid position is smaller than the number at the right end of the interval, the answer lies in the left half.
+    5. If the number at the mid position is greater than the number at the right end of the interval, the answer lies in the right half.
+    6. If the number at the mid position equals the number at the right end of the interval, return the mid position as the answer.
+    7. Repeat steps 2-6 until left and right indexes are equal.
+    8. If no answer return 0 as the nums list is sorted in ascending order and therefore was rotated zero times.
+    '''
+    lo = 0
+    hi = len(nums)-1
+    
+    while lo <= hi:
+        mid = (lo+hi)//2
+        mid_number = nums[mid]
+        
+        # Uncomment the next line for logging the values and fixing errors.
+        # print("lo:", lo, ", hi:", hi, ", mid:", mid, ", mid_number:", mid_number)
+        
+        if mid > 0 and mid_number == nums[hi]:
+            # The middle position is the answer.
+            return mid
+        
+        elif mid_number < nums[hi]:
+            # Answer lies in the left half.
+            hi = mid
+        
+        else:
+            # Answer lies in the right half.
+            lo = mid + 1
+    
+    return 0
 
 import dsa
 
@@ -108,8 +147,13 @@ test7 = {
 tests=[test0, test1, test2, test3, test4, test5, test6, test7]
 
 # Evaluate count_rotations_linear against the first test case.
-dsa.evaluate_test_case(function=count_rotations_linear, test=test0)
+# dsa.evaluate_test_case(function=count_rotations_linear, test=test0)
 
 # Evaluate count_rotations_linear against all test cases.
-dsa.evaluate_test_cases(function=count_rotations_linear, tests=tests)
+# dsa.evaluate_test_cases(function=count_rotations_linear, tests=tests)
 
+# Evaluate count_rotations_binary against the first test case.
+dsa.evaluate_test_case(function=count_rotations_binary, test=test0)
+
+# Evaluate count_rotations_binary against all test cases.
+dsa.evaluate_test_cases(function=count_rotations_binary, tests=tests)
