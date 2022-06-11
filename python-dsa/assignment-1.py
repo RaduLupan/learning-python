@@ -9,6 +9,16 @@ We define "rotating a list" as removing the last element of the list and adding 
 E.g. rotating the list [3, 2, 4, 1] produces [1, 3, 2, 4].
 
 "Sorted list" refers to a list where the elements are arranged in the increasing order e.g. [1, 3, 5, 7].
+
+Optional Questions:
+-------------------
+1. Implement the solution using the generic binary_search function defined in the dsa module.
+2. Rewrite the solution to handle repeating numbers in the nums list.
+3. Searching in a rotated list.
+You are given list of numbers, obtained by rotating a sorted list an unknown number of times. 
+You are also given a target number. Write a function to find the position of the target number within the rotated list. 
+You can assume that all the numbers in the list are unique.
+Example: In the rotated sorted list [5, 6, 9, 0, 2, 3, 4], the target number 2 occurs at position 5.
 '''
 def count_rotations_linear(nums):
     '''
