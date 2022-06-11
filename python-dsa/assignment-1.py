@@ -10,12 +10,26 @@ E.g. rotating the list [3, 2, 4, 1] produces [1, 3, 2, 4].
 
 "Sorted list" refers to a list where the elements are arranged in the increasing order e.g. [1, 3, 5, 7].
 '''
-def count_rotations(nums):
+def count_rotations_linear(nums):
     '''
-    Description: Determines the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    Description: Uses linear search to determine the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    The number of rotations is given by the index of the smallest number in the nums list. For example if the smallest number in the list
+    is at position k (counting from zero) then the list was rotated k times.
     Parameters:
-    nums: the rotated list of numbers.
+    - nums: the rotated list of numbers.
+    Linear Search (aka Brute Force) Algorithm: 
+    - Create variable position = 0 to loop through all indexes of nums list.
+    - Compare nums[position] with its predecessor nums[position-1] and if it is smaller return position as the answer.
+    - If no number in nums list is smaller than its predecessor return 0 as nums is sorted in ascending order which means rotated zero times.
     '''
+    position = 0
+
+    while position <= len(nums)-1:
+        if position > 0 and nums[position] < nums[position-1]:
+            return position
+        position += 1
+    
+    return 0 
 
 import dsa
 
@@ -90,5 +104,12 @@ test7 = {
     'output': 0
 }
 
+# Load all test cases into tests list.
+tests=[test0, test1, test2, test3, test4, test5, test6, test7]
 
+# Evaluate count_rotations_linear against the first test case.
+dsa.evaluate_test_case(function=count_rotations_linear, test=test0)
+
+# Evaluate count_rotations_linear against all test cases.
+dsa.evaluate_test_cases(function=count_rotations_linear, tests=tests)
 
