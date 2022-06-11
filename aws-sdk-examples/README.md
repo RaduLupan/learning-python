@@ -1,4 +1,4 @@
-# AWS-SDK-Examples folder
+# AWS-SDK-Examples
 The code examples in this folder demonstrate using the Amazon Web Services (AWS) SDK for Python ("boto3") to call various AWS services. The examples are mostly based on the [Boto3 Docs Quickstart](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html). 
 
 ## Pre-requisites

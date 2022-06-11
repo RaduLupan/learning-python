@@ -1,4 +1,4 @@
-# Google-Sheets-API folder
+# Google-Sheets-API
 Python examples for working with the Google Sheets API.
 
 # References
