@@ -27,3 +27,68 @@ test={
     'output': 4
 }
 
+# Create more test cases.
+
+# A list of size 9 rotated 4 times.
+test0=test
+
+# A list of size 8 rotated 5 times.
+test1 = {
+    'input': {
+        'nums': [12, 15, 18, 21, 28, 4, 9, 10]
+    },
+    'output': 5
+}
+
+# A list that wasn't rotated at all.
+test2 = {
+    'input': {
+        'nums': [1, 10, 100, 1400]
+    },
+    'output': 0
+}
+
+# A list that was rotated just once.
+test3 = {
+    'input': {
+        'nums': [47, 20, 28, 35, 45]
+    },
+    'output': 1
+}
+
+# A list that was rotated n-1 times, where n is the size of the list.
+test4 = {
+    'input': {
+        'nums': [-20, -15, 0, 19, 35, -30]
+    },
+    'output': 5
+}
+
+# A list that was rotated n times, where n is the size of the list. 
+# A list rotated n times equals to the original sorted list which is rotated 0 times.
+# Since the function must return the minimum number of rotations the output for this test case is 0.
+test5 = {
+    'input': {
+        'nums': [1, 2, 3, 4, 5, 6, 7]
+    },
+    'output': 0
+}
+
+# An empty list. An empty list is always sorted so needs to be rotated zero times.
+test6 = {
+    'input': {
+        'nums': []
+    },
+    'output': 0
+}
+
+# A list containing just one element.
+test7 = {
+    'input': {
+        'nums': [100]
+    },
+    'output': 0
+}
+
+
+
