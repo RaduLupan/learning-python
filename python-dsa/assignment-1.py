@@ -10,4 +10,20 @@ E.g. rotating the list [3, 2, 4, 1] produces [1, 3, 2, 4].
 
 "Sorted list" refers to a list where the elements are arranged in the increasing order e.g. [1, 3, 5, 7].
 '''
+def count_rotations(nums):
+    '''
+    Description: Determines the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    Parameters:
+    nums: the rotated list of numbers.
+    '''
+
 import dsa
+
+# The structure of a test. The list in test['input']['nums'] was obtained by rotating [12, 45, 77, 81, 92, 101, 235, 400, 505] list 4 times.
+test={
+    'input': {
+        'nums': [101, 235, 400, 505, 12, 45, 77, 81, 92]
+    },
+    'output': 4
+}
+
