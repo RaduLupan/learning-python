@@ -80,6 +80,22 @@ def count_rotations_binary(nums):
     
     return 0
 
+def count_rotations_generic(nums):
+    '''
+    Description: Uses generic binary search algorithm to determine the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    Parameters:
+    - nums: the rotated list of numbers.
+    Binar Search Algorithm:
+    1. Set the left and right indexes to 0 and len(nums)-1 respectively.
+    2. Calculate the mid position of the search interval.
+    3. Compare the number at the mid position with the number at the right end of the interval. 
+    4. If the number at the mid position is smaller than the number at the right end of the interval, the answer lies in the left half.
+    5. If the number at the mid position is greater than the number at the right end of the interval, the answer lies in the right half.
+    6. If the number at the mid position equals the number at the right end of the interval, return the mid position as the answer.
+    7. Repeat steps 2-6 until left and right indexes are equal.
+    8. If no answer return 0 as the nums list is sorted in ascending order and therefore was rotated zero times.
+    '''    
+    pass
 import dsa
 
 # The structure of a test. The list in test['input']['nums'] was obtained by rotating [12, 45, 77, 81, 92, 101, 235, 400, 505] list 4 times.
@@ -163,7 +179,13 @@ tests=[test0, test1, test2, test3, test4, test5, test6, test7]
 # dsa.evaluate_test_cases(function=count_rotations_linear, tests=tests)
 
 # Evaluate count_rotations_binary against the first test case.
-dsa.evaluate_test_case(function=count_rotations_binary, test=test0)
+# dsa.evaluate_test_case(function=count_rotations_binary, test=test0)
 
 # Evaluate count_rotations_binary against all test cases.
-dsa.evaluate_test_cases(function=count_rotations_binary, tests=tests)
+# dsa.evaluate_test_cases(function=count_rotations_binary, tests=tests)
+
+# Evaluate count_rotations_generic against the first test case.
+dsa.evaluate_test_case(function=count_rotations_generic, test=test0)
+
+# Evaluate count_rotations_generic against all test cases.
+dsa.evaluate_test_cases(function=count_rotations_generic, tests=tests)
