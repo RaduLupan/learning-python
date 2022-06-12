@@ -95,7 +95,18 @@ def count_rotations_generic(nums):
     7. Repeat steps 2-6 until left and right indexes are equal.
     8. If no answer return 0 as the nums list is sorted in ascending order and therefore was rotated zero times.
     '''    
-    pass
+    def condition (mid):
+        pass
+
+    rotations = dsa.binary_search(lo=0, hi=len(nums)-1, condition=condition)
+
+    # If nums is sorted, the binary_search will return -1 which does not make sense in terms of number of rotations, so we will return 0 instead.
+    if rotations != -1:
+        return rotations
+    else:
+        return 0
+
+    
 import dsa
 
 # The structure of a test. The list in test['input']['nums'] was obtained by rotating [12, 45, 77, 81, 92, 101, 235, 400, 505] list 4 times.
@@ -188,4 +199,4 @@ tests=[test0, test1, test2, test3, test4, test5, test6, test7]
 dsa.evaluate_test_case(function=count_rotations_generic, test=test0)
 
 # Evaluate count_rotations_generic against all test cases.
-dsa.evaluate_test_cases(function=count_rotations_generic, tests=tests)
+# dsa.evaluate_test_cases(function=count_rotations_generic, tests=tests)
