@@ -209,7 +209,7 @@ test7 = {
 }
 
 # Load all test cases into tests list.
-tests=[test0, test1, test2, test3, test4, test5, test6, test2]
+tests=[test0, test1, test2, test3, test4, test5, test6, test7]
 
 # Evaluate count_rotations_linear against the first test case.
 # dsa.evaluate_test_case(function=count_rotations_linear, test=test0)
