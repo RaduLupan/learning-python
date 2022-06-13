@@ -134,8 +134,7 @@ def count_rotations_generic(nums):
         return rotations
     else:
         return 0
-
-    
+   
 import dsa
 
 # The structure of a test. The list in test['input']['nums'] was obtained by rotating [12, 45, 77, 81, 92, 101, 235, 400, 505] list 4 times.
