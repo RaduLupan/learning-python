@@ -56,10 +56,16 @@ def locate_number_binary(nums, target):
     
         if mid >=0 and nums[mid] == target:
             return 'found'
+        # Handle sorted lists.
         elif nums[mid] < target and nums[mid] < nums[hi] and nums[mid] >= nums[lo]:
             return 'right'
         elif nums[mid] > target and nums[mid] < nums[hi] and nums[mid] >= nums[lo]:
             return 'left'
+        # Handle roated lists.
+        elif nums[mid] < target and nums[mid] < nums[hi] and nums[mid] < nums[lo]:
+            return 'left'
+        elif nums[mid] < target and nums[mid] > nums[hi] and nums[mid] > nums[lo]:
+            return 'right'
     return binary_search(0, len(nums)-1, condition)
 import dsa
 
@@ -167,7 +173,7 @@ tests=[test0, test1, test2, test3, test4, test5, test6, test7, test8, test9]
 # dsa.evaluate_test_cases(function=locate_number_linear, tests=tests)
 
 # Evaluate locate_number_binary against the first test case.
-dsa.evaluate_test_case(function=locate_number_binary, test=test7)
+dsa.evaluate_test_case(function=locate_number_binary, test=test0)
 
 # Evaluate locate_number_binary against all test cases.
 # dsa.evaluate_test_cases(function=locate_number_binary, tests=tests)
