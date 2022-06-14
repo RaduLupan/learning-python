@@ -17,8 +17,50 @@ def locate_number_linear(nums, target):
     3. Increment position and repeat steps 2-3 until the end of nums is reached.
     4. If target is not found in nums return -1.
     '''
-    pass
+    position = 0
 
+    while position <= len(nums)-1:
+        if nums[position] == target:
+            return position
+        position += 1
+    
+    return -1
+
+def binary_search(lo, hi, condition):
+
+    while lo <= hi:
+        mid = (lo + hi)// 2
+        
+        print(f"Binary Search -> Lo: {lo}, Hi: {hi}, Mid: {mid}")
+
+        result = condition(mid, lo, hi)
+
+        if result == 'found':
+            return mid
+        elif result == 'left':
+            hi = mid
+        elif result == 'right':
+            lo = mid+1
+    return -1
+
+def locate_number_binary(nums, target):
+    '''
+    Description: Uses binary search algorithm to determine the position of a target number in a rotated sorted list of numbers.
+    Parameters:
+    - nums: the rotated list of numbers.
+    - target: the target number whose position in nums is needed.
+    '''
+    def condition (mid, lo, hi):
+    
+        print(f"Condition -> Lo: {lo}, Hi: {hi}, Mid: {mid}")
+    
+        if mid >=0 and nums[mid] == target:
+            return 'found'
+        elif nums[mid] < target and nums[mid] < nums[hi] and nums[mid] >= nums[lo]:
+            return 'right'
+        elif nums[mid] > target and nums[mid] < nums[hi] and nums[mid] >= nums[lo]:
+            return 'left'
+    return binary_search(0, len(nums)-1, condition)
 import dsa
 
 # The structure of a test. The list in test['input']['nums'] was obtained by rotating [12, 45, 77, 81, 92, 101, 235, 400, 505] list 4 times.
@@ -119,7 +161,13 @@ test9 = {
 tests=[test0, test1, test2, test3, test4, test5, test6, test7, test8, test9]
 
 # Evaluate locate_number_linear against the first test case.
-dsa.evaluate_test_case(function=locate_number_linear, test=test0)
+# dsa.evaluate_test_case(function=locate_number_linear, test=test0)
 
 # Evaluate locate_number_linear against all test cases.
 # dsa.evaluate_test_cases(function=locate_number_linear, tests=tests)
+
+# Evaluate locate_number_binary against the first test case.
+dsa.evaluate_test_case(function=locate_number_binary, test=test7)
+
+# Evaluate locate_number_binary against all test cases.
+# dsa.evaluate_test_cases(function=locate_number_binary, tests=tests)
