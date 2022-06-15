@@ -29,6 +29,27 @@ def locate_number_linear(nums, target):
     
     return -1
 
+def count_rotations_linear(nums):
+    '''
+    Description: Uses linear search algorithm to determine the minimum number of rotations applied to a sorted list of numbers to obtain the given list.
+    The number of rotations is given by the index of the smallest number in the nums list. For example if the smallest number in the list
+    is at position k (counting from zero) then the list was rotated k times.
+    Parameters:
+    - nums: the rotated list of numbers.
+    Linear Search (aka Brute Force) Algorithm: 
+    1. Create variable position = 0 to loop through all indexes of nums list.
+    2. Compare nums[position] with its predecessor nums[position-1] and if it is smaller return position as the answer.
+    3. If no number in nums list is smaller than its predecessor return 0 as nums is sorted in ascending order and therefore rotated zero times.
+    '''
+    position = 0
+
+    while position <= len(nums)-1:
+        if position > 0 and nums[position] < nums[position-1]:
+            return position
+        position += 1
+    
+    return 0
+    
 def binary_search(lo, hi, condition):
 
     while lo <= hi:
