@@ -49,50 +49,61 @@ def count_rotations_linear(nums):
         position += 1
     
     return 0
-    
-def binary_search(lo, hi, condition):
+
+def binary_search_generic(lo, hi, condition):
 
     while lo <= hi:
         mid = (lo + hi)// 2
         
         print(f"Binary Search -> Lo: {lo}, Hi: {hi}, Mid: {mid}")
 
-        result = condition(mid, lo, hi)
+        result = condition(mid)
 
         if result == 'found':
             return mid
         elif result == 'left':
-            hi = mid
+            hi = mid-1
         elif result == 'right':
             lo = mid+1
     return -1
 
-def locate_number_binary(nums, target):
+def locate_number_hybrid(nums, target):
     '''
-    Description: Uses binary search algorithm to determine the position of a target number in a rotated sorted list of numbers.
+    Description: Uses a combination of linear and binary search algorithms to determine the position of a target number in a rotated sorted list of numbers.
+    Firstly it uses count_rotations_linear to determine the number of rotations for the nums list.
+    Secondly it uses search_binary_generic to determine the target position in the two sorted lists (in case nums is rotated) or the one sorted list (if nums is sorted or not rotated). 
     Parameters:
     - nums: the rotated list of numbers.
     - target: the target number whose position in nums is needed.
     '''
-    def condition (mid, lo, hi):
-    
-        print(f"Condition -> Lo: {lo}, Hi: {hi}, Mid: {mid}")
+    def condition (mid):
     
         if mid >=0 and nums[mid] == target:
             return 'found'
-        # Handle sorted lists.
-        elif nums[mid] < target and nums[mid] < nums[hi] and nums[mid] >= nums[lo]:
+        elif nums[mid] < target:
             return 'right'
-        elif nums[mid] > target and nums[mid] < nums[hi] and nums[mid] >= nums[lo]:
+        elif nums[mid] > target:
             return 'left'
-        # Handle roated lists.
-        elif nums[mid] < target and nums[mid] < nums[hi] and nums[mid] < nums[lo]:
-            return 'left'
-        elif nums[mid] < target and nums[mid] > nums[hi] and nums[mid] > nums[lo]:
-            return 'right'
-        elif nums[mid] > target and nums[mid] > nums[hi] and nums[mid] >= nums[lo]:
-            return 'left'
-    return binary_search(0, len(nums)-1, condition)
+
+    rotations = count_rotations_linear(nums=nums) 
+    
+    # If nums is rotated search in the two sorted lists.
+    if rotations > 0:
+        result1 = binary_search_generic(0, rotations-1, condition)
+        result2 = binary_search_generic(rotations, len(nums)-1, condition)
+
+        if result1 != -1:
+            return result1
+        elif result2 != -1:
+            return result2
+        else:
+            return -1
+    # If nums is not rotated search in nums (which is sorted).
+    else:
+        result = binary_search_generic(0, len(nums)-1, condition)
+        return result
+           
+    
 import dsa
 
 # The structure of a test. The list in test['input']['nums'] was obtained by rotating [12, 45, 77, 81, 92, 101, 235, 400, 505] list 4 times.
@@ -199,7 +210,7 @@ tests=[test0, test1, test2, test3, test4, test5, test6, test7, test8, test9]
 # dsa.evaluate_test_cases(function=locate_number_linear, tests=tests)
 
 # Evaluate locate_number_binary against the first test case.
-dsa.evaluate_test_case(function=locate_number_binary, test=test3)
+# dsa.evaluate_test_case(function=locate_number_binary, test=test3)
 
 # Evaluate locate_number_binary against all test cases.
-# dsa.evaluate_test_cases(function=locate_number_binary, tests=tests)
+dsa.evaluate_test_cases(function=locate_number_hybrid, tests=tests)
