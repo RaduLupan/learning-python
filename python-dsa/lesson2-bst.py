@@ -22,8 +22,18 @@ class UserDatabase:
     def list_all(self):
         pass
 
-user1=User('bobg', 'Bob Green', 'bobg@example.com')
+bobg=User('bobg', 'Bob Green', 'bobg@example.com')
+aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
+joeb=User('joeb', 'Joe Blue', 'joeb@example.com')
+danb=User('danb', 'Dan Black', 'danb@example.com')
+pamy=User('pamy', 'Pam Yellow', 'pamy@example.com')
+georgeo=User('georgeo', 'George Orange', 'georgeo@example.com')
+victorp=User('victorp', 'Victor Pink', 'victorp@example.com')
 
-print(user1)
+users=[bobg, aliceb, joeb, danb, pamy, georgeo, victorp]
+
+for user in users:
+    print(user)
+
 
 
