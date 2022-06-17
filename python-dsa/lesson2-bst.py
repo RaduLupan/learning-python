@@ -37,7 +37,17 @@ class UserDatabase:
             i += 1
         return -1
     def update(self, user):
-        pass
+        i = 0
+
+        while i < len(self.users):
+            if self.users[i].username == user.username:
+                self.users[i].name = user.name
+                self.users[i].email = user.email
+            i += 1
+        
+        # If user is not found insert.
+        self.insert(user)
+
     def list_all(self):
         print(self.users)
 
@@ -64,6 +74,18 @@ database.list_all()
 dan=database.find('danb')
 print(dan) 
 
-# Fin non existing username.
+# Find non existing username.
 raul=database.find('raulp')
 print(raul)
+
+# Update existing user.
+print(f"Before: {database.find('danb')}")
+updated_danb=User('danb', 'Daniel Black', 'danielb@example.com')
+database.update(updated_danb)
+print(f"After: {database.find('danb')}")
+
+# Update not existing user (insert).
+print(f"Before: Finding username=xens {database.find('xens')}")
+xens=User('xens', 'Xen Server', 'xens@example.com')
+database.update(xens)
+print(f"After: {database.find('xens')}")
