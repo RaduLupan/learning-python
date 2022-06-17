@@ -31,23 +31,24 @@ class UserDatabase:
 
         while i < len(self.users):
             
-            print(f"i={i}: users[i].username={self.users[i].username} user.username={username} ")
+            # print(f"i={i}: users[i].username={self.users[i].username} user.username={username} ")
             if self.users[i].username == username:
                 return self.users[i]
             i += 1
         return -1
-    def update(self, user):
-        i = 0
 
-        while i < len(self.users):
-            if self.users[i].username == user.username:
-                self.users[i].name = user.name
-                self.users[i].email = user.email
-            i += 1
+    def update(self, user):
+        
+        target = self.find(user.username)
+
+        if target != -1:
+            target.name = user.name
+            target.email = user.email
         
         # If user is not found insert.
-        self.insert(user)
-
+        else:
+            self.insert(user)
+        
     def list_all(self):
         print(self.users)
 
