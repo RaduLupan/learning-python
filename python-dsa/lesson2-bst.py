@@ -17,6 +17,9 @@ class UserDatabase:
         self.users = []
     
     def insert(self, user):
+        
+        target = self.find(user.username)
+
         i = 0
 
         while i < len(self.users):
@@ -24,7 +27,12 @@ class UserDatabase:
             if self.users[i].username > user.username:
                 break
             i += 1
-        self.users.insert(i, user)
+        
+        # Only insert if username not found.
+        if target == -1:
+            self.users.insert(i, user)
+        else:
+            print(f"A user with username={user.username} already exists. You may want to try the update method.")
 
     def find(self, username):
         i = 0
@@ -50,7 +58,7 @@ class UserDatabase:
             self.insert(user)
         
     def list_all(self):
-        print(self.users)
+        return self.users
 
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
@@ -69,7 +77,7 @@ for user in test_users:
     database.insert(user)
 
 
-database.list_all()
+print(database.list_all())
 
 # Finding danb
 dan=database.find('danb')
@@ -90,3 +98,6 @@ print(f"Before: Finding username=xens {database.find('xens')}")
 xens=User('xens', 'Xen Server', 'xens@example.com')
 database.update(xens)
 print(f"After: {database.find('xens')}")
+
+# Try to insert a user that exists.
+database.insert(danb)
