@@ -61,7 +61,37 @@ class UserDatabase:
     def list_all(self):
         return self.users
 
+class TreeNode:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
 
+def parse_tuple(data):
+    '''
+    Description: Helper function that converts a tuple with the structure (left_subtree, key, right_subtree) into a binary tree,
+    where left_subtree and right_subtree are tuples themselves.
+    '''
+
+    if isinstance(data, tuple) and len(data) == 3:
+        
+        node = TreeNode(data[1])
+        
+        # Recursively parse left and right subtrees which are also tuples.
+        node.left = parse_tuple(data[0])
+        node.right = parse_tuple(data[2])
+
+        print(f"data={data}, node.key={node.key}")
+    
+    # Exit recursivity when either None or a number is encountered instead of tuple.
+    elif data is None:
+        print(f"Encountered None -> data={data}")
+        node = None
+    else:
+        print(f"Encountered a number -> data={data}")
+        node = TreeNode(data)
+    
+    return node
 
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
@@ -99,10 +129,18 @@ print(database.list_all())
 
 
 # Update not existing user (insert).
-print(f"Before: Finding username=xens {database.find('xens')}")
-xens=User('xens', 'Xen Server', 'xens@example.com')
-database.update(xens)
-print(f"After: {database.find('xens')}")
+#print(f"Before: Finding username=xens {database.find('xens')}")
+#xens=User('xens', 'Xen Server', 'xens@example.com')
+#database.update(xens)
+#print(f"After: {database.find('xens')}")
 
 # Try to insert a user that exists.
-database.insert(danb)
+#database.insert(danb)
+
+
+#tree_tuple=((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
+# tree_tuple=((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8)))
+           
+tree=parse_tuple(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
+
+print(tree.left.key, tree.right.key)
