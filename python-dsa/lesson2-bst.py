@@ -1,6 +1,8 @@
 '''
 Problem: We need to create a data structure which can store 100 million records and perform insertion, search, update and list operations efficiently.
 Input: User profiles which contain username, name and email for a user.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Question: Implement a binary tree using Python, and show its usage with some examples.
 '''
 class User:
     def __init__(self, username, name, email):
@@ -10,7 +12,6 @@ class User:
     
     def __repr__(self):
         return f"User(username={self.username}, name={self.name}, email={self.email})"
-
 
 class UserDatabase:
     def __init__(self):
@@ -60,6 +61,8 @@ class UserDatabase:
     def list_all(self):
         return self.users
 
+
+
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
 joeb=User('joeb', 'Joe Blue', 'joeb@example.com')
@@ -80,18 +83,20 @@ for user in test_users:
 print(database.list_all())
 
 # Finding danb
-dan=database.find('danb')
-print(dan) 
+#dan=database.find('danb')
+#print(dan) 
 
 # Find non existing username.
-raul=database.find('raulp')
-print(raul)
+#raul=database.find('raulp')
+#print(raul)
 
 # Update existing user.
-print(f"Before: {database.find('danb')}")
-updated_danb=User('danb', 'Daniel Black', 'danielb@example.com')
-database.update(updated_danb)
-print(f"After: {database.find('danb')}")
+#print(f"Before: {database.find('danb')}")
+#updated_danb=User('danb', 'Daniel Black', 'danielb@example.com')
+#database.update(updated_danb)
+#print(f"After: {database.find('danb')}")
+
+
 
 # Update not existing user (insert).
 print(f"Before: Finding username=xens {database.find('xens')}")
