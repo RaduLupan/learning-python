@@ -67,7 +67,7 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def parse_tuple(data):
+def tuple_to_tree(data):
     '''
     Description: Helper function that converts a tuple with the structure (left_subtree, key, right_subtree) into a binary tree,
     where left_subtree and right_subtree are tuples themselves.
@@ -78,8 +78,8 @@ def parse_tuple(data):
         node = TreeNode(data[1])
         
         # Recursively parse left and right subtrees which are also tuples.
-        node.left = parse_tuple(data[0])
-        node.right = parse_tuple(data[2])
+        node.left = tuple_to_tree(data[0])
+        node.right = tuple_to_tree(data[2])
 
         print(f"data={data}, node.key={node.key}")
     
@@ -92,6 +92,33 @@ def parse_tuple(data):
         node = TreeNode(data)
     
     return node
+
+def tree_to_tuple(node):
+    '''
+    Description: Helper function that converts a tree to a tuple (left_subtree, key, right_subtree) that represents the same tree.
+    '''
+    key = node.key
+
+    # If node has only a right subtree call tree_to_tuple(node.right).
+    if node.left is None and node.right != None:
+        left_subtree = None
+        right_subtree = tree_to_tuple(node.right)
+    
+    # If node has only a left subtree call tree_to_tuple(node.left).
+    elif node.left != None and node.right is None:
+        left_subtree = tree_to_tuple(node.left)
+        right_subtree = None
+    
+    # If node has a left and a right subtree call tree_to_tuple on both. 
+    elif node.left != None and node.right != None:
+        left_subtree = tree_to_tuple(node.left)
+        right_subtree = tree_to_tuple(node.right)
+    
+    # If node is a leaf return its key.
+    elif node.left is None and node.right is None:
+        return key
+    
+    return left_subtree, key, right_subtree
 
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
@@ -141,6 +168,6 @@ print(database.list_all())
 #tree_tuple=((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
 # tree_tuple=((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8)))
            
-tree=parse_tuple(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
+tree=tuple_to_tree(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
 
-print(tree.left.key, tree.right.key)
+print(tree_to_tuple(tree))
