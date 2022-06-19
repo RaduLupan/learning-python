@@ -188,6 +188,18 @@ print(database.list_all())
 #tree_tuple=((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
 # tree_tuple=((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8)))
            
-tree=tuple_to_tree(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
+#tree1=tuple_to_tree(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
 
-print(tree_to_tuple(tree))
+#print(tree_to_tuple(tree1))
+
+#display_keys(tree1, ' ')
+
+tree2=tuple_to_tree((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
+display_keys(tree2, ' ')
+
+# Alternatively create the left and right subtrees first and then the tree.
+left_subtree=tuple_to_tree(((None, 25, (42, 36, 48)), 10, None))
+right_subtree=tuple_to_tree(((None, 23, 35), 18, ((43, 39, None), 29, None)))
+tree3=tuple_to_tree((tree_to_tuple(left_subtree), 7, tree_to_tuple(right_subtree)))
+
+display_keys(tree3, ' ')
