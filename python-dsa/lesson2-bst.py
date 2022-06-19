@@ -120,6 +120,26 @@ def tree_to_tuple(node):
     
     return left_subtree, key, right_subtree
 
+def display_keys(node, space='\t', level=0):
+    '''
+    Description: Helper function that prints all keys of a tree using tab indentation to create a tree-like visual structure.
+    '''    
+
+    # If the node is empty
+    if node is None:
+        print(space*level + '∅')
+        return   
+    
+    # If the node is a leaf 
+    if node.left is None and node.right is None:
+        print(space*level + str(node.key))
+        return
+    
+    # If the node has children
+    display_keys(node.right, space, level+1)
+    print(space*level + str(node.key))
+    display_keys(node.left,space, level+1)    
+
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
 joeb=User('joeb', 'Joe Blue', 'joeb@example.com')
