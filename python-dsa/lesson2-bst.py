@@ -140,6 +140,19 @@ def display_keys(node, space='\t', level=0):
     print(space*level + str(node.key))
     display_keys(node.left,space, level+1)    
 
+def traverse_inorder(node):
+    '''
+    Description: Performs inorder traversal of a binary tree.
+    Inorder Traversal:
+     1. Traverse the left subtree recursively inorder.
+     2. Traverse the current node.
+     3. Traverse the right subtree recursively inorder.
+    '''
+
+    if node is None:
+        return []
+    
+    return traverse_inorder(node.left) + [node.key] + traverse_inorder(node.right)
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
 joeb=User('joeb', 'Joe Blue', 'joeb@example.com')
@@ -198,8 +211,11 @@ tree2=tuple_to_tree((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 1
 display_keys(tree2, ' ')
 
 # Alternatively create the left and right subtrees first and then the tree.
-left_subtree=tuple_to_tree(((None, 25, (42, 36, 48)), 10, None))
-right_subtree=tuple_to_tree(((None, 23, 35), 18, ((43, 39, None), 29, None)))
-tree3=tuple_to_tree((tree_to_tuple(left_subtree), 7, tree_to_tuple(right_subtree)))
+#left_subtree=tuple_to_tree(((None, 25, (42, 36, 48)), 10, None))
+#right_subtree=tuple_to_tree(((None, 23, 35), 18, ((43, 39, None), 29, None)))
+#tree3=tuple_to_tree((tree_to_tuple(left_subtree), 7, tree_to_tuple(right_subtree)))
 
-display_keys(tree3, ' ')
+#display_keys(tree3, ' ')
+
+traversal=traverse_inorder(tree2)
+print(traversal)
