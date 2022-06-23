@@ -153,6 +153,21 @@ def traverse_inorder(node):
         return []
     
     return traverse_inorder(node.left) + [node.key] + traverse_inorder(node.right)
+
+def traverse_preorder(node):
+    '''
+    Description: Performs preorder traversal of a binary tree.
+    Preorder Traversal:
+     1. Traverse the current node.
+     2. Traverse the left subtree recursively preorder.
+     3. Traverse the right subtree recursively preorder.
+    '''
+
+    if node is None:
+        return []
+    
+    return [node.key] + traverse_preorder(node.left) + traverse_preorder(node.right)
+
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
 joeb=User('joeb', 'Joe Blue', 'joeb@example.com')
@@ -201,7 +216,7 @@ print(database.list_all())
 #tree_tuple=((1, 3, None), 2, ((None, 3, 4), 5, (6, 7, 8)))
 # tree_tuple=((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8)))
            
-#tree1=tuple_to_tree(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
+tree1=tuple_to_tree(((1,3,None), 2, ((None, 3, 4), 5, (6, 7, 8))))
 
 #print(tree_to_tuple(tree1))
 
@@ -217,5 +232,8 @@ display_keys(tree2, ' ')
 
 #display_keys(tree3, ' ')
 
-traversal=traverse_inorder(tree2)
-print(traversal)
+inorder_traversal=traverse_inorder(tree2)
+print(inorder_traversal)
+
+preorder_traversal=traverse_preorder(tree2)
+print(preorder_traversal)
