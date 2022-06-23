@@ -145,7 +145,7 @@ def traverse_inorder(node):
     Description: Performs inorder traversal of a binary tree.
     Inorder Traversal:
      1. Traverse the left subtree recursively inorder.
-     2. Traverse the current node.
+     2. Visit the current node.
      3. Traverse the right subtree recursively inorder.
     '''
 
@@ -158,7 +158,7 @@ def traverse_preorder(node):
     '''
     Description: Performs preorder traversal of a binary tree.
     Preorder Traversal:
-     1. Traverse the current node.
+     1. Visit the current node.
      2. Traverse the left subtree recursively preorder.
      3. Traverse the right subtree recursively preorder.
     '''
@@ -167,6 +167,20 @@ def traverse_preorder(node):
         return []
     
     return [node.key] + traverse_preorder(node.left) + traverse_preorder(node.right)
+
+def traverse_postorder(node):
+    '''
+    Description: Performs postorder traversal of a binary tree.
+    Postorder Traversal:
+     1. Traverse the left subtree recursively postorder.
+     2. Traverse the right subtree recursively postorder.
+     3. Visit the current node.
+    '''
+
+    if node is None:
+        return []
+    
+    return traverse_postorder(node.left) + traverse_postorder(node.right) + [node.key]
 
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
@@ -237,3 +251,6 @@ print(inorder_traversal)
 
 preorder_traversal=traverse_preorder(tree2)
 print(preorder_traversal)
+
+postorder_traversal=traverse_postorder(tree2)
+print(postorder_traversal)
