@@ -182,7 +182,7 @@ def traverse_postorder(node):
     
     return traverse_postorder(node.left) + traverse_postorder(node.right) + [node.key]
 
-def calculate_height(node):
+def tree_height(node):
     '''
     Description: Calculates the height of a binary tree as maximum of heights of the left and right subtrees.
     '''
@@ -190,7 +190,17 @@ def calculate_height(node):
     if node is None:
         return 0
     
-    return 1 + max(calculate_height(node.left), calculate_height(node.right))
+    return 1 + max(tree_height(node.left), tree_height(node.right))
+
+def tree_size(node):
+    '''
+    Description: Calculates the size of a binary tree.
+    '''
+
+    if node is None:
+        return 0
+
+    return 1 + tree_size(node.left) + tree_size(node.right)
 
 bobg=User('bobg', 'Bob Green', 'bobg@example.com')
 aliceb=User('aliceb', 'Alice Brown', 'aliceb@example.com')
@@ -265,5 +275,8 @@ print(preorder_traversal)
 postorder_traversal=traverse_postorder(tree2)
 print(postorder_traversal)
 
-tree_height = calculate_height(tree2)
+tree_height = tree_height(tree2)
 print(f"The height of the tree is: {tree_height}")
+
+tree_size = tree_size(tree2)
+print(f"The size of the tree is: {tree_size}")
