@@ -1,7 +1,7 @@
 '''
----------------------------------------------------------------------------------
-This module contains functions to use for Data Structure and Algorithms problems.
----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+This module contains functions aasses to use for Data Structure and Algorithms problems.
+----------------------------------------------------------------------------------------
 '''
 
 def binary_search(lo,hi,condition):
@@ -72,3 +72,7 @@ def evaluate_test_cases(function, tests):
             fail_count += 1
     
     print(f"SUMMARY\n TOTAL: {len(tests)}, PASSED: {pass_count}, FAILED: {fail_count}")
+
+class TreeNode():
+    def __init__(self, key):
+        self.left, self.key, self.right = None, key, None
