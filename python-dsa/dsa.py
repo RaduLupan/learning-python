@@ -76,3 +76,28 @@ def evaluate_test_cases(function, tests):
 class TreeNode():
     def __init__(self, key):
         self.left, self.key, self.right = None, key, None
+
+    def height(self):
+        if self is None:
+            return 0
+        return max(TreeNode.height(self.left), TreeNode.height(self.right))
+    
+    def size(self):
+        if self is None:
+            return 0
+        return 1 + TreeNode.size(self.left) + TreeNode.size(self.right)
+
+    def traverse_in_order(self):
+        if self is None:
+            return []
+        return TreeNode.traverse_in_order(self.left) + [self.key] + TreeNode.traverse_in_order(self.right)
+    
+    def traverse_pre_order(self):
+        if self is None:
+            return []
+        return [self.key] + TreeNode.traverse_pre_order(self.left) + TreeNode.traverse_pre_order(self.right)
+
+    def traverse_post_order(self):
+        if self is None:
+            return []
+        return TreeNode.traverse_post_order(self.left) + TreeNode.traverse_post_order(self.right) + [self.key]
