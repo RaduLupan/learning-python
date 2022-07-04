@@ -128,10 +128,10 @@ class TreeNode():
     def __repr__(self):
         return "BinaryTree <{}>".format(self.to_tuple())
     
-    @staticmethod
+    @staticmethod    
     def parse_tuple(data):
         if data is None:
-            node is None
+            node = None
         elif isinstance(data, tuple) and len(data) == 3:
             node = TreeNode(data[1])
             node.left = TreeNode.parse_tuple(data[0])
