@@ -139,3 +139,20 @@ class TreeNode():
         else:
             node = TreeNode(data)
         return node
+
+class BSTNode:
+    def __init__ (self, key, value=None):
+        self.key = key
+        self.value = value
+        self.left = None
+        self.right = None
+        self.parent = None
+
+class User:
+    def __init__(self, username, name, email):
+        self.username = username
+        self.name = name
+        self.email = email
+    
+    def __repr__(self):
+        return "User(username='{}', name='{}', email='{}')".format(self.username, self.name, self.email)
