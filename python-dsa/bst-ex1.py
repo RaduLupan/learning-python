@@ -46,7 +46,21 @@ def bst_insert(bst, node):
     2. If the key is smaller, recursively insert it in the left subtree (if it exists) or attach it as the left child if no left subtree exists.
     3. If the key is greater, recursively insert it in the right subtree (if it exists) or attach it as the right child if no right subtree exists.
     '''
-    pass
+    key = node.username
+
+    if key < bst.key:
+        if bst.left is None:
+            bst.left = node
+            print(f"Inserted node with key={node.key} as the left child of {bst}")
+        else:
+            bst_insert(bst.left, node)
+    elif key > bst.key:
+        if bst.right is None:
+            bst.right = node
+            print(f"Inserted node with key={node.key} as the right child of {bst}")
+        else:
+            bst_insert(bst.right, node)
+            
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
