@@ -34,6 +34,19 @@ def is_bst(node):
     # print(node.key, min_key, max_key, is_bst_node)
 
     return is_bst_node, min_key, max_key 
+
+def bst_insert(bst, node):
+    '''
+    Description: Inserts a new node into a Binary Search Tree (BST).
+    Parameters:
+    - bst: the root node of the BST to insert to
+    - node: the node to be inserted, instance of the User class.
+    Algorithm:
+    1. Starting from the root node, compare the key to be inserted with the current node's key.
+    2. If the key is smaller, recursively insert it in the left subtree (if it exists) or attach it as the left child if no left subtree exists.
+    3. If the key is greater, recursively insert it in the right subtree (if it exists) or attach it as the right child if no right subtree exists.
+    '''
+    pass
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
