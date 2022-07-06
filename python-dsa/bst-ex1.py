@@ -48,18 +48,24 @@ def bst_insert(bst, node):
     '''
     key = node.username
 
-    if key < bst.key:
-        if bst.left is None:
-            bst.left = dsa.BSTNode(node.username, node)
-            print(f"Inserted node with key={node.key} as the left child of {bst}")
-        else:
-            bst_insert(bst.left, node)
-    elif key > bst.key:
-        if bst.right is None:
-            bst.right = dsa.BSTNode(node.username, node)
-            print(f"Inserted node with key={key} as the right child of {bst.key}")
-        else:
-            bst_insert(bst.right, node)
+    if bst is None:
+        bst = dsa.BSTNode(node.username, node)
+        print(f"Inserted node with key={key} into an empty tree.")
+    else:
+        if key < bst.key:
+            if bst.left is None:
+                bst.left = dsa.BSTNode(node.username, node)
+                bst.left.parent = bst
+                print(f"Inserted node with key={key} as the left child of {bst}")
+            else:
+                bst_insert(bst.left, node)
+        elif key > bst.key:
+            if bst.right is None:
+                bst.right = dsa.BSTNode(node.username, node)
+                bst.right.parent = bst
+                print(f"Inserted node with key={key} as the right child of {bst.key}")
+            else:
+                bst_insert(bst.right, node)
 
 def display_keys(node, space='\t', level=0):
     '''
@@ -153,3 +159,7 @@ print(is_bst_tree3)
 
 # Display BST after insertion.
 display_keys(node=tree3)
+
+# Test inserting into a BST that is None.
+tree4 = None
+bst_insert(tree4, frankv)
