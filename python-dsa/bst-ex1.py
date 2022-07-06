@@ -50,17 +50,37 @@ def bst_insert(bst, node):
 
     if key < bst.key:
         if bst.left is None:
-            bst.left = node
+            bst.left = dsa.BSTNode(node.username, node)
             print(f"Inserted node with key={node.key} as the left child of {bst}")
         else:
             bst_insert(bst.left, node)
     elif key > bst.key:
         if bst.right is None:
-            bst.right = node
-            print(f"Inserted node with key={node.key} as the right child of {bst}")
+            bst.right = dsa.BSTNode(node.username, node)
+            print(f"Inserted node with key={key} as the right child of {bst.key}")
         else:
             bst_insert(bst.right, node)
-            
+
+def display_keys(node, space='\t', level=0):
+    '''
+    Description: Helper function that prints all keys of a tree using tab indentation to create a tree-like visual structure.
+    '''    
+
+    # If the node is empty
+    if node is None:
+        print(space*level + '∅')
+        return   
+    
+    # If the node is a leaf 
+    if node.left is None and node.right is None:
+        print(space*level + str(node.key))
+        return
+    
+    # If the node has children
+    display_keys(node.right, space, level+1)
+    print(space*level + str(node.key))
+    display_keys(node.left,space, level+1)    
+
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
@@ -117,3 +137,19 @@ tree3.right.right = dsa.BSTNode(victorp.username, victorp)
 # Check if tree3 is a BST
 is_bst_tree3 = is_bst(tree3)
 print(is_bst_tree3)
+
+# Display BST before insertion.
+display_keys(node=tree3)
+
+# Create a node to be inserted in BST tree3.
+frankv = dsa.User('frankv', 'Frank Violet', 'frankv@example.com')
+
+# Insert node in BST.
+bst_insert(tree3, frankv)
+
+# Check if tree3 is still a BST after insertion.
+is_bst_tree3 = is_bst(tree3)
+print(is_bst_tree3)
+
+# Display BST after insertion.
+display_keys(node=tree3)
