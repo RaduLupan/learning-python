@@ -37,10 +37,10 @@ def is_bst(node):
 
 def bst_insert(bst, node):
     '''
-    Description: Inserts a new node into a Binary Search Tree (BST).
+    Description: Inserts a new node into a Binary Search Tree (BST). The node inserted must be of a class dsa.User with username, name and email attributes.
     Parameters:
     - bst: the root node of the BST to insert to
-    - node: the node to be inserted, instance of the User class.
+    - node: the node to be inserted, instance of the dsa.User class.
     Algorithm:
     1. Starting from the root node, compare the key to be inserted with the current node's key.
     2. If the key is smaller, recursively insert it in the left subtree (if it exists) or attach it as the left child if no left subtree exists.
@@ -67,6 +67,29 @@ def bst_insert(bst, node):
             else:
                 bst_insert(bst.right, node)
 
+def bst_insert_generic(bst, key, value):
+    '''
+    Description: Inserts a new key-value pair as node into a Binary Search Tree (BST). 
+    Parameters:
+    - bst: the root node of the BST to insert to
+    - key: the key for the BST node inserted.
+    - value: the value for the BST node inserted.
+    Algorithm:
+    1. Starting from the root node, compare the key to be inserted with the current node's key.
+    2. If the key is smaller, recursively insert it in the left subtree (if it exists) or attach it as the left child if no left subtree exists.
+    3. If the key is greater, recursively insert it in the right subtree (if it exists) or attach it as the right child if no right subtree exists.
+    '''
+
+    if bst is None:
+        bst = dsa.BSTNode(key, value)
+    else:
+        if key < bst.key:
+            bst.left = bst_insert_generic(bst.left, key, value)
+            bst.left.parent = bst
+        elif key > bst.key:
+            bst.right = bst_insert_generic(bst.right, key, value)
+            bst.right.parent = bst
+    return bst
 def display_keys(node, space='\t', level=0):
     '''
     Description: Helper function that prints all keys of a tree using tab indentation to create a tree-like visual structure.
@@ -151,7 +174,8 @@ display_keys(node=tree3)
 frankv = dsa.User('frankv', 'Frank Violet', 'frankv@example.com')
 
 # Insert node in BST.
-bst_insert(tree3, frankv)
+# bst_insert(tree3, frankv)
+bst_insert_generic(tree3, frankv.username, frankv)
 
 # Check if tree3 is still a BST after insertion.
 is_bst_tree3 = is_bst(tree3)
@@ -162,4 +186,6 @@ display_keys(node=tree3)
 
 # Test inserting into a BST that is None.
 tree4 = None
-bst_insert(tree4, frankv)
+# bst_insert(tree4, frankv)
+tree4=bst_insert_generic(tree4, frankv.username, frankv)
+display_keys(node=tree4)
