@@ -11,6 +11,8 @@ Question 3: Write a function that finds the minimum key in a binary tree.
 Question 4: Write a function to insert a new node into a BST.
 Question 5: Write a function to find the value associated with a given key in a BST.
 Question 6: Write a function that updates a value associated with a given key in a BST.
+Question 7: Write a function to retrieve all the key-value pairs stored in a BST in the sorted order of keys.
+Hint: Use inorder traversal of the BST.
 '''
 def remove_none(nums):
     '''
@@ -146,6 +148,13 @@ def bst_update(node, key, value):
     if target is not None:
         target.value = value
 
+def bst_list_all(node):
+    '''
+    Description: Lists all key-pair values in a Binary Search Tree (BST) in sorted order.
+    '''
+    if node is None:
+        return []
+    return bst_list_all(node.left) + [(node.key, node.value)] + bst_list_all(node.right)
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
@@ -258,3 +267,7 @@ print(node.key, node.value)
 bst_update(tree5, 'pamy', dsa.User('pamy', 'Pamela Yellow', 'pamelay@example.com'))
 node = bst_find(tree5, 'pamy')
 print(node.key, node.value)
+
+# List all key-value pairs in a BST in sorted order.
+list_all=bst_list_all(tree5)
+print(list_all)
