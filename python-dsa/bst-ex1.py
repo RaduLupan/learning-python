@@ -113,6 +113,18 @@ def display_keys(node, space='\t', level=0):
     print(space*level + str(node.key))
     display_keys(node.left,space, level+1)    
 
+def bst_find(node, key):
+    '''
+    Description: Finds the value associated with a given key in a Binary Search Tree (BST).
+    Parameters: 
+    - node: the root node of the BST to find the key in
+    - key:  the key whose value is to be found
+    Algorithm:
+    1. Start from the root node, compare the key with the current node's key.
+    2. If the key is equal to the current node's key then return the current node.
+    3. If the key is smaller than the current node's key then recursively find the key in the left subtree of the current node.
+    4. If the key is greater than the current node's key then recursively find the key in the right subtree of the current node.
+    '''
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
