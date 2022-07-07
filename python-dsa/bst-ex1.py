@@ -66,6 +66,7 @@ def bst_insert(bst, node):
                 print(f"Inserted node with key={key} as the right child of {bst.key}")
             else:
                 bst_insert(bst.right, node)
+    return bst
 
 def bst_insert_generic(bst, key, value):
     '''
@@ -186,6 +187,6 @@ display_keys(node=tree3)
 
 # Test inserting into a BST that is None.
 tree4 = None
-# bst_insert(tree4, frankv)
-tree4=bst_insert_generic(tree4, frankv.username, frankv)
+tree4=bst_insert(tree4, frankv)
+# tree4=bst_insert_generic(tree4, frankv.username, frankv)
 display_keys(node=tree4)
