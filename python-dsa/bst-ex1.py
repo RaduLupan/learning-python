@@ -8,6 +8,8 @@ It follows that any subtree of a binary search tree must also be a BST.
 Question 1: Write a function that checks whether a binary tree is a BST.
 Question 2: Write a function that finds the maximum key in a binary tree.
 Question 3: Write a function that finds the minimum key in a binary tree.
+Question 4: Write a function to insert a new node into a BST.
+Question 5: Write a function to find the value associated with a given key in a BST.
 '''
 def remove_none(nums):
     '''
@@ -56,7 +58,7 @@ def bst_insert(bst, node):
             if bst.left is None:
                 bst.left = dsa.BSTNode(node.username, node)
                 bst.left.parent = bst
-                print(f"Inserted node with key={key} as the left child of {bst}")
+                print(f"Inserted node with key={key} as the left child of {bst.key}")
             else:
                 bst_insert(bst.left, node)
         elif key > bst.key:
@@ -190,3 +192,27 @@ tree4 = None
 tree4=bst_insert(tree4, frankv)
 # tree4=bst_insert_generic(tree4, frankv.username, frankv)
 display_keys(node=tree4)
+
+# Create a tree by inserting nodes.
+tree5 = bst_insert(None, georgeo)
+bst_insert(tree5, danb)
+bst_insert(tree5, bobg)
+bst_insert(tree5, elenab)
+bst_insert(tree5, pamy)
+bst_insert(tree5, joeb)
+bst_insert(tree5, victorp)
+bst_insert(tree5, frankv)
+
+display_keys(node=tree5)
+
+# The order in which we insert the nodes does matter. If we insert as below we get a different tree structure.
+tree6 = bst_insert(None, bobg)
+bst_insert(tree6, danb)
+bst_insert(tree6, elenab)
+bst_insert(tree6, georgeo)
+bst_insert(tree6, joeb)
+bst_insert(tree6, pamy)
+bst_insert(tree6, victorp)
+
+# tree6 is is unbalanced.
+display_keys(node=tree6)
