@@ -125,6 +125,16 @@ def bst_find(node, key):
     3. If the key is smaller than the current node's key then recursively find the key in the left subtree of the current node.
     4. If the key is greater than the current node's key then recursively find the key in the right subtree of the current node.
     '''
+
+    if node is None:
+        return None
+    
+    if key == node.key:
+        return node
+    if key < node.key:
+        return bst_find(node.left, key)
+    if key > node.key:
+        return bst_find(node.right, key)
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
