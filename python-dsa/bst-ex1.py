@@ -13,6 +13,7 @@ Question 5: Write a function to find the value associated with a given key in a 
 Question 6: Write a function that updates a value associated with a given key in a BST.
 Question 7: Write a function to retrieve all the key-value pairs stored in a BST in the sorted order of keys.
 Hint: Use inorder traversal of the BST.
+Question 8: Write a function to determine if a binary tree is balanced.
 '''
 def remove_none(nums):
     '''
@@ -155,6 +156,27 @@ def bst_list_all(node):
     if node is None:
         return []
     return bst_list_all(node.left) + [(node.key, node.value)] + bst_list_all(node.right)
+
+def is_balanced(node):
+    '''
+    Description: Determines if a tree is balanced by recursively checking the left and right subtrees of the root.
+    Algorithm:
+    1. Ensure the left subtree is balanced.
+    2. Ensure the right subtree is balanced.
+    3. Ensure that the difference between heights of left subtree and right subtree is not more than 1.
+    '''
+
+    if node is None:
+        return True, 0
+    
+    balanced_left, height_left = is_balanced(node.left)
+    balanced_right, height_right = is_balanced(node.right)
+
+    balanced = balanced_left and balanced_right and abs(height_left - height_right) <= 1
+    height = 1 + max(height_left, height_right)
+
+    return balanced, height
+
 import dsa
 
 tree1 = dsa.TreeNode.parse_tuple((((None, 25, (42, 36, 48)), 10, None), 7, ((None, 23, 35), 18, ((43, 39, None), 29, None))))
@@ -271,3 +293,7 @@ print(node.key, node.value)
 # List all key-value pairs in a BST in sorted order.
 list_all=bst_list_all(tree5)
 print(list_all)
+
+# Verify if trees are balanced.
+print(f"Is tree6 balanced?: {is_balanced(tree6)}")
+print(f"Is tree5 balanced?: {is_balanced(tree5)}")
