@@ -14,6 +14,7 @@ Question 6: Write a function that updates a value associated with a given key in
 Question 7: Write a function to retrieve all the key-value pairs stored in a BST in the sorted order of keys.
 Hint: Use inorder traversal of the BST.
 Question 8: Write a function to determine if a binary tree is balanced.
+Question 9: Write a function to create a balanced BST from a sorted list/array of key-value pairs.
 '''
 def remove_none(nums):
     '''
@@ -97,6 +98,7 @@ def bst_insert_generic(bst, key, value):
             bst.right = bst_insert_generic(bst.right, key, value)
             bst.right.parent = bst
     return bst
+
 def display_keys(node, space='\t', level=0):
     '''
     Description: Helper function that prints all keys of a tree using tab indentation to create a tree-like visual structure.
@@ -176,6 +178,29 @@ def is_balanced(node):
     height = 1 + max(height_left, height_right)
 
     return balanced, height
+
+def make_balanced_bst(data, lo=0, hi=None, parent=None):
+    '''
+    Description: Creates a balanced BST from a sorted list of key-value pairs.
+    Recursive Strategy:
+    1. Turn the middle element of the list into the root.
+    2. Recursively create the left and right subtrees.
+    '''
+
+    if hi is None:
+        hi = len(data)-1
+    if lo > hi:
+        return None
+
+    mid = (lo + hi) // 2
+    key, value = data[mid]
+
+    root = dsa.BSTNode(key, value)
+    root.parent = parent
+    root.left = make_balanced_bst(data, lo, mid-1, root)
+    root.right = make_balanced_bst(data, mid+1, hi, root)
+
+    return root
 
 import dsa
 
@@ -297,3 +322,14 @@ print(list_all)
 # Verify if trees are balanced.
 print(f"Is tree6 balanced?: {is_balanced(tree6)}")
 print(f"Is tree5 balanced?: {is_balanced(tree5)}")
+
+# Sorted list of users.
+users = [aliceb, bobg, danb, georgeo, joeb, pamy, victorp]
+
+# Sorted list of key-value pairs to be converted to a balanced BST.
+data = [(user.username, user) for user in users]
+print(data)
+
+# Make balanced BST.
+tree7 = make_balanced_bst(data)
+display_keys(node=tree7)
