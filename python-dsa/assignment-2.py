@@ -1,6 +1,10 @@
-from dataclasses import dataclass
-
-
+'''
+Asignement Objective: Implement HashTable class that supports the following operations:
+1. Insert: insert a new key-value pair.
+2. Find: find the value associated with a key.
+3. Update: update the value associated with a key.
+4. List: list all the keys stored in the hash table.
+'''
 def get_index(data_list, a_string):
     '''
     Description: Simple hashing function that uses the ord() function to convert all characters in a string into numbers.
@@ -27,7 +31,7 @@ def get_index(data_list, a_string):
 def get_index2 (data_list, a_string):
     '''
     Description: Simple hashing function that uses the ord() function to convert all characters in a string into numbers multiplied by powers of 2 that reflect the position in the string.
-    By introducing the character position in the calculation of the index, it ensures that indeces for strings consisting of permutations of the same characters are different. 
+    By factoring in the character position in the calculation of the index, it ensures that indeces for strings consisting of permutations of the same characters are different. 
     Algorithm:
     1. Iterate over the string, character-by-character.
     2. Convert each character to a number by multiplying its ord() number by 2 at the power of its position in the string.
