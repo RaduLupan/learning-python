@@ -24,4 +24,42 @@ def get_index(data_list, a_string):
 
     return list_index
 
+def get_index2 (data_list, a_string):
+    '''
+    Description: Simple hashing function that uses the ord() function to convert all characters in a string into numbers multiplied by powers of 2 that reflect the position in the string.
+    By introducing the character position in the calculation of the index, it ensures that indeces for strings consisting of permutations of the same characters are different. 
+    Algorithm:
+    1. Iterate over the string, character-by-character.
+    2. Convert each character to a number by multiplying its ord() number by 2 at the power of its position in the string.
+    3. Add the numbers for each character to obtain the hash for the entire string.
+    Example: 
+    'abc' -> ord('a') * 2**0 + ord('b') * 2**1 + ord('c') * 2**2 = 97 + 98 * 2 + 99 * 4 = 689
+    'cba' -> ord('c') * 2**0 + ord('b') * 2**1 + ord('a') * 2**2 = 99 + 98 * 2 + 97 * 4 = 683
 
+    4. Take the reminder of the result with the size of the data list.
+    '''
+    result = 0
+    n = len(a_string)
+
+    for i in range(n):
+        a_number = ord(a_string[i]) * 2**i
+        result += a_number
+    
+    list_index = result % len(data_list)
+
+    return list_index
+
+
+MAX_HASH_TABLE_SIZE = 4096
+
+data_list = [None] * MAX_HASH_TABLE_SIZE
+
+print(len(data_list) == 4096)
+
+print(get_index(data_list, 'abc') == get_index(data_list, 'cba'))
+print(get_index(data_list, 'listen') == get_index(data_list, 'silent'))
+
+print(f"get_index2(data_list, 'abc'={get_index2(data_list, 'abc')}")
+print(f"get_index2(data_list, 'cba'={get_index2(data_list, 'cba')}")
+
+print(get_index2(data_list, 'listen') == get_index2(data_list, 'silent'))
