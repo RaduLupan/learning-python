@@ -53,8 +53,30 @@ def get_index2 (data_list, a_string):
 
     return list_index
 
-
 MAX_HASH_TABLE_SIZE = 4096
+
+class BasicHashTable:
+    def __init__(self, max_size = MAX_HASH_TABLE_SIZE):
+        self.data_list = [None] * max_size
+
+    def get_valid_index(self, key):
+        '''
+        Uses Python hash() function to calculate the hash and linear probing to handle colisions.
+        '''
+        pass
+    
+    def __getitem__(self, key):
+        '''
+        Returns the value associated with a given key.
+        '''
+        pass
+    
+    def __setitem__(self, key, value):
+        '''
+        Upsert: Updates the value of a given key if the key exists or inserts the key-value if the key does not exist.
+        '''
+        pass
+
 
 data_list = [None] * MAX_HASH_TABLE_SIZE
 
