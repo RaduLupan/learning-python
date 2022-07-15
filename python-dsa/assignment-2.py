@@ -55,22 +55,24 @@ def get_index2 (data_list, a_string):
 
 MAX_HASH_TABLE_SIZE = 4096
 
-class BasicHashTable:
+class HashTable:
     def __init__(self, max_size = MAX_HASH_TABLE_SIZE):
         self.data_list = [None] * max_size
 
     def get_valid_index(self, key):
         '''
-        Uses Python ord() function to calculate the hash and linear probing to handle colisions.
+        Uses Python ord() function to calculate the hash and linear probing to handle collisions.
         '''
-        
+        # Variable that stores the sum of all ord() numbers corresponding to the characters in the key.
         result = 0
 
         for char in key:
             result += ord(char)
 
+        # The remainder of the result and the lenght of the list may produce colliding indexes for keys that contain the same letters i.e. 'silent' and 'listen'.
         idx = result % len(self.data_list) 
 
+        # Linear probing: loop through all positions in the list until you reach an empty position or the value associated with the given key.
         while True:
             
             kv = self.data_list[idx]
@@ -90,24 +92,23 @@ class BasicHashTable:
             if idx == len(self.data_list):
                 idx = 0
 
-    
     def __getitem__(self, key):
         '''
         Returns the value associated with a given key.
         '''
-        # Calculate a valid index for the given key.
-        idx = self.get_valid_index(self.data_list, key)
+        # Calculate a valid index for the given key. Note the call for get_valid_index is prefixed by self. and the data_list is not specified as argument.
+        idx = self.get_valid_index(key)
 
         kv = self.data_list[idx]
 
-        return kv[1] if kv is not None else None 
+        return None if kv is None else kv[1]
     
     def __setitem__(self, key, value):
         '''
-        Upsert: Updates the value of a given key if the key exists or inserts the key-value if the key does not exist.
+        Upsert: Updates the value of a given key if the key exists or inserts the key-value pair if the key does not exist.
         '''
         # Calculates a valid index which corresponds to either the first empty position on the list (insert) or the given key (update).        
-        idx = self.get_valid_index(self.data_list, key)
+        idx = self.get_valid_index(key)
         
         self.data_list[idx] = (key, value)
 
@@ -126,11 +127,18 @@ class BasicHashTable:
 
 #print(get_index2(data_list, 'listen') == get_index2(data_list, 'silent'))
 
-basic_hash_table = BasicHashTable(max_size=10)
+table = HashTable(max_size=10)
 
-print(basic_hash_table.data_list)
+print(table.data_list)
 
-print(basic_hash_table.get_valid_index('listen'))
-print(basic_hash_table.get_valid_index('silent'))
+# Insert value for key 'listen'.
+table['listen'] = 99
+
+print(table['listen'])
 
 
+# Insert value for colliding key 'silent'.
+table['silent'] =300
+
+print(f"table['listen'] = {table['listen']}")
+print(f"table['silent'] = {table['silent']}")
