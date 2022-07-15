@@ -106,7 +106,12 @@ class BasicHashTable:
         '''
         Upsert: Updates the value of a given key if the key exists or inserts the key-value if the key does not exist.
         '''
-        pass
+        # Calculates a valid index which corresponds to either the first empty position on the list (insert) or the given key (update).        
+        idx = self.get_valid_index(self.data_list, key)
+        
+        self.data_list[idx] = (key, value)
+
+
 
 
 #data_list = [None] * MAX_HASH_TABLE_SIZE
@@ -128,4 +133,4 @@ print(basic_hash_table.data_list)
 print(basic_hash_table.get_valid_index('listen'))
 print(basic_hash_table.get_valid_index('silent'))
 
-#print(basic_hash_table.__getitem__('Dan'))
+
