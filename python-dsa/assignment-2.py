@@ -112,7 +112,7 @@ class HashTable:
         
         self.data_list[idx] = (key, value)
 
-    def remove_item(self, key):
+    def __delitem__(self, key):
         
         idx = self.get_valid_index(key)
 
@@ -160,9 +160,9 @@ print(f"table['silent'] = {table['silent']}")
 print(table.data_list)
 
 # Remove existing key.
-table.remove_item('listen')
+del table['listen']
 
 print(table.data_list)
 
 # Remove non-existing key.
-table.remove_item('abc')
+del table['abc']
