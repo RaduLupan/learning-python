@@ -112,6 +112,20 @@ class HashTable:
         
         self.data_list[idx] = (key, value)
 
+    def remove_item(self, key):
+        
+        idx = self.get_valid_index(key)
+
+        kv = self.data_list[idx]
+
+        if kv is None:
+            
+            print(f"Key {key} not found. Nothing to remove.")
+        
+        elif kv[0] == key:
+
+            self.data_list[idx] = None
+            print(f"Removed the key-value {kv} found at index {idx}. ")
 
 
 
@@ -142,3 +156,13 @@ table['silent'] =300
 
 print(f"table['listen'] = {table['listen']}")
 print(f"table['silent'] = {table['silent']}")
+
+print(table.data_list)
+
+# Remove existing key.
+table.remove_item('listen')
+
+print(table.data_list)
+
+# Remove non-existing key.
+table.remove_item('abc')
