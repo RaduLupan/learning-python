@@ -7,7 +7,7 @@ of notebooks can be created every week, so your function needs to be as efficien
 
 Question 2: Write a program to sort a list of numbers.
 '''
-def sort(nums):
+def bubble_sort(nums):
     '''
     Algorithm:
     1. Iterate through the elements of the list starting from the left.
@@ -15,6 +15,21 @@ def sort(nums):
     3. Increment the current position and repeat step 2 until you reach the second last element in the list.
     4. Repeat steps 1-3 until the list is sorted.
     '''
+
+    # Optional make a copy of the list to avoid changing it in place.
+    # nums = list(nums)
+
+    # Repeat the process n-1 times.
+    for _ in range(len(nums)-1):
+        
+        # Iterate until the second last element in the list.
+        for i in range(len(nums)-1):
+            
+            # Compare the current element with the one next to it.
+            if nums[i] > nums[i+1]:
+                # Swap the elements that are out of order.
+                nums[i], nums[i+1] = nums[i+1], nums[i]
+    return nums
 
 # A list of numbers in random order.
 test0 = {
@@ -95,3 +110,6 @@ test8 = {
 }
 
 tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
+
+print(bubble_sort(test2['input']['nums']))
+print (bubble_sort(test2['input']['nums']) == test2['output'])
