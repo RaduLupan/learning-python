@@ -111,5 +111,9 @@ test8 = {
 
 tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 
-print(bubble_sort(test2['input']['nums']))
-print (bubble_sort(test2['input']['nums']) == test2['output'])
+for i in range(len(tests)):
+    print(f"Test[{i}] -> Input: {tests[i]['input']['nums']}")
+    print(f"Test[{i}] -> Expected Output: {tests[i]['output']}")
+    print(f"Test[{i}] -> Actual Output: {bubble_sort(tests[i]['input']['nums'])}")
+    print(f"Test[{i}] -> Match: {bubble_sort(tests[i]['input']['nums']) == tests[i]['output']}")
+
