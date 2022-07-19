@@ -111,9 +111,16 @@ test8 = {
 
 tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 
-for i in range(len(tests)):
-    print(f"Test[{i}] -> Input: {tests[i]['input']['nums']}")
-    print(f"Test[{i}] -> Expected Output: {tests[i]['output']}")
-    print(f"Test[{i}] -> Actual Output: {bubble_sort(tests[i]['input']['nums'])}")
-    print(f"Test[{i}] -> Match: {bubble_sort(tests[i]['input']['nums']) == tests[i]['output']}")
+#for i in range(len(tests)):
+#    print(f"Test[{i}] -> Input: {tests[i]['input']['nums']}")
+#    print(f"Test[{i}] -> Expected Output: {tests[i]['output']}")
+#    print(f"Test[{i}] -> Actual Output: {bubble_sort(tests[i]['input']['nums'])}")
+#    print(f"Test[{i}] -> Match: {bubble_sort(tests[i]['input']['nums']) == tests[i]['output']}")
 
+import dsa
+
+# Use dsa.evaluate_test_case function to evaluate a particular test.
+dsa.evaluate_test_case(function = bubble_sort, test=test0)
+
+# Use dsa.evaluate_test_cases function to evaluate all test cases.
+dsa.evaluate_test_cases(function = bubble_sort, tests = tests)
