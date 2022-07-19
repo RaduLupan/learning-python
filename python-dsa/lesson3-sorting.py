@@ -31,6 +31,35 @@ def bubble_sort(nums):
                 nums[i], nums[i+1] = nums[i+1], nums[i]
     return nums
 
+def insert_sort(nums):
+    '''
+    Description: Simple sorting technique where we keep the initial portion of the list sorted
+    and insert the remaining elements one by one at the right position.
+    Algorithm:
+    1. Loop through the elements of the list starting from the left.
+    2. Pop the current element from the list.
+    3. Loop through the elements at the left of the current element until you reach the element that is <= than the current element.
+    4. Insert the current element in the right position after the smaller element.
+    5. Repeat steps 1-4 for all elements of the list. 
+    '''
+
+    # Make a copy of the initial list so that we don't sort in place.
+    nums = list(nums)
+
+    for i in range(len(nums)):
+
+        # Extract the current element from the list.
+        current = nums.pop(i)
+
+        # Calculate position of the element at the left of current.
+        j = i - 1
+
+        # Loop through the elements at the left of cur until you find an element <= current.
+        while j >= 0 and nums[j] > current:
+            j -= 1
+
+        # Insert current at the right position: after the element that's smaller and before the greater element.
+        nums.insert(j+1, current)
 # A list of numbers in random order.
 test0 = {
     'input': {
@@ -109,6 +138,20 @@ test8 = {
     'output': out_list
 }
 
+# A very long list of 1 milion elements.
+in_list_1_mil = list(range(1000000))
+out_list_1_mil = list(range(1000000))
+
+random.shuffle(in_list_1_mil)
+
+test9 = {
+    'input': {
+        'nums': in_list_1_mil
+    },
+    'output': out_list_1_mil
+}
+
+# Add all test cases to the tests list EXCEPT for test9 that has 1 milion numbers.
 tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 
 #for i in range(len(tests)):
@@ -120,7 +163,7 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 import dsa
 
 # Use dsa.evaluate_test_case function to evaluate a particular test.
-dsa.evaluate_test_case(function = bubble_sort, test=test0)
+# dsa.evaluate_test_case(function = bubble_sort, test=test0)
 
 # Use dsa.evaluate_test_cases function to evaluate all test cases.
-dsa.evaluate_test_cases(function = bubble_sort, tests = tests)
+dsa.evaluate_test_cases(function = insert_sort, tests = tests)
