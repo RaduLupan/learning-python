@@ -60,6 +60,7 @@ def insert_sort(nums):
 
         # Insert current at the right position: after the element that's smaller and before the greater element.
         nums.insert(j+1, current)
+    return nums
 # A list of numbers in random order.
 test0 = {
     'input': {
