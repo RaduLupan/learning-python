@@ -229,17 +229,17 @@ test8 = {
     'output': out_list
 }
 
-# A very long list of 1 milion elements.
-in_list_1_mil = list(range(1000000))
-out_list_1_mil = list(range(1000000))
+# A very long list of 100k elements.
+in_list_100k = list(range(100000))
+out_list_100k = list(range(100000))
 
-random.shuffle(in_list_1_mil)
+random.shuffle(in_list_100k)
 
 test9 = {
     'input': {
-        'nums': in_list_1_mil
+        'nums': in_list_100k
     },
-    'output': out_list_1_mil
+    'output': out_list_100k
 }
 
 # Add all test cases to the tests list EXCEPT for test9 that has 1 milion numbers.
@@ -254,10 +254,10 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 import dsa
 
 # Use dsa.evaluate_test_case function to evaluate a particular test.
-dsa.evaluate_test_case(function = merge_sort, test=test0)
+dsa.evaluate_test_case(function = merge_sort, test=test9)
 
 # Use dsa.evaluate_test_cases function to evaluate all test cases.
-dsa.evaluate_test_cases(function = merge_sort, tests = tests)
+#dsa.evaluate_test_cases(function = merge_sort, tests = tests)
 
 # nums1=[1,3,5,7,9]
 # nums2=[2,4,6,8,10]
