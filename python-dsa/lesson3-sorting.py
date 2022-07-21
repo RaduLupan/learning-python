@@ -86,21 +86,30 @@ def merge_sorted_lists(nums1, nums2):
     return nums1
 
 def merge(nums1, nums2):
+    '''
+    Description: Performs merge operation of two sorted lists nums1 and nums2.
+    '''
+    # Create the target list of the right size to accomodate the two sublists.
     nums = [None] * (len(nums1) + len(nums2))
 
     i = 0
 
+    # Repeat: compare the elements on position 0 on the two lists, and add the smaller one to the target list.
     while True:
 
+        # If nums1 list was exhausted, simply eliminate the None elements from target list and add the remainder of nums2.
         if len(nums1) == 0 and len(nums2) > 0:
             nums = [x for x in nums if x is not None]
             nums += nums2
             break
+        
+        # If nums2 list was exhausted, simply eliminate the None elements from target list and add the remainder of nums1.
         if len(nums2) == 0 and len(nums1) > 0:
             nums = [x for x in nums if x is not None]
             nums += nums1
             break
 
+        # Pop the smaller element from the first position and add it to the target list.
         if nums1[0] < nums2[0]:
             nums[i] = nums1.pop(0)
         else:
@@ -227,7 +236,7 @@ print(f"Merged lists: {merge(nums1, nums2)}")
 nums1=list(range(10))
 
 nums2=list(range(10,15))
-random.shuffle(nums2)
+# random.shuffle(nums2)
 
 print(f"nums1={nums1}")
 print(f"nums2={nums2}")
