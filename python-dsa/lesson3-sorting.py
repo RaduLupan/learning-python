@@ -62,29 +62,6 @@ def insert_sort(nums):
         nums.insert(j+1, current)
     return nums
 
-def merge_sorted_lists(nums1, nums2):
-    '''
-    Description: Performs merge of two sorted lists of numbers.
-    Algorithm:
-    1. Pop the first element from second list and save it in variable cur.
-    2. Insert cur in the first list on the right position.
-    NOTE: This method does not take into account that the nums2 is sorted. 
-    It works even when nums2 is not sorted since it takes all elemnts from nums2 and inserts them in nums1 at the right position.
-    '''  
-    while len(nums2) > 0:
-        
-        cur = nums2.pop(0)  
-
-        j = len(nums1)-1 
-
-        print(f"cur={cur}, j={j}")
-
-        while j >=0 and nums1[j] > cur:
-            j -= 1
-        
-        nums1.insert(j+1, cur)
-    return nums1
-
 def merge(nums1, nums2):
     '''
     Description: Performs merge operation of two sorted lists nums1 and nums2.
@@ -118,6 +95,34 @@ def merge(nums1, nums2):
 
     return nums 
 
+def merge2(nums1, nums2):
+    '''
+    Description: Another implementation of merge function that combines two sorted lists. 
+    '''
+
+    # List to store the result.
+    merged = []
+
+    # Iteration indices.
+    i, j = 0, 0
+
+    # Loop over the two lists.
+    while i < len(nums1) and j < len(nums2):
+
+        # Include the smaller element in the result and move to the next element.
+        if nums1[i] < nums2[j]:
+            merged.append(nums1[i])
+            i += 1
+        else:
+            merged.append(nums2[j])
+            j += 1
+
+    # Get the remaining parts.
+    nums1_tail = nums1[i:]
+    nums2_tail = nums2[j:]
+
+    # Return the final merged list.
+    return merged + nums1_tail + nums2_tail
 def merge_sort(nums):
     '''
     Description Performs sorting of a list by applying a Divide and Conquer strategy called Merge Sort.
@@ -143,7 +148,7 @@ def merge_sort(nums):
     sorted_left, sorted_right = merge_sort(left), merge_sort(right)
 
     # Merge the two sorted lists.
-    sorted = merge(sorted_left, sorted_right)
+    sorted = merge2(sorted_left, sorted_right)
 
     return sorted
 # A list of numbers in random order.
