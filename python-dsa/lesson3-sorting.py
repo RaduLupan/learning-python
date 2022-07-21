@@ -95,11 +95,11 @@ def merge(nums1, nums2):
 
     return nums 
 
-def merge2(nums1, nums2):
+def merge2(nums1, nums2, depth=0):
     '''
     Description: Another implementation of merge function that combines two sorted lists. 
     '''
-
+    print(' ' * depth, 'merge:', nums1, nums2 )
     # List to store the result.
     merged = []
 
@@ -123,7 +123,7 @@ def merge2(nums1, nums2):
 
     # Return the final merged list.
     return merged + nums1_tail + nums2_tail
-def merge_sort(nums):
+def merge_sort(nums, depth=0):
     '''
     Description Performs sorting of a list by applying a Divide and Conquer strategy called Merge Sort.
     Algorithm:
@@ -133,6 +133,7 @@ def merge_sort(nums):
     4. Combine the two sorted sublists into one sorted list by merging the two sublists.
     '''
 
+    print(' ' * depth, 'merge_sort:', nums)
     # If nums has one element or it's empty return it as it is sorted.
     if len(nums) <= 1:
         return nums
@@ -145,10 +146,10 @@ def merge_sort(nums):
     right = nums[mid:]
 
     # Sort the left and right sublists recursively with merge_sort.
-    sorted_left, sorted_right = merge_sort(left), merge_sort(right)
+    sorted_left, sorted_right = merge_sort(left, depth+1), merge_sort(right, depth+1)
 
     # Merge the two sorted lists.
-    sorted = merge2(sorted_left, sorted_right)
+    sorted = merge2(sorted_left, sorted_right, depth+1)
 
     return sorted
 # A list of numbers in random order.
@@ -254,16 +255,17 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 import dsa
 
 # Use dsa.evaluate_test_case function to evaluate a particular test.
-dsa.evaluate_test_case(function = merge_sort, test=test9)
+#dsa.evaluate_test_case(function = merge_sort, test=test9)
 
 # Use dsa.evaluate_test_cases function to evaluate all test cases.
 #dsa.evaluate_test_cases(function = merge_sort, tests = tests)
 
-# nums1=[1,3,5,7,9]
-# nums2=[2,4,6,8,10]
+nums1=[1,3,5,7,9]
+nums2=[2,4,6,8,10]
 # print(f"nums1={nums1}")
 # print(f"nums2={nums2}")
 
 # print(f"Merged lists: {merge(nums1, nums2)}")
 
+merge_sort([8, 12, 5, 24, 3, -15, 0, 40, 100])
 
