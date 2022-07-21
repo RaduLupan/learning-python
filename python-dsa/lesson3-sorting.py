@@ -117,6 +117,35 @@ def merge(nums1, nums2):
         i += 1
 
     return nums 
+
+def merge_sort(nums):
+    '''
+    Description Performs sorting of a list by applying a Divide and Conquer strategy called Merge Sort.
+    Algorithm:
+    1. If the list is empty or has only one element return the list as it is sorted.
+    2. If not, devide the list in two roughly equal sublists.
+    3. Recursively sort the two sublists using merge sort. Return the two sorted sublists.
+    4. Combine the two sorted sublists into one sorted list by merging the two sublists.
+    '''
+
+    # If nums has one element or it's empty return it as it is sorted.
+    if len(nums) <= 1:
+        return nums
+    
+     # Calculate the mid index.
+    mid = len(nums) // 2
+
+     # Divide the nums list in two sublists.
+    left = nums[:mid]
+    right = nums[mid:]
+
+    # Sort the left and right sublists recursively with merge_sort.
+    sorted_left, sorted_right = merge_sort(left), merge_sort(right)
+
+    # Merge the two sorted lists.
+    sorted = merge(sorted_left, sorted_right)
+
+    return sorted
 # A list of numbers in random order.
 test0 = {
     'input': {
@@ -220,25 +249,16 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 import dsa
 
 # Use dsa.evaluate_test_case function to evaluate a particular test.
-# dsa.evaluate_test_case(function = bubble_sort, test=test0)
+dsa.evaluate_test_case(function = merge_sort, test=test0)
 
 # Use dsa.evaluate_test_cases function to evaluate all test cases.
-# dsa.evaluate_test_cases(function = insert_sort, tests = tests)
+dsa.evaluate_test_cases(function = merge_sort, tests = tests)
 
-nums1=[1,3,5,7,9]
-nums2=[2,4,6,8,10]
-print(f"nums1={nums1}")
-print(f"nums2={nums2}")
+# nums1=[1,3,5,7,9]
+# nums2=[2,4,6,8,10]
+# print(f"nums1={nums1}")
+# print(f"nums2={nums2}")
 
-print(f"Merged lists: {merge(nums1, nums2)}")
+# print(f"Merged lists: {merge(nums1, nums2)}")
 
 
-nums1=list(range(10))
-
-nums2=list(range(10,15))
-# random.shuffle(nums2)
-
-print(f"nums1={nums1}")
-print(f"nums2={nums2}")
-
-print(f"Merged lists: {merge(nums1, nums2)}")
