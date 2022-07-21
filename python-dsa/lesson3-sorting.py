@@ -61,6 +61,51 @@ def insert_sort(nums):
         # Insert current at the right position: after the element that's smaller and before the greater element.
         nums.insert(j+1, current)
     return nums
+
+def merge_sorted_lists(nums1, nums2):
+    '''
+    Description: Performs merge of two sorted lists of numbers.
+    Algorithm:
+    1. Pop the first element from second list and save it in variable cur.
+    2. Insert cur in the first list on the right position.
+    NOTE: This method does not take into account that the nums2 is sorted. 
+    It works even when nums2 is not sorted since it takes all elemnts from nums2 and inserts them in nums1 at the right position.
+    '''  
+    while len(nums2) > 0:
+        
+        cur = nums2.pop(0)  
+
+        j = len(nums1)-1 
+
+        print(f"cur={cur}, j={j}")
+
+        while j >=0 and nums1[j] > cur:
+            j -= 1
+        
+        nums1.insert(j+1, cur)
+    return nums1
+
+def merge(nums1, nums2):
+    nums = [None] * (len(nums1) + len(nums2))
+
+    i = 0
+
+    while True:
+
+        if len(nums1) == 0 and len(nums2) > 0:
+            nums += nums2
+            break
+        if len(nums2) == 0 and len(nums1) > 0:
+            nums += nums1
+            break
+
+        if nums1[0] < nums2[0]:
+            nums[i] = nums1.pop(0)
+        else:
+            nums[i] = nums2.pop(0)
+        i += 1
+
+    return nums 
 # A list of numbers in random order.
 test0 = {
     'input': {
@@ -167,4 +212,22 @@ import dsa
 # dsa.evaluate_test_case(function = bubble_sort, test=test0)
 
 # Use dsa.evaluate_test_cases function to evaluate all test cases.
-dsa.evaluate_test_cases(function = insert_sort, tests = tests)
+# dsa.evaluate_test_cases(function = insert_sort, tests = tests)
+
+nums1=[1,3,5,7,9]
+nums2=[2,4,6,8,10]
+print(f"nums1={nums1}")
+print(f"nums2={nums2}")
+
+print(f"Merged lists: {merge(nums1, nums2)}")
+
+
+nums1=list(range(10))
+
+nums2=list(range(10,15))
+random.shuffle(nums2)
+
+print(f"nums1={nums1}")
+print(f"nums2={nums2}")
+
+print(f"Merged lists: {merge(nums1, nums2)}")
