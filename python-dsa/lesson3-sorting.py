@@ -93,9 +93,11 @@ def merge(nums1, nums2):
     while True:
 
         if len(nums1) == 0 and len(nums2) > 0:
+            nums = [x for x in nums if x is not None]
             nums += nums2
             break
         if len(nums2) == 0 and len(nums1) > 0:
+            nums = [x for x in nums if x is not None]
             nums += nums1
             break
 
