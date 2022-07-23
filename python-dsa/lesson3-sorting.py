@@ -152,8 +152,41 @@ def merge_sort(nums, depth=0):
     sorted = merge2(sorted_left, sorted_right, depth+1)
 
     return sorted
-def partition(nums, start, end):
-    pass
+def partition(nums, start=0, end=None):
+    
+    print('partition', nums, start, end)
+
+    if end is None:
+        end = len(nums)-1
+    
+    # Initialize the left and right pointers.
+    left, right = start, end-1
+
+    # Iterate while they are apart.
+    while left < right:
+
+        print(' ', nums, left, right)
+        # Increment the left pointer if the number is less or equal to pivot.
+        if nums[left] <= nums[end]:
+            left += 1
+
+        # Decrement the right pointer if the number is greater than the pivot.
+        elif nums[right] > nums[end]:
+            right -= 1
+
+        # Two out-of-order elements found: swap them.
+        else:
+            nums[left], nums[right] = nums[right], nums[left]
+
+    print(' ', nums, left, right)
+    
+    # Place the pivot between the two parts.
+    if nums[left] > nums[end]:
+        nums[left], nums[end] = nums[end], nums[left]
+        return left
+    else:
+        return end   
+
 def quicksort(nums, start=0, end=None):
     '''
     Description: Quick Sort implementation. Uses partion function to divide the list into two sublists.
