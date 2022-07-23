@@ -152,6 +152,28 @@ def merge_sort(nums, depth=0):
     sorted = merge2(sorted_left, sorted_right, depth+1)
 
     return sorted
+def partition(nums, start, end):
+    pass
+def quicksort(nums, start=0, end=None):
+    '''
+    Description: Quick Sort implementation. Uses partion function to divide the list into two sublists.
+    Algorithm:
+    1. If the list is empty or has just one element, return it. It's already sorted.
+    2. Pick a random element from the list. This element is called pivot.
+    3. Reorder the list so that all elements with values less than or equal to the pivot come before the pivot, 
+    while all elements with values greater than the pivot come after it. This operation is called partitioning.
+    4. The pivot element divides the array into two parts which can be sorted independently by making a recursive call to quicksort. 
+    '''
+
+    if end is None:
+        nums = list(nums)
+        end = len(nums) - 1
+
+    if start < end:
+        pivot = partition(nums, start, end)
+        quicksort(nums, start, pivot-1)
+        quicksort(nums, pivot+1, end)
+
 # A list of numbers in random order.
 test0 = {
     'input': {
