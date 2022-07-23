@@ -153,7 +153,16 @@ def merge_sort(nums, depth=0):
 
     return sorted
 def partition(nums, start=0, end=None):
-    
+    '''
+    Algorithm:
+    1. Choose a pivot (usually the highest index number).
+    2. Create a left reference, pointing to the element at the lowest index.
+    3. Create a right reference, pointing to the element at the highest index (not pivot).
+    4. While the left reference is less than the pivot, move the pointer one element to the right.
+    5. While the right reference is greater than the pivot, move the pointer one element to the left.
+    6. If both left reference is greater than pivot AND right reference is smaller than pivot, swapp the left and right references.
+    7. Once the index of the left reference is greater than (or equal to) the index of the right reference, swap the pivot with the left reference.
+    '''
     print('partition', nums, start, end)
 
     if end is None:
@@ -179,7 +188,7 @@ def partition(nums, start=0, end=None):
             nums[left], nums[right] = nums[right], nums[left]
 
     print(' ', nums, left, right)
-    
+
     # Place the pivot between the two parts.
     if nums[left] > nums[end]:
         nums[left], nums[end] = nums[end], nums[left]
