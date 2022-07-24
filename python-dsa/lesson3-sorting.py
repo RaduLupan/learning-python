@@ -163,7 +163,7 @@ def partition(nums, start=0, end=None):
     6. If both left reference is greater than pivot AND right reference is smaller than pivot, swapp the left and right references.
     7. Once the index of the left reference is greater than (or equal to) the index of the right reference, swap the pivot with the left reference.
     '''
-    print('partition', nums, start, end)
+    # print('partition', nums, start, end)
 
     if end is None:
         end = len(nums)-1
@@ -174,7 +174,7 @@ def partition(nums, start=0, end=None):
     # Iterate while they are apart.
     while left < right:
 
-        print(' ', nums, left, right)
+        # print(' ', nums, left, right)
         # Increment the left pointer if the number is less or equal to pivot.
         if nums[left] <= nums[end]:
             left += 1
@@ -187,7 +187,7 @@ def partition(nums, start=0, end=None):
         else:
             nums[left], nums[right] = nums[right], nums[left]
 
-    print(' ', nums, left, right)
+    # print(' ', nums, left, right)
 
     # Place the pivot between the two parts.
     if nums[left] > nums[end]:
@@ -216,6 +216,7 @@ def quicksort(nums, start=0, end=None):
         quicksort(nums, start, pivot-1)
         quicksort(nums, pivot+1, end)
 
+    return nums
 # A list of numbers in random order.
 test0 = {
     'input': {
@@ -319,17 +320,19 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7, test8]
 import dsa
 
 # Use dsa.evaluate_test_case function to evaluate a particular test.
-#dsa.evaluate_test_case(function = merge_sort, test=test9)
+# dsa.evaluate_test_case(function = quicksort, test=test9)
 
 # Use dsa.evaluate_test_cases function to evaluate all test cases.
-#dsa.evaluate_test_cases(function = merge_sort, tests = tests)
+dsa.evaluate_test_cases(function = quicksort, tests = tests)
 
-nums1=[1,3,5,7,9]
-nums2=[2,4,6,8,10]
+# nums1=[1,3,5,7,9]
+# nums2=[2,4,6,8,10]
 # print(f"nums1={nums1}")
 # print(f"nums2={nums2}")
 
 # print(f"Merged lists: {merge(nums1, nums2)}")
 
-merge_sort([8, 12, 5, 24, 3, -15, 0, 40, 100])
-
+# merge_sort([8, 12, 5, 24, 3, -15, 0, 40, 100])
+# l1 = [1, 5, 6, 2, 0, 11, 3]
+# pivot = partition(l1)
+# print(l1, pivot)
