@@ -13,10 +13,12 @@ def multiply_basic(poly1, poly2):
     Description: Performs multiplication of two polynomials represented by lists using the brute-force approach.
     '''
     # If either list is empty the result is an empty list.
-    if poly1 == []:
+    if poly1 == [] or poly2 == []:
         return []
-    elif poly2 == []:
-        return []
+    
+    # If either list contains all zeros the result is an empty list.
+    elif all([value == 0 for value in poly1]) or all([value == 0 for value in poly2]):
+        return [] 
     else:
         # m and n are the degrees of the two polynomials respectively. 
         m, n = len(poly1)-1, len(poly2)-1
@@ -56,8 +58,8 @@ def multiply_basic(poly1, poly2):
             k += 1
         return result
 
-poly1 = [1, 2, 3, 4]
-poly2 = [1, 2, 1]
+poly2 = []
+poly1 = [1, 2, 1]
 
 result=multiply_basic(poly1, poly2)
 print(result)
