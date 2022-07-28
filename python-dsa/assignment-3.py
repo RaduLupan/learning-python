@@ -58,8 +58,23 @@ def multiply_basic(poly1, poly2):
             k += 1
         return result
 
-poly2 = []
-poly1 = [1, 2, 1]
+def add(poly1, poly2):
+    '''
+    Description: Adds two polynomials represented by lists and returns a list representing the sum polynomial.
+    '''
 
-result=multiply_basic(poly1, poly2)
+    # Creates a result list of lenght equal with the largest length.
+    result = [0] * max(len(poly1), len(poly2))
+
+    for i in range(len(result)):
+        if i < len(poly1):
+            result[i] += poly1[i]
+        if i < len(poly2):
+            result[i] += poly2[i]
+    return result
+
+poly1 = [1,3, 4]
+poly2 = [5, 2, 7, 1]
+
+result=add(poly1, poly2)
 print(result)
