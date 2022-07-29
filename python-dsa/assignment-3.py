@@ -73,6 +73,13 @@ def add(poly1, poly2):
             result[i] += poly2[i]
     return result
 
+def substract(poly1, poly2):
+    '''
+    Description: Implements polynomial substraction.
+    '''
+    poly2 = [-v for v in poly2]
+
+    return add(poly1, poly2)
 def split(poly1, poly2):
     '''
     Description: Splits each polynomial into two smaller polynomials.
@@ -81,13 +88,19 @@ def split(poly1, poly2):
 
     return (poly1[:mid], poly1[mid:]), (poly2[:mid], poly2[mid:])
 
+def increase_exponent(poly, n):
+    '''
+    Description: Multiplies polynomial poly with x^n.
+    '''
+    return [0] * n + [poly]
+    
 def multiply_optimized(a, b):
     '''
     Description: Performs multiplication of two polynomials represented by lists, using an Divide-and-Conquer algorithm.
     '''
     # If one polynom is a constant multiply all coeficients of the other polynom with the constant.
     if len(a) == 1 and len(b) > 1:
-        return [v * poly1[0] for v in poly2]
+        return [v * a[0] for v in b]
     elif len(b) == 1 and len(a) > 1:
         return [v * b[0] for v in a]
     else:
@@ -96,8 +109,19 @@ def multiply_optimized(a, b):
         if len(a0) == 1 and len(a1) == 2 and len(b0) == 1 and len(b1) == 2:
             return [(a[0] * b[0]), (a[0] * b[1] + a[1] * b[0]), (a[0] * b[2] + a[1] * b[1] + a[2] * b[0]), (a[1] * b[2] + a[2] * b[1]), a[2] * b[2]]
 
-poly2 = [1, 1, 2]
-poly1 = [1, 2, 3]
+        y = multiply_optimized(add(a0, a1), add(b0, b1))
+        u = multiply_optimized(a0, b0)
+        z = multiply_optimized(a1, b1)
 
-result=multiply_optimized(poly1, poly2)
+        negative_u = [-v for v in u]
+        negative_z = [-v for v in z]
+
+        result = u + increase_exponent(add(add(y, negative_u), negative_z), (len(a)-1) // 2) + increase_exponent(z, len(a) - 1)
+
+        return result
+
+poly1 = [4, 2, 3]
+poly2 = [1, 1, 1]
+
+result=substract(poly1, poly2)
 print(result)
