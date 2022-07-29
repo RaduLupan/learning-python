@@ -78,28 +78,24 @@ def subtract(poly1, poly2):
     Description: Implements polynomial substraction.
     '''
     poly2 = [-v for v in poly2]
-
     return add(poly1, poly2)
+
 def split(poly1, poly2):
     '''
     Description: Splits each polynomial into two smaller polynomials.
     '''
     mid = max(len(poly1), len(poly2)) // 2
-    mid = max(len(poly1), len(poly2)) // 2
     return  (poly1[:mid], poly1[mid:]), (poly2[:mid], poly2[mid:])
-
-    return (poly1[:mid], poly1[mid:]), (poly2[:mid], poly2[mid:])
 
 def increase_exponent(poly, n):
     '''
     Description: Multiplies polynomial poly with x^n.
     '''
-    return [0] * n + [poly]
+    return [0] * n + poly
     
 def multiply_optimized(poly1, poly2):
     '''
     Description: Performs multiplication of two polynomials represented by lists, using an Divide-and-Conquer algorithm.
-    TODO: Fix unsupported operand type(s) for +=: 'int' and 'list'
     '''
     # If either list is empty the result is an empty list.
     if poly1 == [] or poly2 == []:
@@ -117,7 +113,7 @@ def multiply_optimized(poly1, poly2):
         return [v * poly2[0] for v in poly1]
     
     else:
-        print(f"multiply_optimized({poly1},{poly2})")
+        # print(f"multiply_optimized({poly1},{poly2})")
 
         n =  max(len(poly1), len(poly2))
         n = n if n % 2 == 0 else n-1
@@ -130,11 +126,10 @@ def multiply_optimized(poly1, poly2):
         y = multiply_optimized(add(a[0], a[1]), add(b[0], b[1]))
                    
         y = subtract(y, add(u, z))
-        y = increase_exponent(y, n//2)
-            
+        y = increase_exponent(y, n//2)          
         z = increase_exponent(z, n)
-        result = add((add(u, z), y))
-        return result
+        
+        return add(add(u, z), y)
 
     
 poly1 = [1, 2, 3, 1]
