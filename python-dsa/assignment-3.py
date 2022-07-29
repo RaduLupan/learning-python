@@ -73,8 +73,31 @@ def add(poly1, poly2):
             result[i] += poly2[i]
     return result
 
-poly1 = [1,3, 4]
-poly2 = [5, 2, 7, 1]
+def split(poly1, poly2):
+    '''
+    Description: Splits each polynomial into two smaller polynomials.
+    '''
+    mid = max(len(poly1), len(poly2)) // 2
 
-result=add(poly1, poly2)
+    return (poly1[:mid], poly1[mid:]), (poly2[:mid], poly2[mid:])
+
+def multiply_optimized(a, b):
+    '''
+    Description: Performs multiplication of two polynomials represented by lists, using an Divide-and-Conquer algorithm.
+    '''
+    # If one polynom is a constant multiply all coeficients of the other polynom with the constant.
+    if len(a) == 1 and len(b) > 1:
+        return [v * poly1[0] for v in poly2]
+    elif len(b) == 1 and len(a) > 1:
+        return [v * b[0] for v in a]
+    else:
+        (a0, a1), (b0, b1) = split(a, b)
+
+        if len(a0) == 1 and len(a1) == 2 and len(b0) == 1 and len(b1) == 2:
+            return [(a[0] * b[0]), (a[0] * b[1] + a[1] * b[0]), (a[0] * b[2] + a[1] * b[1] + a[2] * b[0]), (a[1] * b[2] + a[2] * b[1]), a[2] * b[2]]
+
+poly2 = [1, 1, 2]
+poly1 = [1, 2, 3]
+
+result=multiply_optimized(poly1, poly2)
 print(result)
