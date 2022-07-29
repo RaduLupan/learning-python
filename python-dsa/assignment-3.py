@@ -73,7 +73,7 @@ def add(poly1, poly2):
             result[i] += poly2[i]
     return result
 
-def substract(poly1, poly2):
+def subtract(poly1, poly2):
     '''
     Description: Implements polynomial substraction.
     '''
@@ -85,6 +85,8 @@ def split(poly1, poly2):
     Description: Splits each polynomial into two smaller polynomials.
     '''
     mid = max(len(poly1), len(poly2)) // 2
+    mid = max(len(poly1), len(poly2)) // 2
+    return  (poly1[:mid], poly1[mid:]), (poly2[:mid], poly2[mid:])
 
     return (poly1[:mid], poly1[mid:]), (poly2[:mid], poly2[mid:])
 
@@ -94,34 +96,51 @@ def increase_exponent(poly, n):
     '''
     return [0] * n + [poly]
     
-def multiply_optimized(a, b):
+def multiply_optimized(poly1, poly2):
     '''
     Description: Performs multiplication of two polynomials represented by lists, using an Divide-and-Conquer algorithm.
+    TODO: Fix unsupported operand type(s) for +=: 'int' and 'list'
     '''
+    # If either list is empty the result is an empty list.
+    if poly1 == [] or poly2 == []:
+        return []
+
+    # If either list contains all zeros the result is an empty list.
+    elif all([value == 0 for value in poly1]) or all([value == 0 for value in poly2]):
+        return [] 
+
     # If one polynom is a constant multiply all coeficients of the other polynom with the constant.
-    if len(a) == 1 and len(b) > 1:
-        return [v * a[0] for v in b]
-    elif len(b) == 1 and len(a) > 1:
-        return [v * b[0] for v in a]
+    elif len(poly1) == 1:
+        return [v * poly1[0] for v in poly2]
+    
+    elif len(poly2) == 1:
+        return [v * poly2[0] for v in poly1]
+    
     else:
-        (a0, a1), (b0, b1) = split(a, b)
+        print(f"multiply_optimized({poly1},{poly2})")
 
-        if len(a0) == 1 and len(a1) == 2 and len(b0) == 1 and len(b1) == 2:
-            return [(a[0] * b[0]), (a[0] * b[1] + a[1] * b[0]), (a[0] * b[2] + a[1] * b[1] + a[2] * b[0]), (a[1] * b[2] + a[2] * b[1]), a[2] * b[2]]
+        n =  max(len(poly1), len(poly2))
+        n = n if n % 2 == 0 else n-1
 
-        y = multiply_optimized(add(a0, a1), add(b0, b1))
-        u = multiply_optimized(a0, b0)
-        z = multiply_optimized(a1, b1)
-
-        negative_u = [-v for v in u]
-        negative_z = [-v for v in z]
-
-        result = u + increase_exponent(add(add(y, negative_u), negative_z), (len(a)-1) // 2) + increase_exponent(z, len(a) - 1)
-
+        a, b = split(poly1, poly2) 
+            
+        u = multiply_optimized(a[0], b[0])
+        z = multiply_optimized(a[1], b[1])
+        
+        y = multiply_optimized(add(a[0], a[1]), add(b[0], b[1]))
+                   
+        y = subtract(y, add(u, z))
+        y = increase_exponent(y, n//2)
+            
+        z = increase_exponent(z, n)
+        result = add((add(u, z), y))
         return result
 
-poly1 = [4, 2, 3]
-poly2 = [1, 1, 1]
+    
+poly1 = [1, 2, 3, 1]
+poly2 = [2, 1, 1, 2]
 
-result=substract(poly1, poly2)
+result=multiply_optimized(poly1, poly2)
+#result1 = add(poly1, poly2)
+#result2 = subtract(poly1, poly2)
 print(result)
