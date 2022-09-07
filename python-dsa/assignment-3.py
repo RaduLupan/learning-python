@@ -139,3 +139,6 @@ result=multiply_optimized(poly1, poly2)
 #result1 = add(poly1, poly2)
 #result2 = subtract(poly1, poly2)
 print(result)
+
+r=split([1, 2], [3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+print(r)
