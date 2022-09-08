@@ -14,7 +14,19 @@ def lcs_recursive(seq1, seq2, idx1=0, idx2=0):
     3. If not, compute the LCS of seq1[idx1+1:] and seq2[idx2:] and the LCS of seq1[idx1:] and seq2[idx2+1:] the maximum of which is the solution.
     4. If either seq1[idx1:] or seq2[idx2:] is empty then their LCS is also empty.
     '''
-    pass
+    
+    # Check if either seqence is exhausted.
+    if idx1 == len(seq1) or idx2 == len(seq2):
+        return 0
+    
+    # Check if the current characters are equal.
+    if seq1[idx1] == seq2[idx2]:
+        return 1 + lcs_recursive(seq1, seq2, idx1+1, idx2+1)
+    
+    # Skip one element from each sequence.
+    else:
+        return max(lcs_recursive(seq1, seq2, idx1, idx2+1),
+                   lcs_recursive(seq1, seq2, idx1+1, idx2))
 # Test cases.
 
 # 1. General case - string.
@@ -66,3 +78,6 @@ test6 = {'input': {'seq1': '', 'seq2': ''}, 'output': 0}
 test7 = {'input': {'seq1': 'abcdef', 'seq2': 'badcfe'}, 'output': 3}
 
 tests = [test0, test1, test2, test3, test4, test5, test6, test7]
+
+lcs=lcs_recursive(test0['input']['seq1'], test0['input']['seq2'])
+print(lcs)
