@@ -27,6 +27,13 @@ def lcs_recursive(seq1, seq2, idx1=0, idx2=0):
     else:
         return max(lcs_recursive(seq1, seq2, idx1, idx2+1),
                    lcs_recursive(seq1, seq2, idx1+1, idx2))
+
+def lcs_memo(seq1, seq2):
+    '''
+    Description: Computes the longest common subsequence of two sequences using the memoization technique whereby results are cached in a dictionary to avoid
+    repetitive recursive calls.
+    '''
+
 # Test cases.
 
 # 1. General case - string.
