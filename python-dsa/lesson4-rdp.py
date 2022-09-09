@@ -81,3 +81,9 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7]
 
 lcs=lcs_recursive(test0['input']['seq1'], test0['input']['seq2'])
 print(lcs)
+
+# Use dsa.evaluate_test_case to validate one test and respectively dsa.evaluate_tests_cases for all.
+import dsa
+
+dsa.evaluate_test_case(function=lcs_recursive, test=test0)
+dsa.evaluate_test_cases(function=lcs_recursive, tests=tests)
