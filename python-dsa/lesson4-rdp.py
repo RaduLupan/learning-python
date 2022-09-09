@@ -34,6 +34,30 @@ def lcs_memo(seq1, seq2):
     repetitive recursive calls.
     '''
 
+    # Dictionary that caches computation results.
+    memo = {}
+
+    def recurse(idx1=0, idx2=0):
+        
+        key=(idx1,idx2)
+
+        if key in memo:
+            return memo[key]
+        
+        # Check if either sequence is exhausted.
+        elif idx1 == len(seq1) or idx2 == len(seq2):
+            memo[key] = 0
+        # Check if the current characters are equal.
+        elif seq1[idx1] == seq2[idx2]:
+            memo[key] = 1 + recurse(idx1+1, idx2+1)
+        
+        # Skip one element from each sequence.
+        else:
+            memo[key] = max(recurse(idx1, idx2+1),
+                            recurse(idx1+1, idx2))
+        return memo[key]
+
+    return recurse(0,0)
 # Test cases.
 
 # 1. General case - string.
@@ -92,5 +116,5 @@ print(lcs)
 # Use dsa.evaluate_test_case to validate one test and respectively dsa.evaluate_tests_cases for all.
 import dsa
 
-dsa.evaluate_test_case(function=lcs_recursive, test=test0)
-dsa.evaluate_test_cases(function=lcs_recursive, tests=tests)
+dsa.evaluate_test_case(function=lcs_memo, test=test0)
+dsa.evaluate_test_cases(function=lcs_memo, tests=tests)
