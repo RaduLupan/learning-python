@@ -8,8 +8,23 @@ General problem statement:
     no more than w.
 '''
 
-def max_profit(profits, weights, capacity):
-    pass
+def max_profit(profits, weights, capacity, idx=0):
+    '''
+    Description: Computes the maximum profit of a list of elements with given profits and weights restricted to a given capacity.
+    '''
+
+    if idx == len(weights):
+        return 0
+    
+    # Check if the current element exceeds capacity.
+    elif weights[idx] > capacity:
+        return max_profit(profits, weights, capacity, idx+1)
+    
+    # If the current element fits into capacity, then compute the max of the two options of adding and not adding the element.
+    else:
+        option1=max_profit(profits, weights, capacity, idx+1)
+        option2=profits[idx] + max_profit(profits, weights, capacity-weights[idx], idx+1)
+        return max(option1, option2)
 
 # Test cases.
 
@@ -64,3 +79,6 @@ test4 = {
 }
 
 tests = [test0, test1, test2, test3, test4]
+
+# Evaluate the first test case.
+print(max_profit(**test4['input']))
