@@ -8,7 +8,7 @@ General problem statement:
     no more than w.
 '''
 
-def max_profit(profits, weights, capacity, idx=0):
+def max_profit_recursive(profits, weights, capacity, idx=0):
     '''
     Description: Computes the maximum profit of a list of elements with given profits and weights restricted to a given capacity.
     '''
@@ -26,6 +26,8 @@ def max_profit(profits, weights, capacity, idx=0):
         option2=profits[idx] + max_profit(profits, weights, capacity-weights[idx], idx+1)
         return max(option1, option2)
 
+def max_profit_memo(profits, weights, capacity):
+    pass
 # Test cases.
 
 # General case 1.
@@ -81,9 +83,9 @@ test4 = {
 tests = [test0, test1, test2, test3, test4]
 
 # Evaluate the first test case.
-print(max_profit(**test0['input']))
+print(max_profit_recursive(**test0['input']))
 
 import dsa
 
 # Evaluate all test cases.
-dsa.evaluate_test_cases(max_profit, tests) 
+dsa.evaluate_test_cases(max_profit_recursive, tests) 
