@@ -45,7 +45,7 @@ test1 = {
         'weights': [13, 27, 41, 10, 11, 19],
         'capacity': 80
     },
-    'output': 92
+    'output': 99
 }
 
 # All weights are larger than the capacity.
@@ -81,4 +81,9 @@ test4 = {
 tests = [test0, test1, test2, test3, test4]
 
 # Evaluate the first test case.
-print(max_profit(**test4['input']))
+print(max_profit(**test0['input']))
+
+import dsa
+
+# Evaluate all test cases.
+dsa.evaluate_test_cases(max_profit, tests) 
