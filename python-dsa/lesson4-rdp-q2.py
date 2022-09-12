@@ -27,7 +27,24 @@ def max_profit_recursive(profits, weights, capacity, idx=0):
         return max(option1, option2)
 
 def max_profit_memo(profits, weights, capacity):
-    pass
+    
+    # Dictonary to keep intermediate results.
+    memo = {}
+
+    def recurse(idx = 0, capacity = capacity ):
+        key = idx, capacity
+
+        if idx == len(weights):
+            memo[key] = 0
+        elif weights[idx] > capacity:
+            memo[key] = recurse(idx+1, capacity)
+        else:
+            option1 = recurse(idx+1, capacity)
+            option2 = profits[idx] + recurse(idx+1, capacity-weights[idx])
+            memo[key] = max(option1, option2)
+        return memo[key]
+    
+    return recurse(0, capacity)
 # Test cases.
 
 # General case 1.
@@ -83,9 +100,9 @@ test4 = {
 tests = [test0, test1, test2, test3, test4]
 
 # Evaluate the first test case.
-print(max_profit_recursive(**test0['input']))
+print(max_profit_memo(**test0['input']))
 
 import dsa
 
 # Evaluate all test cases.
-dsa.evaluate_test_cases(max_profit_recursive, tests) 
+dsa.evaluate_test_cases(max_profit_memo, tests) 
