@@ -30,22 +30,68 @@ def lcs_recursive(seq1, seq2, idx1 = 0, idx2 = 0):
         option1 = lcs_recursive(seq1, seq2, idx1, idx2+1)
         option2 = lcs_recursive(seq1, seq2, idx1+1, idx2)
 
+        # The caveat here is that when there are multiple common susequences with the same length, only the first one is returned.
+        # See test case test7.
         if len(option1) >= len(option2):
             return option1
         else:
             return option2
     
 # Test cases.
-# General case 1.
+# General case - string.
 test0 = {
     'input': {
         'seq1': 'serendipitous',
         'seq2': 'precipitation'
     },
-    'output': ['r', 'e', 'i', 'p', 'i', 't', 'o']
+    'output': ['r','e','i','p','i','t','o']
 }
 
-# Evaluate first test case.
-print(lcs_recursive(**test0['input']))
+# 2. General case - list.
+test1 = {
+    'input': {
+        'seq1': [1, 3, 5, 6, 7, 2, 5, 2, 3],
+        'seq2': [6, 2, 4, 7, 1, 5, 6, 2, 3]
+    },
+    'output': [1,5,6,2,3]
+}
 
-print(lcs_recursive(**test0['input']) == test0['output'])
+# 3. Another general case - string.
+test2 = {
+    'input': {
+        'seq1': 'longest',
+        'seq2': 'stone'
+    },
+    'output': ['o','n','e']
+}
+
+# 4. No common subsequence.
+test3 = {
+    'input': {
+        'seq1': 'qwerty',
+        'seq2': 'asdfgh'
+    },
+    'output': []
+}
+
+# 5. One is a subsequence of the other.
+test4 = {'input': {'seq1': 'dense', 'seq2': 'condensed'}, 'output': ['d','e','n','s','e']}
+
+# 6. One sequence is empty.
+test5 = {'input': {'seq1': '', 'seq2': 'abcdef'}, 'output': []}
+
+# 7. Both sequences are empty.
+test6 = {'input': {'seq1': '', 'seq2': ''}, 'output': []}
+
+# 8. Multiple sequences with same length.
+test7 = {'input': {'seq1': 'abcdef', 'seq2': 'badcfe'}, 'output': ['a', 'c', 'e']}
+
+tests = [test0, test1, test2, test3, test4, test5, test6, test7]
+
+# Evaluate one test case.
+import dsa
+dsa.evaluate_test_case(lcs_recursive, test0)
+
+# Evaluate all test cases.
+dsa.evaluate_test_cases(lcs_recursive, tests)
+
