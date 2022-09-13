@@ -36,7 +36,44 @@ def lcs_recursive(seq1, seq2, idx1 = 0, idx2 = 0):
             return option1
         else:
             return option2
+
+def lcs_memo(seq1, seq2):
+    '''
+    Description: Computes the longest common subsequence (LCS) of two sequences using the recursive memoization method.
+    '''
     
+    # Dictionary to keep intermediate results.
+    memo={}
+    
+    def recurse(idx1 = 0, idx2 = 0):
+        key = (idx1, idx2)
+
+        # List to keep the characters in the LCS.
+        lcs=[]
+        
+        if key in memo:
+            return memo[key]
+        
+        # Check if either sequence is exhausted.
+        elif idx1 == len(seq1) or idx2 == len(seq2):
+            memo[key] = []
+        
+        # If the current elements of the two sequences are equal, append the value to the lcs list and compute LCS recursively for seq1[idx1+1:] and seq2[idx2+1:]. 
+        elif seq1[idx1] == seq2[idx2]:
+            lcs.append(seq1[idx1])
+            memo[key] = lcs + recurse(idx1+1, idx2+1)
+        
+        # Skip one element from each sequence, compute the LCS for the two subproblems and return the greater LCS.
+        else:
+            option1 = recurse(idx1, idx2+1)
+            option2 = recurse(idx1+1, idx2)
+            if len(option1) >= len(option2):
+                memo[key] = option1
+            else:
+                memo[key] = option2
+        return memo[key]
+    return recurse(0,0)
+
 # Test cases.
 # General case - string.
 test0 = {
@@ -90,8 +127,8 @@ tests = [test0, test1, test2, test3, test4, test5, test6, test7]
 
 # Evaluate one test case.
 import dsa
-dsa.evaluate_test_case(lcs_recursive, test0)
+dsa.evaluate_test_case(lcs_memo, test0)
 
 # Evaluate all test cases.
-dsa.evaluate_test_cases(lcs_recursive, tests)
+dsa.evaluate_test_cases(lcs_memo, tests)
 
