@@ -21,7 +21,11 @@ Outputs:
     the used capacity is weights[1] + weights[4] = 1 + 11 = 12 < capacity.
 
 '''
-
+def max_profits_recursive(profits, weights, capacity, idx=0):
+    '''
+    Description: Returns the list of indices for elements in profits list that maximize the profit while staying within given weight (capacity).
+    '''
+    pass
 # Test cases.
 
 # General case 1.
