@@ -18,12 +18,12 @@ def max_profit_recursive(profits, weights, capacity, idx=0):
     
     # Check if the current element exceeds capacity.
     elif weights[idx] > capacity:
-        return max_profit(profits, weights, capacity, idx+1)
+        return max_profit_recursive(profits, weights, capacity, idx+1)
     
     # If the current element fits into capacity, then compute the max of the two options of adding and not adding the element.
     else:
-        option1=max_profit(profits, weights, capacity, idx+1)
-        option2=profits[idx] + max_profit(profits, weights, capacity-weights[idx], idx+1)
+        option1=max_profit_recursive(profits, weights, capacity, idx+1)
+        option2=profits[idx] + max_profit_recursive(profits, weights, capacity-weights[idx], idx+1)
         return max(option1, option2)
 
 def max_profit_memo(profits, weights, capacity):
