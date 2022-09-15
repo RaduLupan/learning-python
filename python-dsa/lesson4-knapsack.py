@@ -21,7 +21,7 @@ Outputs:
     the used capacity is weights[1] + weights[4] = 1 + 11 = 12 < capacity.
 
 '''
-def max_profits_recursive(profits, weights, capacity, idx=0):
+def max_profit_recursive(profits, weights, capacity, idx=0):
     '''
     Description: Returns the list of indices for elements in profits list that maximize the profit while staying within given weight (capacity).
     '''
@@ -34,14 +34,14 @@ def max_profits_recursive(profits, weights, capacity, idx=0):
     
     # Check if the current element's weight is bigger than the capacity.
     elif weights[idx] > capacity:
-        return max_profits_recursive(profits, weights, capacity, idx+1)
+        return max_profit_recursive(profits, weights, capacity, idx+1)
     
     # If the current element fits into the capacity, compute the two subproblems: either pick the element or don't and return the maximum. 
     else:
         # We pick the current element.
         indices.append(idx)
-        option1 =  indices + max_profits_recursive(profits, weights, capacity-weights[idx], idx+1)
-        option2 = max_profits_recursive(profits, weights, capacity, idx+1)
+        option1 =  indices + max_profit_recursive(profits, weights, capacity-weights[idx], idx+1)
+        option2 = max_profit_recursive(profits, weights, capacity, idx+1)
 
         # Compute the profit for the two options (list of indices) and return the list with greater profit as the solution.
         profit1, profit2 = 0, 0
@@ -68,6 +68,51 @@ test0 = {
     'output': [1, 4]
 }
 
+# General case 2.
+test1 = {
+    'input': {
+        'profits': [15, 30, 45, 12, 17, 25],
+        'weights': [13, 27, 41, 10, 11, 19],
+        'capacity': 80
+    },
+    'output': [0, 1, 3, 4, 5]
+}
+
+# All weights are larger than the capacity.
+test2 = {
+    'input': {
+        'profits': [10, 20, 30, 40, 50, 60],
+        'weights': [15, 25, 35, 45, 55, 65],
+        'capacity': 10
+    },
+    'output': []
+}
+
+# All weights fit into the capacity.
+test3 = {
+    'input': {
+        'profits': [17, 302, 250, 180, 78, 13],
+        'weights': [12, 185, 110, 90, 45, 9],
+        'capacity': 500
+    },
+    'output': [0, 1, 2, 3, 4, 5]
+}
+
+# Only one element is selected.
+test4 = {
+    'input': {
+        'profits': [7, 12, 5, 4, 2],
+        'weights': [14, 25, 18, 7, 5],
+        'capacity': 5
+    },
+    'output': [4]
+}
+
+tests = [test0, test1, test2, test3, test4]
+
 # Evaluate one test case.
 import dsa
-dsa.evaluate_test_case(max_profits_recursive, test0)
+dsa.evaluate_test_case(max_profit_recursive, test0)
+
+# Evaluate all cases.
+dsa.evaluate_test_cases(max_profit_recursive, tests)
