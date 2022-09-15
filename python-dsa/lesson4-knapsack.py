@@ -24,6 +24,7 @@ Outputs:
 def max_profit_recursive(profits, weights, capacity, idx=0):
     '''
     Description: Returns the list of indices for elements in profits list that maximize the profit while staying within given weight (capacity).
+    The profit itself is not returned as it is simply calculated by adding up the profits of the elements with indices returned.
     '''
     
     indices = []
