@@ -28,6 +28,18 @@ class Graph:
         if n1 not in self.data[n2]:
             self.data[n2].append(n1)
 
+    def remove_edge(self, n1, n2):
+
+        # Brings the nodes within the Graph in case n1,n2 >= len(self.data)
+        n1 = n1 % len(self.data)
+        n2 = n2 % len(self.data)
+
+        # Only removes existing edges.
+        if n2 in self.data[n1]:
+            self.data[n1].remove(n2)
+        if n1 in self.data[n2]:
+            self.data[n2].remove(n1)
+
     def __repr__(self):
        return "\n".join(["{}:{}".format(node, neighbors) for node, neighbors in enumerate(self.data)])
 
@@ -35,9 +47,10 @@ num_nodes=5
 edges=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
 graph=Graph(num_nodes, edges)
+print(graph)
 
 graph.add_edge(0,3)
 print(graph)
 
-graph.add_edge(0,3)
+graph.remove_edge(0,3)
 print(graph)
