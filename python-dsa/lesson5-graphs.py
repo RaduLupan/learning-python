@@ -56,8 +56,9 @@ class GraphMatrix:
             self.data[n1][n2]=1
             self.data[n2][n1]=1
 
+    # Adjacency matrices that represent graphs are symmetric (meaning they are equal to their transpose) so technically we did not need to transpose it.
     def __repr__(self):
-        return "\t".join(["{}:{}".format(n, row) for n, row in enumerate(self.data)])
+        return "\n".join(["{}:{}".format(n, row) for n, row in enumerate(transpose(self.data))])
 
 def transpose(matrix):
     '''
