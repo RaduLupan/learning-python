@@ -1,8 +1,9 @@
 '''
 Question1: Create a class to represent a graph as an adjacency list.
-Question2: Write a function to add an edge to a graph represented as an adjancecy list.
-Question3: Write a function to remove an edge from a graph represented as an adjancecy list.
+Question2: Write a function to add an edge to a graph represented as an adjacency list.
+Question3: Write a function to remove an edge from a graph represented as an adjacency list.
 Question4: Represent a graph as an adjacency matrix.
+Question5: Implement breadth-first search (BFS) given a source node in a graph represented by an adjacency list.
 '''
 
 class GraphList:
@@ -77,6 +78,27 @@ def transpose(matrix):
         transposed_matrix.append(element)
     
     return transposed_matrix
+
+def breadth_first_search(graph, source, target):
+    
+    # Queue to keep the discovered but unexplored nodes.
+    queue = []
+
+    # List of boolens representing the discover/undiscovered status of nodes.
+    discovered = [False] * len(graph.data)
+
+    discovered[source] = True
+    queue.append(source)
+
+    while len(queue) > 0:
+        current = queue.pop(0) # always pop the first element in the list to simulate a FIFO queue
+        if current == target:
+            return current
+        else:
+            for n in graph.data[n]:
+                if not discovered[graph.data[n]]:
+                    discovered[graph.data[n]] = True
+                    queue.append(graph.data[n])
 
 num_nodes=5
 edges=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
