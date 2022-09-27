@@ -79,40 +79,33 @@ def transpose(matrix):
     
     return transposed_matrix
 
-def breadth_first_search(graph, source, target):
+def bfs(graph, root):
     
     # Queue to keep the discovered but unexplored nodes.
     queue = []
 
-    # List of boolens representing the discover/undiscovered status of nodes.
+    # List of booleans representing the discover/undiscovered status of nodes.
     discovered = [False] * len(graph.data)
 
-    discovered[source] = True
-    queue.append(source)
+    discovered[root] = True
+    queue.append(root)
+    idx = 0
 
-    while len(queue) > 0:
-        current = queue.pop(0) # always pop the first element in the list to simulate a FIFO queue
-        if current == target:
-            return current
-        else:
-            for n in graph.data[n]:
-                if not discovered[graph.data[n]]:
-                    discovered[graph.data[n]] = True
-                    queue.append(graph.data[n])
+    while idx < len(queue):
+        # Dequeue
+        current = queue[idx]
+        idx += 1
+        
+        # Check all edges of current.
+        for node in graph.data[current]:
+            if not discovered[node]:
+                discovered[node] = True
+                queue.append(node)
+    return queue
 
 num_nodes=5
 edges=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
-graph=GraphMatrix(num_nodes, edges)
-print(graph.data)
+graph1=GraphList(num_nodes, edges)
 
-print(graph)
-#graph.add_edge(0,3)
-#print(graph)
-
-#graph.remove_edge(0,3)
-#print(graph)
-
-#s=''
-#for n, row in enumerate(m2):
-#    s += "\n{}:{}".format(n, row)
+print(bfs(graph1, 3))
