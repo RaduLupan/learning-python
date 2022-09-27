@@ -87,11 +87,16 @@ def bfs(graph, root):
     # List of booleans representing the discover/undiscovered status of nodes.
     discovered = [False] * len(graph.data)
 
+    # List of distances from root to each node of the graph.
+    distance = [None] * len(graph.data)
+
     discovered[root] = True
+    distance[root] = 0
     queue.append(root)
     idx = 0
 
     while idx < len(queue):
+        
         # Dequeue
         current = queue[idx]
         idx += 1
@@ -99,9 +104,12 @@ def bfs(graph, root):
         # Check all edges of current.
         for node in graph.data[current]:
             if not discovered[node]:
+                
+                # For each undiscovered node, the distance is 1 + the distance of the current node (which caused it to be discovered).
+                distance[node] = 1 + distance[current]
                 discovered[node] = True
                 queue.append(node)
-    return queue
+    return queue, distance
 
 num_nodes=5
 edges=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
