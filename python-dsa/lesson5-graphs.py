@@ -80,7 +80,17 @@ def transpose(matrix):
     return transposed_matrix
 
 def bfs(graph, root):
+    '''
+    Description: Performs breadth-first search on a graph represented by an adjacency list.
+    Input:
+    graph: instance of Graph class.
+    root:  a node in the graph representing the starting point for the search.
     
+    Output:
+    queue:    a list of discovered nodes in breadth-first fashion starting from the root node.
+    distance: a list of distances from the root for all discovered nodes.
+    parent:   a list of parent nodes for each discovered nodes.
+    '''
     # Queue to keep the discovered but unexplored nodes.
     queue = []
 
