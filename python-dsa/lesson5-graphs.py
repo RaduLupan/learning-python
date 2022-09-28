@@ -93,11 +93,14 @@ def bfs(graph, root):
     discovered[root] = True
     distance[root] = 0
     queue.append(root)
+    
+    # Index in the queue list to dequeue from. 
     idx = 0
 
     while idx < len(queue):
         
-        # Dequeue
+        # Dequeue operation.
+        # We could actually remove the first element from the list by doing queue.pop(0) but then we need to add it to another list in order to return the discovered nodes.
         current = queue[idx]
         idx += 1
         
@@ -106,8 +109,8 @@ def bfs(graph, root):
             if not discovered[node]:
                 
                 # For each undiscovered node, the distance is 1 + the distance of the current node (which caused it to be discovered).
-                distance[node] = 1 + distance[current]
                 discovered[node] = True
+                distance[node] = 1 + distance[current]
                 queue.append(node)
     return queue, distance
 
