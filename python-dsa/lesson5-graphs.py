@@ -90,10 +90,16 @@ def bfs(graph, root):
     # List of distances from root to each node of the graph.
     distance = [None] * len(graph.data)
 
+    # List of parents for each node (parent = the node that led to the discovery of the current node).
+    parent = [None] * len(graph.data)
+
     discovered[root] = True
     distance[root] = 0
     queue.append(root)
     
+    # The root node has no parent.
+    parent[root] = None
+
     # Index in the queue list to dequeue from. 
     idx = 0
 
@@ -111,8 +117,9 @@ def bfs(graph, root):
                 # For each undiscovered node, the distance is 1 + the distance of the current node (which caused it to be discovered).
                 discovered[node] = True
                 distance[node] = 1 + distance[current]
+                parent[node] = current
                 queue.append(node)
-    return queue, distance
+    return queue, distance, parent
 
 num_nodes=5
 edges=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
