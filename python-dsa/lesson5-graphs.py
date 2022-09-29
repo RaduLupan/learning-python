@@ -132,11 +132,30 @@ def bfs(graph, root):
                 queue.append(node)
     return queue, distance, parent
 
-num_nodes1=5
-edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
+# num_nodes1=5
+# edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
-graph1=GraphList(num_nodes1, edges1)
+# graph1=GraphList(num_nodes1, edges1)
 
-print(bfs(graph1, 3))
+# print(bfs(graph1, 3))
+
+# Example of a graph where not all nodes are connected.
+num_nodes2=9
+edges2=[(0,1), (0,3), (1,2), (2,3), (4,5), (4,6), (5,6), (7,8)] 
+graph2=GraphList(num_nodes2, edges2)
+
+# If all nodes in a graph are connected when you do a BFS traversal from any source you get to visit all nodes.
+# Simply checking the length of the queue returned by bfs(graph, source) will determine whether or not all nodes are connected.
+discovered = len(bfs(graph2, 0)[0])
+
+print(graph2)
+
+print(bfs(graph2, 0))
+
+if discovered == graph2.num_nodes:
+    print('All nodes are connected.')
+else:
+    print('All nodes are NOT connected')
+
 
 
