@@ -4,6 +4,7 @@ Question2: Write a function to add an edge to a graph represented as an adjacenc
 Question3: Write a function to remove an edge from a graph represented as an adjacency list.
 Question4: Represent a graph as an adjacency matrix.
 Question5: Implement breadth-first search (BFS) given a source node in a graph represented by an adjacency list.
+Question6: Write a program that checks if all the nodes in a graph are connected.
 '''
 
 class GraphList:
@@ -131,9 +132,11 @@ def bfs(graph, root):
                 queue.append(node)
     return queue, distance, parent
 
-num_nodes=5
-edges=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
+num_nodes1=5
+edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
-graph1=GraphList(num_nodes, edges)
+graph1=GraphList(num_nodes1, edges1)
 
 print(bfs(graph1, 3))
+
+
