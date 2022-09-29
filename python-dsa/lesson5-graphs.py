@@ -137,11 +137,30 @@ def connected_components(graph):
     '''
     Description: Returnes the list of connected components in a graph represented by an adjacency list.
     '''
-    pass
-# num_nodes1=5
-# edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
+    connected_components = []
+    
+    # List of undiscovered nodes. All nodes are undiscovered intitally.
+    undiscovered = [n for n in range(graph.num_nodes)]
 
-# graph1=GraphList(num_nodes1, edges1)
+    idx = 0  
+
+    while idx < len(undiscovered):
+        
+        root = undiscovered[idx]
+        
+        # The returned queue by BFS traversing the praph from an undiscovered node represents a connected component.
+        connected_components.append(bfs(graph, root)[0])
+
+        # Remove the idx element from the undiscovered list since it was discovered.
+        undiscovered.pop(idx)
+
+        idx += 1
+    return connected_components
+
+num_nodes1=5
+edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
+
+graph1=GraphList(num_nodes1, edges1)
 
 # print(bfs(graph1, 3))
 
@@ -164,4 +183,5 @@ else:
     print('All nodes are NOT connected')
 
 
-
+connected_components = connected_components(graph1)
+print(connected_components)
