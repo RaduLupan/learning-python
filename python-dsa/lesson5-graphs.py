@@ -139,22 +139,22 @@ def connected_components(graph):
     '''
     connected_components = []
     
-    # List of undiscovered nodes. All nodes are undiscovered intitally.
+    # List of undiscovered nodes. All nodes are undiscovered initially.
     undiscovered = [n for n in range(graph.num_nodes)]
 
-    idx = 0  
-
-    while idx < len(undiscovered):
+    while len(undiscovered) > 0:
         
-        root = undiscovered[idx]
+        # Get the first undiscovered node.
+        root = undiscovered[0]
         
-        # The returned queue by BFS traversing the praph from an undiscovered node represents a connected component.
-        connected_components.append(bfs(graph, root)[0])
+        # The discovered nodes returned by BFS from an undiscovered node represent a connected component.
+        discovered = bfs(graph, root)[0]    
+        connected_components.append(discovered)
 
-        # Remove the idx element from the undiscovered list since it was discovered.
-        undiscovered.pop(idx)
+        # Remove the discovered nodes from the undiscovered list.
+        for node in discovered:
+            undiscovered.remove(node)
 
-        idx += 1
     return connected_components
 
 num_nodes1=5
@@ -182,6 +182,5 @@ if discovered == graph2.num_nodes:
 else:
     print('All nodes are NOT connected')
 
-
-connected_components = connected_components(graph1)
+connected_components = connected_components(graph2)
 print(connected_components)
