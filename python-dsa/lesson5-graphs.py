@@ -159,7 +159,41 @@ def connected_components(graph):
     return connected_components
 
 def dfs(graph, root):
-    pass
+    '''
+    Description: Performs depth-first search on a graph represented by an adjacency list.
+    Input:
+    graph: instance of Graph class.
+    root:  a node in the graph representing the starting point for the search.
+    
+    Output:
+    discovered_nodes: a list of discovered nodes in depth-first fashion starting from the root node.
+    '''
+    # Use a list as a stack structure.
+    stack = []
+    
+    # List of discovered nodes.
+    discovered_nodes = []
+    
+    # List of booleans that indicates whether each node is discovered.
+    discovered = [False] * len(graph.data)
+    
+    stack.append(root)
+    
+    while len(stack) > 0:
+        
+        current = stack.pop()
+        
+        if not discovered[current]:
+            discovered[current] = True
+            discovered_nodes.append(current)
+        
+            # Check all edges of current.
+            for node in graph.data[current]:        
+                if not discovered[node]:
+                    stack.append(node)
+                
+    return discovered_nodes
+
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
@@ -187,3 +221,5 @@ else:
 
 connected_components = connected_components(graph2)
 print(connected_components)
+
+print(dfs(graph1,3))
