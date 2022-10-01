@@ -158,9 +158,9 @@ def connected_components(graph):
 
     return connected_components
 
-def dfs(graph, root):
+def dfs_iterative(graph, root):
     '''
-    Description: Performs depth-first search on a graph represented by an adjacency list.
+    Description: Performs iterative depth-first search on a graph represented by an adjacency list.
     Input:
     graph: instance of Graph class.
     root:  a node in the graph representing the starting point for the search.
@@ -222,4 +222,4 @@ else:
 connected_components = connected_components(graph2)
 print(connected_components)
 
-print(dfs(graph1,3))
+print(dfs_iterative(graph1,3))
