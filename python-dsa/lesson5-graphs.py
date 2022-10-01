@@ -6,6 +6,7 @@ Question4: Represent a graph as an adjacency matrix.
 Question5: Implement breadth-first search (BFS) given a source node in a graph represented by an adjacency list.
 Question6: Write a program that checks if all the nodes in a graph are connected.
 Question7: Write a function that returns the list of connected components in a graph.
+Question8: Implement depth-first search (DFS) given a source node in a graph represented by an adjacency list.
 '''
 
 class GraphList:
@@ -157,6 +158,8 @@ def connected_components(graph):
 
     return connected_components
 
+def dfs(graph, root):
+    pass
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
