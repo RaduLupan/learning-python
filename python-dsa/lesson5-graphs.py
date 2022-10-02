@@ -194,6 +194,15 @@ def dfs_iterative(graph, root):
                 
     return discovered_nodes
 
+def dfs_recursive(graph, root):
+    '''
+    Description: Performs recursive depth-first search on a graph represented by an adjacency list.
+    Algorithm (Wikipedia):
+    procedure DFS(G, v) is
+        for all directed edges from v to w that are in G.adjacent.Edges(v) do
+            if vertex w is not labeled as discovered then
+                recursively call DFS(G, w)
+    '''
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
