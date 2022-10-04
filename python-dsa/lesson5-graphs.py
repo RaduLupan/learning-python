@@ -194,7 +194,7 @@ def dfs_iterative(graph, root):
                 
     return discovered_nodes
 
-def dfs_recursive(graph, root):
+def dfs_recursive(graph, root, discovered):
     '''
     Description: Performs recursive depth-first search on a graph represented by an adjacency list.
     Algorithm (Wikipedia):
@@ -202,7 +202,15 @@ def dfs_recursive(graph, root):
         for all directed edges from v to w that are in G.adjacent.Edges(v) do
             if vertex w is not labeled as discovered then
                 recursively call DFS(G, w)
+    Credits: https://favtutor.com/blogs/depth-first-search-python
     '''
+
+    if root not in discovered:
+        discovered.append(root)
+
+        for neighbor in graph.data[root]:
+            dfs_recursive(graph, neighbor, discovered) 
+
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
@@ -215,6 +223,9 @@ num_nodes2=9
 edges2=[(0,1), (0,3), (1,2), (2,3), (4,5), (4,6), (5,6), (7,8)] 
 graph2=GraphList(num_nodes2, edges2)
 
+# Another graph
+num_nodes3=10
+edges3=[(0,1), (0,2), (0,3), (1,4), (2,5), (2,6), (3,7), (4,8), (5,9)]
 # If all nodes in a graph are connected when you do a BFS traversal from any source you get to visit all nodes.
 # Simply checking the length of the queue returned by bfs(graph, source) will determine whether or not all nodes are connected.
 discovered = len(bfs(graph2, 0)[0])
@@ -232,3 +243,13 @@ connected_components = connected_components(graph2)
 print(connected_components)
 
 print(dfs_iterative(graph1,3))
+
+discovered=[]
+dfs_recursive(graph1,3, discovered)
+print(discovered)
+
+graph3=GraphList(num_nodes3, edges3)
+discovered=[]
+dfs_recursive(graph3,0, discovered)
+print(discovered)
+
