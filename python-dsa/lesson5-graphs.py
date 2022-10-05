@@ -7,6 +7,7 @@ Question5: Implement breadth-first search (BFS) given a source node in a graph r
 Question6: Write a program that checks if all the nodes in a graph are connected.
 Question7: Write a function that returns the list of connected components in a graph.
 Question8: Implement depth-first search (DFS) given a source node in a graph represented by an adjacency list.
+Question9: Create a class to represent weighted and directed graphs.
 '''
 
 class GraphList:
@@ -64,6 +65,9 @@ class GraphMatrix:
     def __repr__(self):
         return "\n".join(["{}:{}".format(n, row) for n, row in enumerate(transpose(self.data))])
 
+class GraphWD:
+    def __init__(self, num_nodes, edges, directed):
+        pass
 def transpose(matrix):
     '''
     Description: Computes the transpose of a matrix represented by a list of columns. Returns the flipped version of the matrix as a list of rows.
@@ -194,7 +198,7 @@ def dfs_iterative(graph, root):
                 
     return discovered_nodes
 
-def dfs_recursive(graph, root, discovered):
+def dfs_recursive(graph, root, discovered=[]):
     '''
     Description: Performs recursive depth-first search on a graph represented by an adjacency list.
     Algorithm (Wikipedia):
@@ -211,6 +215,7 @@ def dfs_recursive(graph, root, discovered):
         for neighbor in graph.data[root]:
             dfs_recursive(graph, neighbor, discovered) 
 
+    return discovered
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
@@ -219,37 +224,32 @@ graph1=GraphList(num_nodes1, edges1)
 # print(bfs(graph1, 3))
 
 # Example of a graph where not all nodes are connected.
-num_nodes2=9
-edges2=[(0,1), (0,3), (1,2), (2,3), (4,5), (4,6), (5,6), (7,8)] 
-graph2=GraphList(num_nodes2, edges2)
+# num_nodes2=9
+# edges2=[(0,1), (0,3), (1,2), (2,3), (4,5), (4,6), (5,6), (7,8)] 
+# graph2=GraphList(num_nodes2, edges2)
 
 # Another graph
 num_nodes3=10
 edges3=[(0,1), (0,2), (0,3), (1,4), (2,5), (2,6), (3,7), (4,8), (5,9)]
 # If all nodes in a graph are connected when you do a BFS traversal from any source you get to visit all nodes.
 # Simply checking the length of the queue returned by bfs(graph, source) will determine whether or not all nodes are connected.
-discovered = len(bfs(graph2, 0)[0])
+# discovered = len(bfs(graph2, 0)[0])
 
-print(graph2)
+# print(graph2)
 
-print(bfs(graph2, 0))
+# print(bfs(graph2, 0))
 
-if discovered == graph2.num_nodes:
-    print('All nodes are connected.')
-else:
-    print('All nodes are NOT connected')
+# if discovered == graph2.num_nodes:
+#     print('All nodes are connected.')
+# else:
+#     print('All nodes are NOT connected')
 
-connected_components = connected_components(graph2)
-print(connected_components)
+# connected_components = connected_components(graph2)
+# print(connected_components)
 
 print(dfs_iterative(graph1,3))
-
-discovered=[]
-dfs_recursive(graph1,3, discovered)
-print(discovered)
+print(dfs_recursive(graph1,3))
 
 graph3=GraphList(num_nodes3, edges3)
-discovered=[]
-dfs_recursive(graph3,0, discovered)
-print(discovered)
-
+print(graph3)
+print(dfs_recursive(graph3,0))
