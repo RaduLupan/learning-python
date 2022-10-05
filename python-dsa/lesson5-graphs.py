@@ -67,7 +67,29 @@ class GraphMatrix:
 
 class GraphWD:
     def __init__(self, num_nodes, edges, directed):
-        pass
+        self.num_nodes = num_nodes
+        self.data = [[] for _ in range(num_nodes)]
+
+        # Determine if the graph is weighted by checking the length of the first edge.
+        weighted = (len(edges[0]) == 3) # True for weighted graphs.
+
+        if weighted:
+            for n1, n2, w in edges:
+                if directed:
+                    self.data[n1].append((n2,w))
+                else:
+                    self.data[n1].append((n2,w))
+                    self.data[n2].append((n1,w))
+        else:
+            for n1, n2 in edges:
+                if directed:
+                    self.data[n1].append(n2)
+                else:
+                    self.data[n1].append(n2)
+                    self.data[n2].append(n1)
+    def __repr__(self):
+       return "\n".join(["{}:{}".format(node, neighbors) for node, neighbors in enumerate(self.data)])
+
 def transpose(matrix):
     '''
     Description: Computes the transpose of a matrix represented by a list of columns. Returns the flipped version of the matrix as a list of rows.
@@ -247,9 +269,18 @@ edges3=[(0,1), (0,2), (0,3), (1,4), (2,5), (2,6), (3,7), (4,8), (5,9)]
 # connected_components = connected_components(graph2)
 # print(connected_components)
 
-print(dfs_iterative(graph1,3))
-print(dfs_recursive(graph1,3))
+# print(dfs_iterative(graph1,3))
+# print(dfs_recursive(graph1,3))
 
-graph3=GraphList(num_nodes3, edges3)
-print(graph3)
-print(dfs_recursive(graph3,0))
+# graph3=GraphList(num_nodes3, edges3)
+# print(graph3)
+# print(dfs_recursive(graph3,0))
+
+# Graph with weights.
+num_nodes5 = 9
+edges5 = [(0, 1, 3), (0, 3, 2), (0, 8, 4), (1, 7, 4), (2, 7, 2), (2, 3, 6), 
+          (2, 5, 1), (3, 4, 1), (4, 8, 8), (5, 6, 8)]
+directed5 = False
+
+graph5 = GraphWD(num_nodes5, edges5, directed5)
+print(graph5)
