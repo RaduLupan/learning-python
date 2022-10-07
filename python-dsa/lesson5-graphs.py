@@ -259,6 +259,32 @@ def pick_next_node(distance, visited):
             min_distance = distance[node]
     return min_node
 
+def shortest_path(graph, source, target):
+    """Uses the Dijkstra's algorithm to find the shortest path between a source and a target node in a graph."""
+    
+    visited = [False] * graph.num_nodes 
+    distance = [float('inf') for _ in range(graph.num_nodes)]
+    queue = []
+     
+    distance[source] = 0
+    queue.append(source)
+    idx = 0
+    
+    while idx < len(queue) and not visited[target]:
+        current = queue[idx]
+        idx += 1             
+        visited[current] = True
+        
+        # Update the distances of all the neighbors.
+        update_distances(graph, current, distance)
+    
+        # Find the first unvisited node with the smallest distance.
+        next_node = pick_next_node(distance, visited)
+        if next_node:
+            queue.append(next_node)
+    
+    return distance[target]
+
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
@@ -312,3 +338,5 @@ directed6 = True
 
 graph6 = GraphWD(num_nodes6, edges6, directed6)
 print(graph6)
+
+print(f"The shortest distance from 0 to 5 is:",shortest_path(graph6, 0, 5))
