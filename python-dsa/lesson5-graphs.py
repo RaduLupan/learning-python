@@ -234,6 +234,31 @@ def dfs_recursive(graph, root, discovered=[]):
             dfs_recursive(graph, neighbor, discovered) 
 
     return discovered
+
+def update_distances(graph, current, distance, parent=None):
+    """Update the distances of the current node's neighbors"""
+
+    neighbors = [graph.data[current][n][0] for n in range(len(graph.data[current]))]
+    weights = [graph.data[current][n][1] for n in range(len(graph.data[current]))]
+    
+    for i, node in enumerate(neighbors):
+        weight = weights[i]
+        if distance[current] + weight < distance[node]:
+            distance[node] = distance[current] + weight
+            if parent:
+                parent[node] = current
+
+def pick_next_node(distance, visited):
+    """Pick the next univisited node at the smallest distance"""
+
+    min_distance = float('inf')
+    min_node = None
+    for node in range(len(distance)):
+        if not visited[node] and distance[node] < min_distance:
+            min_node = node
+            min_distance = distance[node]
+    return min_node
+
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
 
