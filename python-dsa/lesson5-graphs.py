@@ -279,3 +279,11 @@ edges5 = [(0, 1, 3), (0, 3, 2), (0, 8, 4), (1, 7, 4), (2, 7, 2), (2, 3, 6),
 
 graph5 = GraphWD(num_nodes5, edges5)
 print(graph5)
+
+# Directed graph with weights.
+num_nodes6 = 6
+edges6 = [(0,1,4), (0,2,2), (1,2,5), (1,3,10), (2,4,3), (3,5,11), (4,3,4)]
+directed6 = True
+
+graph6 = GraphWD(num_nodes6, edges6, directed6)
+print(graph6)
