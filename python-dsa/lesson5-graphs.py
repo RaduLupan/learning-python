@@ -263,6 +263,7 @@ def shortest_path(graph, source, target):
     """Uses the Dijkstra's algorithm to find the shortest path between a source and a target node in a graph."""
     
     visited = [False] * graph.num_nodes 
+    parent = [None] * graph.num_nodes
     distance = [float('inf') for _ in range(graph.num_nodes)]
     queue = []
      
@@ -276,14 +277,14 @@ def shortest_path(graph, source, target):
         visited[current] = True
         
         # Update the distances of all the neighbors.
-        update_distances(graph, current, distance)
+        update_distances(graph, current, distance, parent)
     
         # Find the first unvisited node with the smallest distance.
         next_node = pick_next_node(distance, visited)
         if next_node:
             queue.append(next_node)
     
-    return distance[target]
+    return distance[target], parent
 
 num_nodes1=5
 edges1=[(0,1), (0,4), (1,2), (1,3), (1,4), (2,3), (3,4)]
@@ -339,4 +340,5 @@ directed6 = True
 graph6 = GraphWD(num_nodes6, edges6, directed6)
 print(graph6)
 
-print(f"The shortest distance from 0 to 5 is:",shortest_path(graph6, 0, 5))
+print(f"The shortest distance from 0 to 5 is:",shortest_path(graph6, 0, 5)[0])
+print(f"The shortest path from 0 to 5 is:", shortest_path(graph6, 0, 5)[1])
