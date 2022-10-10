@@ -77,15 +77,15 @@ def find_subarray1(arr, target):
     '''
     Algorithm:
     1. Start with two indices idx1, idx2 that track the start and end for the subarray.
-    2. For each idx1 in range(0, n-1) evaluate all subarrays with idx2 going from idx1+1 to n+1.
+    2. For each idx1 in range(0, n) evaluate all subarrays with idx2 going from idx1+1 to n+1.
     3. If sum(arr[idx1:idx2]) == target return idx1, idx2-1.
     4. Else return None, None.
     '''
 
-    idx1, idx2 = 0, 0
+    # idx1, idx2 = 0, 0
     n = len(arr)
 
-    for idx1 in range (0, n-1):
+    for idx1 in range (0, n):
         for idx2 in range(idx1+1, n+1):
             sub_arr = arr[idx1:idx2]
             # print(f"Subarray: {sub_arr}, sum: {sum(sub_arr)}")
@@ -100,4 +100,4 @@ import dsa
 dsa.evaluate_test_case(find_subarray1, test0)
 
 # Evaluate all test cases.
-dsa.evaluate_test_cases(find_subarray1, tests)
+# dsa.evaluate_test_cases(find_subarray1, tests)
