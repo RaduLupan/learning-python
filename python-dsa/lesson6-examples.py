@@ -72,7 +72,26 @@ test4 = {
 
 tests = [test0, test1, test2, test3, test4]
 
+# 3. Come up with a correct solution for the problem. State it in plain English.
 def find_subarray1(arr, target):
-    pass
+    '''
+    Algorithm:
+    1. Start with two indices idx1, idx2 that track the start and end for the subarray.
+    2. For each idx1 in range(0, n-1) evaluate all subarrays with idx2 going from idx1 to n-1.
+    3. If sum(arr[idx1:idx2]) == target return idx1, idx2.
+    4. Else return None, None.
+    '''
+
+    idx1, idx2 = 0, 0
+    n = len(arr)
+
+    for idx1 in range (0, n-1):
+        for idx2 in range(idx1, n-1):
+            sub_arr = arr[idx1:idx2]
+            print(f"Subarray: {sub_arr}, sum: {sum(sub_arr)}")
+            if sum(sub_arr) == target:
+                return idx1, idx2
+
+    return None, None
 
 print(find_subarray1(**test0['input']))
