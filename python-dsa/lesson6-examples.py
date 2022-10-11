@@ -73,6 +73,7 @@ test4 = {
 tests = [test0, test1, test2, test3, test4]
 
 # 3. Come up with a correct solution for the problem. State it in plain English.
+# 4. Implement the solution.
 def find_subarray1(arr, target):
     '''
     Algorithm:
@@ -96,8 +97,39 @@ def find_subarray1(arr, target):
 
 import dsa
 
+# 4. Test the solution using example inputs.
 # Evaluate one test case.
 dsa.evaluate_test_case(find_subarray1, test0)
 
 # Evaluate all test cases.
 # dsa.evaluate_test_cases(find_subarray1, tests)
+
+# 5. Analyze algorithm's complexity and identify inefficiencies if any.
+# Time complexity: O(n^3) where n is the lenght of the array.
+
+def find_subarray2(arr, target):
+    '''
+    Improved version of find_subarray1() which overcomes the inefficiency of adding up the elements repeatedly.
+    '''
+
+    n = len(arr)
+    
+    for i in range (0, n):
+        
+        # Variable to keep the current sum of the subarray elements.
+        s = arr[i]
+        
+        for j in range(i+1, n+1):
+            sub_arr = arr[i:j]
+            
+            if len(sub_arr) > 1:
+                s += arr[j-1]
+            
+            print(f"Subarray: {sub_arr}, sum: {s}")
+            
+            if s == target:
+                return i, j-1
+
+    return None, None
+
+dsa.evaluate_test_case(find_subarray2, test0)
