@@ -44,7 +44,7 @@ test1 = {
     'output': (3, 7)
 }
 
-# 2.3 The subarray is at the beginning of arr list.
+# 2.3 The subarray is at the beginning of arr list. Also the second subarray that meets the target (2, 4) is ignored.
 test2 = {
     'input': {
         'arr': [5, 10, 3, 15, 9, 20, 7],
@@ -62,7 +62,7 @@ test3 = {
     'output': (1, 2)
 }
 
-# The subarray has zero elements.
+# 2.5 The subarray has zero elements.
 test4 = {
     'input': {
         'arr': [5, 10, 3, 15, 9, 20, 7],
@@ -71,21 +71,22 @@ test4 = {
     'output': (None, None)
 }
 
-tests = [test0, test1, test2, test3, test4]
-
+# 2.6 The array is empty.
 test5 = {
     'input': {
-        'arr': [1, 7, 4, 2, 1, 3, 11, 5],
+        'arr': [],
         'target': 10
     },
-    'output': (2, 6)
+    'output': (None, None)
 }
+
+tests = [test0, test1, test2, test3, test4, test5]
 
 # 3. Come up with a correct solution for the problem. State it in plain English.
 # 4. Implement the solution.
 def find_subarray1(arr, target):
     '''
-    Brute force - Timpe complexity is O(n^3)
+    Brute force - Time complexity is O(n^3)
     Algorithm:
     1. Start with two indices i, j that track the start and end for the subarray.
     2. For each idx1 in range(0, n) evaluate all subarrays with idx2 going from idx1+1 to n+1.
@@ -97,9 +98,7 @@ def find_subarray1(arr, target):
 
     for i in range(n):
         for j in range(i, n+1):
-            sub_arr = arr[i:j]
-            # print(f"Subarray: {sub_arr}, sum: {sum(sub_arr)}")
-            if sum(sub_arr) == target:
+            if sum(arr[i:j]) == target:
                 return i, j
 
     return None, None
