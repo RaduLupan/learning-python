@@ -22,7 +22,8 @@ Problem1: You are given an array of numbers (non-negative). Find a continuous su
 # target = 16
 
 # Output: (i, j) - a tuple representing the start and end indices for the subarray in arr whose elements add up to target.
-# output1 = 1, 3 
+# sum(arr[i:j]) == target so j is 4 in the above example!
+# output1 = 1, 4
 
 # 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
 # 2.1 General case: the subarray is in the middle of the arr list.
@@ -31,7 +32,7 @@ test0 = {
         'arr': [1, 4, 7, 5, 10, 13],
         'target': 16
     },
-    'output': (1,3)
+    'output': (1,4)
 }
 
 # 2.2 The subarray is at the end of arr list.
@@ -40,7 +41,7 @@ test1 = {
         'arr': [5, 10, 3, 15, 9, 20, 7],
         'target': 51
     },
-    'output': (3, 6)
+    'output': (3, 7)
 }
 
 # 2.3 The subarray is at the beginning of arr list.
@@ -49,7 +50,7 @@ test2 = {
         'arr': [5, 10, 3, 15, 9, 20, 7],
         'target': 18
     },
-    'output': (0, 2)
+    'output': (0, 3)
 }
 
 # 2.4 The subarray has only 1 element.
@@ -58,7 +59,7 @@ test3 = {
         'arr': [5, 10, 3, 15, 9, 20, 7],
         'target': 10
     },
-    'output': (1, 1)
+    'output': (1, 2)
 }
 
 # The subarray has zero elements.
@@ -77,13 +78,14 @@ test5 = {
         'arr': [1, 7, 4, 2, 1, 3, 11, 5],
         'target': 10
     },
-    'output': (2, 5)
+    'output': (2, 6)
 }
 
 # 3. Come up with a correct solution for the problem. State it in plain English.
 # 4. Implement the solution.
 def find_subarray1(arr, target):
     '''
+    Brute force - Timpe complexity is O(n^3)
     Algorithm:
     1. Start with two indices i, j that track the start and end for the subarray.
     2. For each idx1 in range(0, n) evaluate all subarrays with idx2 going from idx1+1 to n+1.
@@ -106,10 +108,10 @@ import dsa
 
 # 4. Test the solution using example inputs.
 # Evaluate one test case.
-dsa.evaluate_test_case(find_subarray1, test5)
+dsa.evaluate_test_case(find_subarray1, test0)
 
 # Evaluate all test cases.
-# dsa.evaluate_test_cases(find_subarray1, tests)
+dsa.evaluate_test_cases(find_subarray1, tests)
 
 # 5. Analyze algorithm's complexity and identify inefficiencies if any.
 # Time complexity: O(n^3) where n is the lenght of the array.
