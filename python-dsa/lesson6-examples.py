@@ -72,26 +72,33 @@ test4 = {
 
 tests = [test0, test1, test2, test3, test4]
 
+test5 = {
+    'input': {
+        'arr': [1, 7, 4, 2, 1, 3, 11, 5],
+        'target': 10
+    },
+    'output': (2, 5)
+}
+
 # 3. Come up with a correct solution for the problem. State it in plain English.
 # 4. Implement the solution.
 def find_subarray1(arr, target):
     '''
     Algorithm:
-    1. Start with two indices idx1, idx2 that track the start and end for the subarray.
+    1. Start with two indices i, j that track the start and end for the subarray.
     2. For each idx1 in range(0, n) evaluate all subarrays with idx2 going from idx1+1 to n+1.
     3. If sum(arr[idx1:idx2]) == target return idx1, idx2-1.
     4. Else return None, None.
     '''
 
-    # idx1, idx2 = 0, 0
     n = len(arr)
 
-    for idx1 in range (0, n):
-        for idx2 in range(idx1+1, n+1):
-            sub_arr = arr[idx1:idx2]
+    for i in range(n):
+        for j in range(i, n+1):
+            sub_arr = arr[i:j]
             # print(f"Subarray: {sub_arr}, sum: {sum(sub_arr)}")
             if sum(sub_arr) == target:
-                return idx1, idx2-1
+                return i, j
 
     return None, None
 
@@ -99,7 +106,7 @@ import dsa
 
 # 4. Test the solution using example inputs.
 # Evaluate one test case.
-dsa.evaluate_test_case(find_subarray1, test0)
+dsa.evaluate_test_case(find_subarray1, test5)
 
 # Evaluate all test cases.
 # dsa.evaluate_test_cases(find_subarray1, tests)
@@ -132,4 +139,4 @@ def find_subarray2(arr, target):
 
     return None, None
 
-dsa.evaluate_test_case(find_subarray2, test0)
+# dsa.evaluate_test_case(find_subarray2, test0)
