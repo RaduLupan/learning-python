@@ -138,7 +138,9 @@ def find_subarray2(arr, target):
 
             if s == target:
                 return i, j
-            
+            # No point in going further if the target is exceeded.
+            elif s > target:
+                break
             print(f"i, j: {i}, {j}")
             print(f"arr[i:j]: {sub_arr}, sum: {s}")
             
