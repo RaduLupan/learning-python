@@ -117,27 +117,33 @@ dsa.evaluate_test_cases(find_subarray1, tests)
 
 def find_subarray2(arr, target):
     '''
-    Improved version of find_subarray1() which overcomes the inefficiency of adding up the elements repeatedly.
+    Improved brute force version of find_subarray1() which overcomes the inefficiency of adding up the elements repeatedly.
+    Time complexity is O(n^2).
     '''
 
     n = len(arr)
     
-    for i in range (0, n):
-        
-        # Variable to keep the current sum of the subarray elements.
-        s = arr[i]
-        
+    # Variable to keep the current sum of the subarray elements.
+    
+
+    for i in range(n):
+
+        s = 0
+
         for j in range(i+1, n+1):
+        
             sub_arr = arr[i:j]
             
-            if len(sub_arr) > 1:
-                s += arr[j-1]
-            
-            print(f"Subarray: {sub_arr}, sum: {s}")
-            
-            if s == target:
-                return i, j-1
+            s += arr[j-1]
 
+            if s == target:
+                return i, j
+            
+            print(f"i, j: {i}, {j}")
+            print(f"arr[i:j]: {sub_arr}, sum: {s}")
+            
+            
     return None, None
 
-# dsa.evaluate_test_case(find_subarray2, test0)
+dsa.evaluate_test_case(find_subarray2, test1)
+dsa.evaluate_test_cases(find_subarray2, tests)
