@@ -107,10 +107,10 @@ import dsa
 
 # 4. Test the solution using example inputs.
 # Evaluate one test case.
-dsa.evaluate_test_case(find_subarray1, test0)
+# dsa.evaluate_test_case(find_subarray1, test0)
 
 # Evaluate all test cases.
-dsa.evaluate_test_cases(find_subarray1, tests)
+# dsa.evaluate_test_cases(find_subarray1, tests)
 
 # 5. Analyze algorithm's complexity and identify inefficiencies if any.
 # Time complexity: O(n^3) where n is the lenght of the array.
@@ -151,5 +151,23 @@ def find_subarray3(arr, target):
     '''
     Further improvment upon find_subarray2() which uses a greedy aproach.
     '''
-dsa.evaluate_test_case(find_subarray2, test1)
-dsa.evaluate_test_cases(find_subarray2, tests)
+
+    n = len(arr)
+
+    s, i, j = 0, 0 , 0
+
+    while i < n and j < n+1:
+
+        if s == target:
+            return i, j
+        elif s > target:
+            s -= arr[i]
+            i += 1
+        elif s < target:
+            if j < n:
+                s += arr[j]
+            j += 1
+    
+    return None, None
+dsa.evaluate_test_case(find_subarray3, test0)
+dsa.evaluate_test_cases(find_subarray3, tests)
