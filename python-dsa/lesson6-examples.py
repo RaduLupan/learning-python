@@ -147,5 +147,9 @@ def find_subarray2(arr, target):
             
     return None, None
 
+def find_subarray3(arr, target):
+    '''
+    Further improvment upon find_subarray2() which uses a greedy aproach.
+    '''
 dsa.evaluate_test_case(find_subarray2, test1)
 dsa.evaluate_test_cases(find_subarray2, tests)
