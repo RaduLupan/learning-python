@@ -24,8 +24,24 @@ Eeach operation is counted as 1 step.
 # str2 = 'execution'
 # output = 5
 
-def min_steps(str1, str2):
-    pass
+def min_steps(str1, str2, idx1=0, idx2=0):
+    
+    # idx1 and idx2 are tracking the indices of current characters in str1 and str2 respectively.
+
+    # If we reached the end of str1 return the remaining number of characters in str2.
+    if idx1 == len(str1): 
+        return len(str2) - idx2
+    # If we reached the end of str2 return the remaining number of characters in str1.
+    elif idx2 == len(str2):
+        return len(str1) - idx1
+    # The first characters are equal.
+    elif str1[idx1] == str2[idx2]:
+        return 1 + min_steps(str1, str2, idx1+1, idx2+1)
+    else:
+        delete = 1 + min_steps(str1, str2, idx1+1, idx2)
+        replace = 1 + min_steps(str1, str2, idx1+1, idx2+1)
+        insert = 1 + min_steps(str1, str2, idx1, idx2+1)
+        return min(delete, replace, insert)
 
 # 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
 # 2.1 General case.
@@ -92,3 +108,18 @@ test6 = {
 }
 
 tests = [test0, test1, test2, test3, test4, test5, test6]
+
+# 3. Recursive solution.
+'''
+If the first characters are equal then ignore them and recursively the remaining strings.
+If the first caracters are not equal:
+    1. Either apply DELETE operation
+       the solution is 1 + recursively solving for remaining of str1 and entire str2. 
+    2. Or apply REPLACE operation
+       the solution is 1 + recursively solving for remaining of str1 and remaining of str2.
+    3. Or apply INSERT operation
+       the solution is 1 + recursively solving for entire str1 and remaining str2.
+'''
+
+import dsa
+dsa.evaluate_test_case(min_steps, test6)
