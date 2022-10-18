@@ -4,7 +4,7 @@ The following systematic strategy for solving problems will be used for the two 
 The method
 1. State the problem clearly. Identify the input & output formats.
 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
-3. Come up with a crrect solution for the problem. State it in plain English.
+3. Come up with a correct solution for the problem. State it in plain English.
 4. Implement the solution and test it using the example inputs. Fix bugs if any.
 5. Analyze the algorithm's complexity and identify inefficiencies if any.
 6. Apply the right technique to overcome the inefficiencies. Repeat steps 3-6. 
