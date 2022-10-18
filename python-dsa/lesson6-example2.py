@@ -29,9 +29,66 @@ def min_steps(str1, str2):
 
 # 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
 # 2.1 General case.
+test0 = {
+    'input': {
+        'str1': 'intention',
+        'str2': 'execution'
+    },
+    'output': 5
+}
+
 # 2.2 No change required (str1 and str2 are equal).
+test1 = {
+    'input': {
+        'str1': 'algorithm',
+        'str2': 'algorithm'
+    },
+    'output': 0
+}
+
 # 2.3 All characters in str1 need to be changed.
+test2 = {
+    'input': {
+        'str1': 'morning',
+        'str2': 'summer'
+    },
+    'output': 7
+}
+
 # 2.4 The two strings have equal length.
+test3 = {
+    'input': {
+        'str1': 'fog',
+        'str2': 'dog'
+    },
+    'output': 1
+}
+
 # 2.5 The two strungs have unequal length.
+test4 = {
+    'input': {
+        'str1': 'nation',
+        'str2': 'equation'
+    },
+    'output': 3
+}
+
 # 2.6 One of the strings is empty.
+test5 = {
+    'input': {
+        'str1': '',
+        'str2': 'reality'
+    },
+    'output': 7
+}
+
 # 2.7 Only one type of operation is required: one deletion, or one substitution or one insertion.
+test6 = {
+    'input': {
+        'str1': 'fog',
+        'str2': 'frog'
+    },
+    'output': 1
+}
+
+tests = [test0, test1, test2, test3, test4, test5, test6]
