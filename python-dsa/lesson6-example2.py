@@ -125,4 +125,5 @@ If the first caracters are not equal:
 
 import dsa
 
-dsa.evaluate_test_case(min_steps, test6)
+# dsa.evaluate_test_case(min_steps, test6)
+dsa.evaluate_test_cases(min_steps, tests)
