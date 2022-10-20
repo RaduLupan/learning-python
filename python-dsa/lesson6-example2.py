@@ -111,7 +111,7 @@ test6 = {
 
 tests = [test0, test1, test2, test3, test4, test5, test6]
 
-# 3. Recursive solution.
+# 3. Recursive solution - brute force.
 '''
 If the first characters are equal then ignore them and recursively solve for the remaining strings.
 If the first caracters are not equal:
@@ -126,4 +126,44 @@ If the first caracters are not equal:
 import dsa
 
 # dsa.evaluate_test_case(min_steps, test6)
-dsa.evaluate_test_cases(min_steps, tests)
+# dsa.evaluate_test_cases(min_steps, tests)
+
+# 5. Analyze the algorithm's complexity and identify inefficiencies if any.
+# The time complexity for the brute force solution is O(3^(m+n)) where m=len(str1) and n=len(str2). 
+# There are a lot of repetitive calls. For m+n=20 there will be over 3.4 bilion recursive calls!!
+
+# 6. Apply the right technique to overcome the inefficiencies.
+# One way to overcome the inefficiencies is to use a technique called memoization where the results are stored in a dictionary to avoid repetitive calls.
+
+def min_steps_memo(str1, str2):
+    '''
+    Uses memoization technique to avoid repetitive calls.
+    '''
+    
+    # Dictionary to store intermediate results.
+    memo = {}
+
+    def recurse(idx1, idx2):
+        key = (idx1, idx2)
+
+        if key in memo:
+            return memo[key]
+        elif idx1 == len(str1):
+            memo[key] = len(str2) - idx2
+        elif idx2 == len(str2):
+            memo[key] = len(str1) - idx1
+        elif str1[idx1] == str2[idx2]:
+            memo[key] = recurse(idx1+1, idx2+1)
+        else:
+            delete = 1 + recurse(idx1+1, idx2)
+            replace = 1 + recurse(idx1+1, idx2+1)
+            insert = 1 + recurse(idx1, idx2+1)
+            memo[key] = min(delete, replace, insert)
+        
+        return memo[key]
+
+    return recurse(0, 0) 
+
+dsa.evaluate_test_case(min_steps_memo, test0)
+
+dsa.evaluate_test_cases(min_steps_memo, tests)
