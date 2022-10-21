@@ -37,3 +37,15 @@ the resultant linked list is 3->2->1->5->4.
 Reference:
 https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1?page=3&company[]=Amazon&sortBy=submissions
 '''
+# 1. State the problem clearly. Identify the input & output formats.
+# We are given a list of size N. We need to write a function that reverses every k elements in the list.
+# If the number of elements is not a multiple of k then the left-out elements, in the end, should be considered as a group and must be reversed.
+
+# Input: 
+#  - arr: a list of integers that needs to be reversed in groups.
+#  - k:   an integer representing the number of elements in a group.
+# Output:
+#  - rev: a list obtained by reversing every k elements in arr.
+
+def reverse_list(arr, k):
+    pass
