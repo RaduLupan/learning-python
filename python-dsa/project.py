@@ -49,3 +49,42 @@ https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-g
 
 def reverse_list(arr, k):
     pass
+
+# 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
+# 2.1 General case when N is multiple of k.
+test0 = {
+    'input': {
+        'arr': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        'k': 4
+    },
+    'output': [4, 3, 2, 1, 8, 7, 6, 5, 12, 11, 10, 9]
+}
+
+# 2.2 General case when N is not multiple of k.
+test1 = {
+    'input': {
+        'arr': [10, 15, 12, 40, 37, 28, 35, 49, 55, 17, 23],
+        'k': 3
+    },
+    'output': [12, 15, 10, 28, 37, 40, 55, 49, 35, 23, 17]
+}
+
+# 2.3 k=N The whole arr list gets reversed.
+test2 = {
+    'input': {
+        'arr': 'reverse me',
+        'k': 10
+    },
+    'output': ['e', 'm', '', 'e', 's', 'r', 'e', 'v', 'e', 'r']
+}
+
+# 2.4 k=1 The original list is returned, no elements are reversed.
+test3 = {
+    'input': {
+        'arr': [10, 20, 30, 40, 50, 60],
+        'k': 1
+    },
+    'output': [10, 20, 30, 40, 50, 60]
+}
+
+tests = [test0, test1, test2, test3]
