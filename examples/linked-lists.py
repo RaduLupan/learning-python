@@ -1,3 +1,8 @@
+'''
+Reference:
+https://realpython.com/linked-lists-python/
+'''
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -16,7 +21,7 @@ class LinkedList:
         nodes = []
         
         while node is not None:
-            nodes.append(node)
+            nodes.append(node.data)
             node = node.next
         
         nodes.append("None")
@@ -24,4 +29,15 @@ class LinkedList:
         return " -> ".join(nodes)
 
 llist = LinkedList()
+print(llist)
+
+node1=Node('a')
+llist.head=node1
+print(llist)
+
+node2=Node('b')
+node1.next = node2
+
+node3=Node('c')
+node2.next = node3
 print(llist)
