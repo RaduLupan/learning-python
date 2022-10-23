@@ -52,13 +52,14 @@ def reverse_list(arr, k):
     n = len(arr)
     result = []
 
-    # If n is multiple of k
+    # If n is multiple of k, the number of groups with k elements is g = n // k and the remainder group has r = 0 elements.
     if n % k == 0:
 
         # Determine the number of groups with k elements.
         g = n//k
         r = 0
 
+    # If n is not multiple of k, the number of groups with k elements is g = (n-1) // k and the remainder group has r = n % k elements.
     else:
         g = (n-1)//k
         r = n % k
@@ -128,3 +129,7 @@ import dsa
 dsa.evaluate_test_case(reverse_list, test0)
 
 dsa.evaluate_test_cases(reverse_list, tests)
+
+# 5. Analyze the algorithm's complexity and identify inefficiencies if any.
+# The time complexity is O(n) as we have to reverse all n elements of the list, regardless of k.
+# The space complexity is O(k) however and that could be improved.
