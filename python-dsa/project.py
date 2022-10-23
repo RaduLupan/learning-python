@@ -48,7 +48,41 @@ https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-g
 #  - rev: a list obtained by reversing every k elements in arr.
 
 def reverse_list(arr, k):
-    pass
+
+    n = len(arr)
+    result = []
+
+    # If n is multiple of k
+    if n % k == 0:
+
+        # Determine the number of groups with k elements.
+        g = n//k
+        r = 0
+
+    else:
+        g = (n-1)//k
+        r = n % k
+
+    for i in range(g):
+        group = arr[i*k:(i+1)*k]
+
+        # Reverse the group.
+        rev = [group[_] for _ in range(len(group)-1, -1, -1)]
+
+        # Pop  elements from rev and append them to result.
+        while len(rev) > 0:
+            result.append(rev.pop(0))
+    
+    if r != 0:
+        r_group = arr[n-r:n]
+
+        # Reverse the remainder group.
+        rev_r_group = [r_group[_] for _ in range(len(r_group-1), -1, -1)]
+        
+        # Pop elements from rev_r_group and append them to result.
+        while len(rev_r_group) > 0:
+            result.append(rev_r_group.pop(0))
+    return result
 
 # 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
 # 2.1 General case when N is multiple of k.
@@ -88,3 +122,9 @@ test3 = {
 }
 
 tests = [test0, test1, test2, test3]
+
+import dsa
+
+dsa.evaluate_test_case(reverse_list, test0)
+
+dsa.evaluate_test_cases(reverse_list, tests)
