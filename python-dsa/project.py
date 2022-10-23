@@ -77,7 +77,7 @@ def reverse_list(arr, k):
         r_group = arr[n-r:n]
 
         # Reverse the remainder group.
-        rev_r_group = [r_group[_] for _ in range(len(r_group-1), -1, -1)]
+        rev_r_group = [r_group[_] for _ in range(len(r_group)-1, -1, -1)]
         
         # Pop elements from rev_r_group and append them to result.
         while len(rev_r_group) > 0:
@@ -109,7 +109,7 @@ test2 = {
         'arr': 'reverse me',
         'k': 10
     },
-    'output': ['e', 'm', '', 'e', 's', 'r', 'e', 'v', 'e', 'r']
+    'output': ['e', 'm', ' ', 'e', 's', 'r', 'e', 'v', 'e', 'r']
 }
 
 # 2.4 k=1 The original list is returned, no elements are reversed.
