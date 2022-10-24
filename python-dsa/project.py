@@ -87,6 +87,36 @@ def reverse_list1(arr, k):
             result.append(rev_r_group.pop(0))
     return result
 
+def reverse_list2(arr, k):
+    '''
+    Improved version of reverse_list1(). 
+    Time complexity: O(n)
+    Space complexity: O(1).
+    '''
+    n = len(arr)
+    result = []
+
+    # If n is multiple of k, the number of groups with k elements is g = n // k and the remainder group has r = 0 elements.
+    if n % k == 0:
+        g = n//k
+        r = 0
+
+    # If n is not multiple of k, the number of groups with k elements is g = (n-1) // k and the remainder group has r = n % k elements.
+    else:
+        g = (n-1)//k
+        r = n % k
+
+    for i in range(g):
+        # Appends all k elements of the group to the result list in reverse order.
+        for j in range((i+1)*k-1, i*k-1, -1):
+            result.append(arr[j])
+    
+    if r != 0:
+        # Appends all elements of the remainder group (less than k) to the result list in reverse order.
+        for j in range(n-1, n-r-1, -1):
+            result.append(arr[j])
+    return result
+
 # 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
 # 2.1 General case when N is multiple of k.
 test0 = {
@@ -128,9 +158,9 @@ tests = [test0, test1, test2, test3]
 
 import dsa
 
-dsa.evaluate_test_case(reverse_list, test0)
+dsa.evaluate_test_case(reverse_list2, test0)
 
-dsa.evaluate_test_cases(reverse_list, tests)
+dsa.evaluate_test_cases(reverse_list2, tests)
 
 # 5. Analyze the algorithm's complexity and identify inefficiencies if any.
 # The time complexity is O(n) as we have to reverse all n elements of the list, regardless of k.
