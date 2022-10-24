@@ -47,15 +47,17 @@ https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-g
 # Output:
 #  - rev: a list obtained by reversing every k elements in arr.
 
-def reverse_list(arr, k):
-
+def reverse_list1(arr, k):
+    '''
+    Reverses a list in groups of k elements.
+    Time complexity: O(n)
+    Space complexity: O(k) and can be improved.
+    '''
     n = len(arr)
     result = []
 
     # If n is multiple of k, the number of groups with k elements is g = n // k and the remainder group has r = 0 elements.
     if n % k == 0:
-
-        # Determine the number of groups with k elements.
         g = n//k
         r = 0
 
