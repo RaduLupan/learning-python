@@ -37,6 +37,12 @@ the resultant linked list is 3->2->1->5->4.
 Reference:
 https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1?page=3&company[]=Amazon&sortBy=submissions
 '''
+
+#-------------------------------------------------------------------------------------------------------
+# In part 1 we solve a simplified version of the problem when the list to be reversed is a simple array. 
+# In part 2 we will apply this solution to solve the original problem of reversing a linked list.
+#-------------------------------------------------------------------------------------------------------
+
 # 1. State the problem clearly. Identify the input & output formats.
 # We are given a list of size N. We need to write a function that reverses every k elements in the list.
 # If the number of elements is not a multiple of k then the left-out elements, in the end, should be considered as a group and must be reversed.
