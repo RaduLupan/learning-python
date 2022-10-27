@@ -26,6 +26,7 @@ the resultant linked list is 3->2->1->5->4.
 
 Reference:
 https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1?page=3&company[]=Amazon&sortBy=submissions
+https://realpython.com/linked-lists-python/
 '''
 
 #--------------------------------------------------------------------------------------------------------
@@ -42,8 +43,18 @@ class Node:
         return str(self.data)
 
 class LinkedList:
-    def __init__(self):
+    def __init__(self, nodes = None):
         self.head = None
+
+        if nodes is not None:
+            node = Node(data = nodes.pop(0))
+            self.head = node
+
+            for elem in nodes:
+                node.next = Node(data = elem)
+                node = node.next
+
+
 
     def __repr__(self):
         node = self.head
@@ -84,3 +95,5 @@ def reverse_list(arr, k):
             result.append(arr[j])
     return result
 
+llist1=LinkedList([1,2,3,4])
+print(llist1)
