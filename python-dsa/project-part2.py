@@ -100,8 +100,28 @@ def reverse_list(arr, k):
             result.append(arr[j])
     return result
 
-llist1=LinkedList([1,2,3,4])
-print(llist1)
+def reverse_linked_list(llist, k):
+    # Extract all nodes in an array.
+    arr = [n for n in llist]
 
-arr1=[n for n in llist1]
-print(arr1)
+    # Reverse the array.
+    rev_arr = reverse_list(arr, k)
+
+    # Create the reverted linked list.
+    rev_llist = LinkedList(rev_arr)
+    return rev_llist
+
+# 2. Come up with some examples of inputs and outputs. Try to cover all edge cases.
+# 2.1 General case when N is multiple of k.
+
+test0 = {
+    'input': {
+        'llist': LinkedList(nodes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]),
+        'k': 4
+    },
+    'output': LinkedList(nodes = [4, 3, 2, 1, 8, 7, 6, 5, 12, 11, 10, 9])
+}
+
+import dsa
+
+dsa.evaluate_test_case(reverse_linked_list, test0)
