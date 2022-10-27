@@ -54,7 +54,12 @@ class LinkedList:
                 node.next = Node(data = elem)
                 node = node.next
 
+    def __iter__(self):
+        node = self.head
 
+        while node is not None:
+            yield node
+            node = node.next
 
     def __repr__(self):
         node = self.head
@@ -97,3 +102,6 @@ def reverse_list(arr, k):
 
 llist1=LinkedList([1,2,3,4])
 print(llist1)
+
+arr1=[n for n in llist1]
+print(arr1)
