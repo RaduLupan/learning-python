@@ -47,3 +47,6 @@ print(llist)
 
 for node in llist:
     print(node)
+
+arr1 = [n for n in llist]
+print(arr1)
