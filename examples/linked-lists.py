@@ -22,6 +22,13 @@ class LinkedList:
                 node.next = Node(data = elem)
                 node = node.next
 
+    def __iter__(self):
+        # Enables traversal/iteration of a LinkedList in the most Pythonic way. Creating a method called traverse() would have not been Pythonic.
+        node = self.head
+        while node is not None:
+            yield node
+            node = node.next
+
     def __repr__(self):
         node = self.head
         nodes = []
@@ -37,3 +44,6 @@ class LinkedList:
 arr=['1','2','3','4']
 llist = LinkedList(nodes=arr)
 print(llist)
+
+for node in llist:
+    print(node)
