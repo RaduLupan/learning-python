@@ -9,6 +9,49 @@ sg_description = 'Test Security Group'
 vpc_id = 'vpc-0291e1f27c8725ac4'
 
 # Create security group.
-response = client.create_security_group(GroupName = sg_name, Description = sg_description, VpcId = vpc_id)
+# response = client.create_security_group(GroupName = sg_name, Description = sg_description, VpcId = vpc_id)
+
+# cidr_ip = '1.2.3.4/32'
+group_id =  'sg-09d0c55a2a08dcadb'
+from_port = 80
+to_port = 80
+ip_protocol = 'tcp'
+
+# Create an ingress security group rule. 
+'''
+response = client.authorize_security_group_ingress(
+    GroupId = group_id,
+    FromPort = from_port,
+    ToPort = to_port,
+    IpProtocol = ip_protocol,
+    CidrIp = cidr_ip)
+'''
+
+# Create multiple ingress security rules.
+ip_permissions = [
+    {
+        'FromPort': 80,
+        'IpProtocol': 'tcp',
+        'IpRanges': [{'CidrIp': '0.0.0.0/0', 'Description': 'HTTP from anywhere'}],
+        'ToPort': 80
+    },
+    {
+        'FromPort': 443,
+        'IpProtocol': 'tcp',
+        'IpRanges': [{'CidrIp': '0.0.0.0/0', 'Description': 'HTTPS from anywhere'}],
+        'ToPort': 443
+    },
+    {
+        'FromPort': 22,
+        'IpProtocol': 'tcp',
+        'IpRanges': [{'CidrIp': '1.2.3.4/32', 'Description': 'SSH from restricted IP'}],
+        'ToPort': 22
+    }
+]
+
+response = client.authorize_security_group_ingress(
+    GroupId = group_id,
+    IpPermissions = ip_permissions
+)
 
 print(response)
