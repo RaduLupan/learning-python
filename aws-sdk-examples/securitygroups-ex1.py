@@ -1,3 +1,9 @@
+'''
+----------------------------------------------------------------------------------------------------------
+This example shows how to create a security group and add some ingress rules.
+The default egress rule is created automatically allowing all traffic/all protocols/all ports to 0.0.0.0/0.
+-----------------------------------------------------------------------------------------------------------
+'''
 import boto3
 
 # Get the service resource
@@ -8,7 +14,8 @@ sg_name = 'Test SG'
 sg_description = 'Test Security Group'
 vpc_id = 'vpc-0291e1f27c8725ac4'
 
-# Create security group.
+# Create security group. 
+# The default egress rule is also created allowing all traffic/all protocols/all ports to 0.0.0.0/0.
 # response = client.create_security_group(GroupName = sg_name, Description = sg_description, VpcId = vpc_id)
 
 # cidr_ip = '1.2.3.4/32'
@@ -17,7 +24,7 @@ from_port = 80
 to_port = 80
 ip_protocol = 'tcp'
 
-# Create an ingress security group rule. 
+# Create one ingress security group rule. 
 '''
 response = client.authorize_security_group_ingress(
     GroupId = group_id,
@@ -27,7 +34,7 @@ response = client.authorize_security_group_ingress(
     CidrIp = cidr_ip)
 '''
 
-# Create multiple ingress security rules.
+# Create multiple ingress security  group rules.
 ip_permissions = [
     {
         'FromPort': 80,
