@@ -1,3 +1,6 @@
+'''
+This example shows how to detect ingress rules that open access to port 3389 (RDP) or 22 (SSH) from anywhere on a security group.
+'''
 import boto3
 
 sg_id = 'sg-09d0c55a2a08dcadb'
