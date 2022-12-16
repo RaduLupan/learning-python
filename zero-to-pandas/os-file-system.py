@@ -55,3 +55,9 @@ def read_csv(path):
         result.append(item_dict)
     
     return result
+
+loans1_path = './data/loans1.txt'
+
+data1 = read_csv(loans1_path)
+
+print(data1)
