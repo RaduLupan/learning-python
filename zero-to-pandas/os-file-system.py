@@ -20,7 +20,7 @@ def parse_values(data_line):
                 values.append(item)
     return values
 
-def creat_item_dict(values, headers):
+def create_item_dict(values, headers):
     '''
     Creates a dictionary with the keys passed in the headers argument and values passed in the values argument.
     '''
