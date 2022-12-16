@@ -20,6 +20,17 @@ def parse_values(data_line):
                 values.append(item)
     return values
 
+def creat_item_dict(values, headers):
+    '''
+    Creates a dictionary with the keys passed in the headers argument and values passed in the values argument.
+    '''
+    result = {}
+
+    for value, header in zip(values, headers):
+        result[header] = value
+    
+    return result
+
 def read_csv(path):
     '''
     Reads lines from CSV file and returns a list of dictionaries representing each line.
