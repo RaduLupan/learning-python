@@ -79,8 +79,21 @@ def loan_emi(amount, duration, rate, down_payment=0):
     
     return emi
 
+def compute_emi(loans):
+    '''
+    Computes the Equal Monthly Installment (EMI) for a list of loans. Each loan is a dictionary.
+    '''
+
+    for loan in loans:
+        loan['emi'] = loan_emi(amount = loan['amount'],
+                               duration = loan['duration'],
+                               rate = loan['rate'] /12, # the CSV contains yearly rates
+                               down_payment = loan['down_payment'])
+
 loans1_path = './data/loans1.txt'
 
 data1 = read_csv(loans1_path)
+
+compute_emi(data1)
 
 print(data1)
