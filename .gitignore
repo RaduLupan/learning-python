@@ -130,3 +130,5 @@ dmypy.json
 
 # Credentials file
 credentials.json
+
+./zero-to-pandas/data/*
