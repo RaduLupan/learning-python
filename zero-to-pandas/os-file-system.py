@@ -114,12 +114,11 @@ def compute_emi(loans):
                                rate = loan['rate'] /12, # the CSV contains yearly rates
                                down_payment = loan['down_payment'])
 
-loans1_path = './data/loans1.txt'
 
-loans1 = read_csv(loans1_path)
 
-compute_emi(loans1)
-
-print(loans1)
-
-write_csv(loans1, './data/emis1.txt')
+for i in range(1,4):
+    loans_path = './data/loans{}.txt'.format(i)
+    loans = read_csv(loans_path)
+    print(f"Processing EMI for loans file: {loans_path}")
+    compute_emi(loans)
+    write_csv(loans, './data/emis{}.txt'.format(i))
