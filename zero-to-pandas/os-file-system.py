@@ -58,6 +58,30 @@ def read_csv(path):
     
     return result
 
+def write_csv(items, path):
+    '''
+    Writes the items (a list of dictionaries) to a CSV file.
+    '''
+
+    # Open the file in write mode.
+    with open(path, 'w') as f:
+        
+        # Return if there is nothing to write.
+        if len(items) == 0:
+            return
+        
+        # Write the headers on the first line.
+        headers = list(items[0].keys())
+        f.write(','.join(headers) + '\n')
+
+        # Write one item per line.
+        for item in items:
+            values = []
+
+            for header in headers:
+                values.append(str(item.get(header,"")))
+
+            f.write(','.join(values) + '\n')
 
 def loan_emi(amount, duration, rate, down_payment=0):
     ''''
@@ -92,8 +116,10 @@ def compute_emi(loans):
 
 loans1_path = './data/loans1.txt'
 
-data1 = read_csv(loans1_path)
+loans1 = read_csv(loans1_path)
 
-compute_emi(data1)
+compute_emi(loans1)
 
-print(data1)
+print(loans1)
+
+write_csv(loans1, './data/emis1.txt')
