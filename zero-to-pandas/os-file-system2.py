@@ -26,3 +26,17 @@ We'll convert it into the following dictionary of lists:
 4. Define a function write_csv_columnar that writes the data from the dictionary of lists into a correctly formatted CSV file.
 5. Process all three downloaded files and write the results by creating new files in the directory data2.
 '''
+import os
+from urllib.request import urlretrieve
+
+os.makedirs('./data2', exist_ok=True)
+
+url1 = 'https://gist.githubusercontent.com/aakashns/257f6e6c8719c17d0e498ea287d1a386/raw/7def9ef4234ddf0bc82f855ad67dac8b971852ef/loans1.txt'
+url2 = 'https://gist.githubusercontent.com/aakashns/257f6e6c8719c17d0e498ea287d1a386/raw/7def9ef4234ddf0bc82f855ad67dac8b971852ef/loans2.txt'
+url3 = 'https://gist.githubusercontent.com/aakashns/257f6e6c8719c17d0e498ea287d1a386/raw/7def9ef4234ddf0bc82f855ad67dac8b971852ef/loans3.txt'
+
+urls = [url1, url2, url3]
+
+# Download all files in the data2 folder.
+for i, url in enumerate(urls):
+    urlretrieve(url, './data2/loans{}.txt'.format(i+1))
