@@ -52,6 +52,26 @@ def create_dict_item(headers):
         result[header] = []
     return result
 
+def read_csv_columnar(path):
+    
+    # Open the CSV file in read mode and read all lines.
+    with open(path, 'r') as f:
+        lines = f.readlines()
+        
+    # Parse the headers.
+    headers = parse_headers(lines[0])
+    
+    # Create a dictionary of empty lists based on the headers as keys.
+    result = create_dict_item(headers)
+    
+    # Parse each data line and append the values to the corresponding list in the result dictionary.
+    for line in lines[1:]:
+        values_line = parse_values(line)
+        for header, value in zip(headers, values_line):
+            result[header].append(value)
+    
+    return result
+    
 import os
 from urllib.request import urlretrieve
 
