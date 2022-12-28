@@ -43,6 +43,15 @@ def parse_values(values_line):
                 values.append(item)
     return values
 
+def create_dict_item(headers):
+    '''
+    Creates a dictionary of empty lists based on the keys read from the headers line. 
+    '''
+    result = {}
+    for header in headers:
+        result[header] = []
+    return result
+
 import os
 from urllib.request import urlretrieve
 
