@@ -27,6 +27,9 @@ We'll convert it into the following dictionary of lists:
 5. Process all three downloaded files and write the results by creating new files in the directory data2.
 '''
 
+import os, math
+from urllib.request import urlretrieve
+
 def parse_headers(headers_line):
     return headers_line.strip().split(',')
 
@@ -71,9 +74,26 @@ def read_csv_columnar(path):
             result[header].append(value)
     
     return result
+
+def loan_emi(amount, duration, rate, down_payment=0):
+    ''''
+    Calculates the equal montly installment (EMI) for a loan.
+    Arguments: 
+        amount - Total amount to be spent (loan + down payment)
+        duration - Duration of the loan (in months)
+        rate - Rate of interest (monthly)
+        down_payment (optional) - Optional intial payment (deducted from amount)
+    '''
+    loan_amount = amount - down_payment
     
-import os
-from urllib.request import urlretrieve
+    try:
+        emi = loan_amount * rate * ((1+rate)**duration) / (((1+rate)**duration)-1)
+    except ZeroDivisionError:
+        emi = loan_amount / duration
+    
+    emi = math.ceil(emi)
+    
+    return emi
 
 os.makedirs('./data2', exist_ok=True)
 
