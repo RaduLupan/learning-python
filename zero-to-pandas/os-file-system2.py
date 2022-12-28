@@ -95,6 +95,22 @@ def loan_emi(amount, duration, rate, down_payment=0):
     
     return emi
 
+def compute_emis(loans):
+    '''
+    Adds an emi key to the dictionary of lists passed in the loans argument. Uses the loan_emi function to compute
+    the emi for the loans.
+    '''
+    emi = []
+    for amount, duration, rate, down_payment in zip(loans['amount'], loans['duration'], loans['rate'], loans['down_payment']):
+        emi_item = loan_emi(amount = amount,
+                       duration = duration,
+                       rate = rate/12,
+                       down_payment = down_payment)
+        emi.append(emi_item)
+    
+    loans['emi'] = emi
+    
+    return loans
 os.makedirs('./data2', exist_ok=True)
 
 url1 = 'https://gist.githubusercontent.com/aakashns/257f6e6c8719c17d0e498ea287d1a386/raw/7def9ef4234ddf0bc82f855ad67dac8b971852ef/loans1.txt'
