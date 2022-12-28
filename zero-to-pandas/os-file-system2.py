@@ -26,6 +26,23 @@ We'll convert it into the following dictionary of lists:
 4. Define a function write_csv_columnar that writes the data from the dictionary of lists into a correctly formatted CSV file.
 5. Process all three downloaded files and write the results by creating new files in the directory data2.
 '''
+
+def parse_headers(headers_line):
+    return headers_line.strip().split(',')
+
+def parse_values(values_line):
+    values = []
+
+    for item in values_line.strip().split(','):
+        if item == "":
+            values.append(0.0)
+        else:
+            try:
+                values.append(float(item))
+            except ValueError:
+                values.append(item)
+    return values
+
 import os
 from urllib.request import urlretrieve
 
