@@ -151,3 +151,12 @@ urls = [url1, url2, url3]
 # Download all files in the data2 folder.
 for i, url in enumerate(urls):
     urlretrieve(url, './data2/loans{}.txt'.format(i+1))
+
+# Read all CSV files, process them and write the results to disk. in CSV format.
+for i in range(1,4):
+    # loans = read_csv_columnar('./data2/loans{}.txt'.format(i))
+    # loans_emis = compute_emis(loans)
+    # write_csv_columnar(loans_emis, './data2/loans_emis{}.txt'.format(i))
+
+    # Or contrast everything in one line
+    write_csv_columnar(compute_emis(read_csv_columnar('./data2/loans{}.txt'.format(i))), './data2/loans_emis{}.txt'.format(i) )
