@@ -111,6 +111,35 @@ def compute_emis(loans):
     loans['emi'] = emi
     
     return loans
+
+def write_csv_columnar(loans, path):
+    '''
+    Converts a dictionary of lists in to a list of lines representing headers and values and saves it as a CSV file. 
+    '''
+    headers_line = []
+        
+    for key in loans:
+        headers_line.append(key)
+    
+    headers = ','.join(headers_line) + "\n"
+    
+    with open(path, 'w') as f:
+        # Write the headers in the first line.
+        f.write(headers)
+        
+        for amount, duration, rate, down_payment, emi in zip(loans['amount'], loans['duration'], loans['rate'], loans['down_payment'], loans['emi']):
+            values_line = []
+            values_line.append(str(amount))
+            values_line.append(str(duration))
+            values_line.append(str(rate))
+            values_line.append(str(down_payment))
+            values_line.append(str(emi))
+            
+            #print(values_line)
+            
+            # Write the values line in the CSV file.
+            f.write(','.join(values_line) + "\n")
+
 os.makedirs('./data2', exist_ok=True)
 
 url1 = 'https://gist.githubusercontent.com/aakashns/257f6e6c8719c17d0e498ea287d1a386/raw/7def9ef4234ddf0bc82f855ad67dac8b971852ef/loans1.txt'
