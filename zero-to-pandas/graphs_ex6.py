@@ -19,6 +19,9 @@ setosa_df = flowers_df[flowers_df.species == 'setosa']
 versicolor_df = flowers_df[flowers_df.species == 'versicolor']
 virginica_df = flowers_df[flowers_df.species == 'virginica']
 
+# Data for chart 4.
+tips_df = sns.load_dataset('tips')
+
 # Matplotlib and Seaborn support plotting multiple charts in a grid using plt.subplots which returns a set of axis for plotting.
 fig, axes = plt.subplots(2, 3, figsize = (16,8))
 
@@ -43,5 +46,10 @@ axes[0,2].set_title('Distribution of Sepal Width')
 axes[0,2].hist([setosa_df.sepal_width, versicolor_df.sepal_width, virginica_df.sepal_width],
                bins=np.arange(2,5,0.25),
                stacked=True)
-axes[0,2].legend(['setosa', 'versicolor', 'virginica'])
+axes[0,2].legend(['Setosa', 'Versicolor', 'Virginica'])
+
+# Pass the axes into seaborn.
+axes[1,0].set_title('Restaurant bills')
+sns.barplot(x ='day', y ='total_bill', hue ='sex', data = tips_df, ax = axes[1,0]);
+
 plt.show()
