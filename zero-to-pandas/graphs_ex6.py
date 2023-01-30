@@ -22,6 +22,9 @@ virginica_df = flowers_df[flowers_df.species == 'virginica']
 # Data for chart 4.
 tips_df = sns.load_dataset('tips')
 
+# Data for chart 5.
+flights_df = sns.load_dataset('flights').pivot('month','year','passengers')
+
 # Matplotlib and Seaborn support plotting multiple charts in a grid using plt.subplots which returns a set of axis for plotting.
 fig, axes = plt.subplots(2, 3, figsize = (16,8))
 
@@ -52,4 +55,7 @@ axes[0,2].legend(['Setosa', 'Versicolor', 'Virginica'])
 axes[1,0].set_title('Restaurant bills')
 sns.barplot(x ='day', y ='total_bill', hue ='sex', data = tips_df, ax = axes[1,0]);
 
+# Pass the axes into seaborn.
+axes[1,1].set_title('Flight traffic')
+sns.heatmap(flights_df, cmap='Greens', ax=axes[1,1]);
 plt.show()
