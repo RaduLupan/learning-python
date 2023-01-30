@@ -5,6 +5,8 @@ Plotting Multiple Charts in a Grid - Example
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from urllib.request import urlretrieve
+from PIL import Image
 
 # Data for chart 1.
 years = range(2000, 2012)
@@ -23,7 +25,11 @@ virginica_df = flowers_df[flowers_df.species == 'virginica']
 tips_df = sns.load_dataset('tips')
 
 # Data for chart 5.
-flights_df = sns.load_dataset('flights').pivot('month','year','passengers')
+flights_df = sns.load_dataset('flights').pivot(index='month',columns='year',values='passengers')
+
+# Data for chart 6.
+urlretrieve('https://i.imgur.com/SkPbq.jpg', 'chart.jpg');
+img = Image.open('chart.jpg')
 
 # Matplotlib and Seaborn support plotting multiple charts in a grid using plt.subplots which returns a set of axis for plotting.
 fig, axes = plt.subplots(2, 3, figsize = (16,8))
@@ -58,4 +64,13 @@ sns.barplot(x ='day', y ='total_bill', hue ='sex', data = tips_df, ax = axes[1,0
 # Pass the axes into seaborn.
 axes[1,1].set_title('Flight traffic')
 sns.heatmap(flights_df, cmap='Greens', ax=axes[1,1]);
+
+# Plot an image using the axes.
+axes[1,2].set_title('Data Science Meme')
+axes[1,2].imshow(img)
+axes[1,2].grid(False)
+axes[1,2].set_xticks([])
+axes[1,2].set_yticks([])
+
+plt.tight_layout(pad=2);
 plt.show()
